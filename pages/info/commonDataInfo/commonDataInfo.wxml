@@ -1,0 +1,141 @@
+<!--pages/info/commonDataInfo/commonDataInfo.wxml-->
+<view>
+  <view class='toolsNav'>
+    <view class='toolStatus'>
+      <view wx:if="{{isXS}}">
+        <icon class='iconfont icon-safe_warn {{XSStyle}}'></icon>
+        <view>
+          <image src='{{imgPath}}/cook.png'></image>
+          XSWorking
+        </view>
+      </view>
+      <view wx:if="{{isFire}}">
+        <icon class='iconfont icon-safe_warn {{FireStyle}}'></icon>
+        <view>
+          <image src='{{imgPath}}/fire.png'></image>
+          FireListening
+        </view>
+      </view>
+      <view wx:if="{{isSmog}}">
+        <icon class='iconfont icon-safe_warn {{SmogStyle}}'></icon>
+        <view>
+          <image src='{{imgPath}}/smog.png'></image>
+          SmogListening
+        </view>
+      </view>
+    </view>
+    <view class='btnList'>
+      <button hover-class='none' class='icon_menu_main' bindtap='popup'>
+        <view class='icon-ball'>
+          <view></view>
+        </view>
+        <image src='{{imgPath}}/icon-ball.png'></image>
+      </button>
+      <button hover-class='none' class='icon_menu_item {{XSBtnStyle}}' bindtap='cook' animation="{{animationcollect}}">
+        <image src='{{imgPath}}/cook.png'></image>
+      </button>
+      <button hover-class='none' class='icon_menu_item {{FireBtnStyle}}' bindtap='fire' animation="{{animationTranspond}}">
+        <image src='{{imgPath}}/fire.png'></image>
+      </button>
+      <button hover-class='none' class='icon_menu_item {{SmogBtnStyle}}' bindtap='smog' animation="{{animationInput}}">
+        <image src='{{imgPath}}/smog.png'></image>
+      </button>
+    </view>
+    <navigator hover-class='none'>
+      <icon class='iconfont icon-pinglun'></icon>
+      1
+    </navigator>
+    <navigator hover-class='none'>
+      <icon class='iconfont icon-zhaoxiangji'></icon>
+      传作品
+    </navigator>
+  </view>
+  <scroll-view scroll-y>
+    <image class='cover' src='{{resPathUrl}}{{recipeData.fcover}}' bindtap='previewImage' data-src="{{resPathUrl}}{{recipeData.fcover}}"></image>
+    <view class='main'>
+      <view class='title'>{{recipeData.fname}}</view>
+      <view class='tools'>
+        <view>
+          <view>
+            <icon class="iconfont icon-shoucang"></icon>
+            <text>{{recipeData.fgood}}人收藏</text>
+          </view>
+          <view>
+            <icon class='iconfont icon-yanjing'></icon>
+            <text>{{recipeData.fcount}}人看过</text>
+          </view>
+        </view>
+        <view>
+          <button open-type='share' hover-class='none'>
+            <icon class='iconfont icon-weixin'></icon>
+          </button>
+          <button hover-class='none'>
+            <icon class='iconfont icon-yishoucangyingyuan' style='color: #999999;'></icon>
+          </button>
+          <button hover-class='none'>
+            <icon class='iconfont icon-jubao'></icon>
+          </button>
+        </view>
+      </view>
+      <view class='introduction'>{{recipeData.fintroduction}}</view>
+      <view class='userinfo'>
+        <navigator wx:if="{{recipeData.faid!=0}}" hover-class='none'>
+          <image src='{{resPathUrl}}{{recipeData.adminUser.fhead}}'></image>
+          {{recipeData.adminUser.fusername}}
+        </navigator>
+        <navigator wx:if="{{recipeData.faid==0}}">
+          <image src='{{resPathUrl}}{{recipeData.commonUser.fcover}}'></image>
+          {{recipeData.commonUser.fusername}}
+        </navigator>
+        <button hover-class='none' bindtap='testVoice'>关注</button>
+      </view>
+      <view class='recipeclassify'>
+        <view class='icon'>类别</view>
+        <view class='classifyList'>
+          <view wx:for="{{recipeData.recipeClassifies}}" wx:key="classify" wx:for-item="item">
+            <view wx:if="{{item.ftwoId==0}}">
+              {{item.classify.classifyTwo.classifyOne.fname}}
+              <icon class='iconfont icon-xaingyou'></icon> {{item.classify.classifyTwo.fname}}
+              <icon class='iconfont icon-xaingyou'></icon> {{item.classify.fname}}
+            </view>
+            <view wx:if="{{item.ftwoId!=0}}">
+              {{item.classifyTwo.classifyOne.fname}}
+              <icon class='iconfont icon-xaingyou'></icon> {{item.classifyTwo.fname}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='recipetip'>
+        <view class='icon'>小贴士</view>
+        <view class='tipList'>
+          <navigator wx:for="{{recipeData.recipeTips}}" wx:key="tip" wx:for-item="item" hover-class='none'>{{item.tips.fname}}</navigator>
+        </view>
+      </view>
+      <view class='material'>
+        <view>食材清单</view>
+        <view class='materialList'>
+          <view wx:for="{{recipeData.recipeMaterials}}" wx:key="material" wx:for-item="item">
+            <view>
+              <view wx:if="{{item.fmid==0}}">{{item.fname}}</view>
+              <navigator wx:if="{{item.fmid!=0}}" hover-class='none'>{{item.fname}}</navigator>
+            </view>
+            <view>{{item.fnumber}}</view>
+          </view>
+        </view>
+      </view>
+      <view class='process'>
+        <view class='processTitle'>烹饪步骤</view>
+        <view wx:for="{{recipeData.processes}}" wx:for-item="item" wx:key="process" wx:for-index="index">
+          <view>步骤{{index+1}}/{{processLength}}</view>
+          <image src='{{resPathUrl}}{{item.fcover}}'></image>
+          <view class='processContent'>{{item.fcontent}}</view>
+        </view>
+      </view>
+      <view class='release'>
+        发布于 {{recipeData.frelease}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <audio wx:if="{{audioEle}}" id='aiAudio' src='{{resPathUrl}}{{voiceData}}'></audio>
+</view>

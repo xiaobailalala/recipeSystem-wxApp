@@ -1,0 +1,21 @@
+<!--pages/reg/reg.wxml-->
+<view>
+  <image src='{{imgPath}}/regbgimg.png'/>
+  <view class='con-main'>
+    <text>注册膳房膳食</text>
+    <text>做一道菜，温暖你所爱的人</text>
+    <form>
+      <view class="form-group">
+        <text>+86</text><input type='text' placeholder='请输入手机号' bindinput='accountInput'></input>
+      </view>
+      <view class='form-group'>
+        <input type='text' placeholder='请输入验证码' bindinput='codeInput'></input>
+        <button hover-class='none' disabled='{{codeDisabled}}' style="color:{{codeColor}}" bindtap='codeBtn'>{{codeBtnText}}</button>
+      </view>
+      <view class='form-group'>
+        <input type='password' placeholder='请设置密码' bindinput='passwordInput'></input>
+      </view>
+      <button class='submitbtn' hover-class='none' bindtap='regBtn' loading='{{submitbtnLoading}}' disabled='{{disabled}}' style="background-color:{{submitbtnBackgroungColor}};color:{{submitbtnColor}};">注册</button>
+    </form>
+  </view>
+</view>

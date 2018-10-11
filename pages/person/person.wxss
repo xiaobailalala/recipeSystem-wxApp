@@ -1,0 +1,158 @@
+/* pages/person/person.wxss */
+
+page {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.con-out {
+  height: 100%;  
+  width: 100%;
+}
+
+.loginbg {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.login-con {
+  padding-top: 160rpx;
+}
+
+.login-con text {
+  font-size: 30rpx;
+  color: #888;
+  text-align: center;
+  display: block;
+  line-height: 60rpx;
+}
+
+.login-con text:nth-of-type(1) {
+  font-size: 44rpx;
+  color: #333;
+  font-weight: bold;
+  font-family: "宋体";
+  margin-bottom: 46rpx;
+}
+
+.loginbtn {
+  background-color: #ffdc44;
+  width: 500rpx;
+  margin: 0 auto;
+  height: 70rpx;
+  padding: 0;
+  line-height: 70rpx;
+  font-family: "宋体";
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-top: 260rpx;
+  border: 0;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 35px;
+}
+
+.info-main {
+  padding: 0 40rpx;
+}
+
+.info-main>view {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 0;
+}
+
+.userhead {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+}
+
+.personInfo {
+  width: 490rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10rpx;
+}
+
+.personInfo>view>text {
+  display: block;
+  margin: 26rpx 0;
+}
+
+.personInfo>view>text:nth-of-type(1) {
+  font-size: 44rpx;
+}
+
+.personInfo>view>text:nth-of-type(2) {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.userEditor {
+  border-bottom: 1rpx solid #dedeee;
+  padding-bottom: 44rpx !important;
+  padding-top: 10rpx !important;
+}
+
+.userEditor>navigator:nth-of-type(1) {
+  color: #4385c4;
+  font-size: 30rpx;
+  position: relative;
+  left: 24rpx;
+  top: 24rpx;
+}
+
+.userEditor>navigator {
+  width: 33.33%;
+}
+
+.userEditor>navigator>text {
+  display: block;
+  color: #999;
+}
+
+.userEditor>navigator>text:nth-of-type(1) {
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+.toolsGo {
+  padding: 30rpx 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #dedeee;
+}
+
+.toolsGo>view {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #999;
+  font-size: 24rpx;
+}
+
+button.toolsGo::after {
+  border: unset;
+}
+
+button.toolsGo {
+  line-height: 1;
+  font-size: 34rpx;
+}
+
+.iconRight {
+  font-size: 40rpx !important;
+  font-weight: bold;
+  color: #000 !important;
+  margin-left: 20rpx;
+}

@@ -1,0 +1,17 @@
+<!--pages/login/login.wxml-->
+<view>
+  <image src='{{imgPath}}/loginbgimg.png'/>
+  <view class='con-main'>
+    <text>欢迎膳客驾临</text>
+    <text>精致生活，从每一餐开始</text>
+    <form>
+      <input type='text' placeholder='请输入您的手机号' bindinput='accountInput'></input>
+      <input type='password' placeholder='密码' bindinput='passwordInput'></input>
+      <button class='submitbtn' hover-class='none' bindtap='loginBtn' loading='{{submitbtnLoading}}' disabled='{{disabled}}' style="background-color:{{submitbtnBackgroungColor}};color:{{submitbtnColor}};">登录</button>
+      <view class='toolsLink'>
+        <navigator url='/pages/reg/reg' hover-class='none'>注册</navigator>
+        <navigator url='/pages/repwd/repwd' hover-class='none'>忘记密码？</navigator>
+      </view>
+    </form>
+  </view>
+</view>

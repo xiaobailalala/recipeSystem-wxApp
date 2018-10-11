@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/info/commonDataInfo/commonDataInfo",
+    "pages/home/index",
+    "pages/list/commonDataList/commonDataList",
+    "pages/menu/menu",
+    "pages/person/person",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/login/login",
+    "pages/personeditor/personeditor",
+    "pages/reg/reg",
+    "pages/repwd/repwd",
+    "pages/persondetail/persondetail",
+    "pages/personeditor/changeImage/changeImage"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffdc44",
+    "navigationBarTitleText": "膳房膳食",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#000",
+    "color": "#cdcdcd",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "iconPath": "icon/unhome.png",
+        "selectedIconPath": "icon/inhome.png",
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "icon/unclassify.png",
+        "selectedIconPath": "icon/inclassify.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "icon/unstore.png",
+        "selectedIconPath": "icon/instore.png",
+        "text": "周边"
+      },
+      {
+        "pagePath": "pages/person/person",
+        "iconPath": "icon/unperson.png",
+        "selectedIconPath": "icon/inperson.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

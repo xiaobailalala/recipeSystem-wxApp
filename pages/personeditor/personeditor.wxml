@@ -1,0 +1,61 @@
+<!--pages/personeditor/personeditor.wxml-->
+<view class='con-main'>
+  <form>
+    <view>
+      <button class='toolsBtn' bindtap='chooseImg' hover-class='navigator-hover'>
+        头像
+        <view>
+          <view>
+            <image class='userhead' src="{{imgPath}}"></image>
+          </view>
+          <text class='icon-gengduo iconfont iconRight'></text>
+        </view>
+      </button>
+    </view>
+    <view>
+      <label for='fUsername'>昵称</label>
+      <input class='text' id='fUsername' placeholder='请设置昵称（此处不能为空）' value="{{userInfo.fusername}}" bindinput='usernameInput'></input>
+    </view>
+    <view>
+      <picker range='{{sexArray}}' value='{{sexIndex}}' bindchange='sexChange'>
+        <button class='toolsBtn' hover-class='navigator-hover'>
+          性别
+          <view>
+            <view>{{sexArray[sexIndex]}}</view>
+            <text class='icon-gengduo iconfont iconRight'></text>
+          </view>
+        </button>
+      </picker>
+    </view>
+    <view>
+      <picker range='{{professionArray}}' value='{{professionIndex==-1?0:professionIndex}}' bindchange='professionChange'>
+        <button class='toolsBtn' hover-class='navigator-hover'>
+          职业
+          <view>
+            <view wx:if="{{professionIndex==-1}}">请选择</view>
+            <view wx:else>{{professionArray[professionIndex]}}</view>
+            <text class='icon-gengduo iconfont iconRight'></text>
+          </view>
+        </button>
+      </picker>
+    </view>
+    <view>
+      <picker mode="region" value='{{addressArray}}' bindchange='addressChange'>
+        <button class='toolsBtn' hover-class='navigator-hover'>
+          家乡
+          <view>
+            <view>{{addressArray[0]}} {{addressArray[1]}} {{addressArray[2]}}</view>
+            <text class='icon-gengduo iconfont iconRight'></text>
+          </view>
+        </button>
+      </picker>
+    </view>
+    <view>
+      <label for='fSign'>个性签名</label>
+      <textarea id='fSign' placeholder='设置您的个性签名' maxlength='40' bindinput='signInput' value="{{userInfo.fsign}}">
+        <text class='countLimit' style="color:{{countLimitColor}}">{{countLimit}} / 40</text>
+      </textarea>
+    </view>
+    <button class='submitbtn' hover-class='none' catchtap='saveBtn' loading='{{submitbtnLoading}}' disabled='{{disabled}}' style="background-color:{{submitbtnBackgroungColor}};color:{{submitbtnColor}};">保存</button>
+  </form>
+</view>

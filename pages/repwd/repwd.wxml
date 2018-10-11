@@ -1,0 +1,19 @@
+<!--pages/repwd/repwd.wxml-->
+<view>
+  <view class='con-main'>
+    <text>手机重置密码</text>
+    <form>
+      <view class="form-group">
+        <text>+86</text><input type='text' placeholder='请输入手机号'></input>
+      </view>
+      <view class='form-group'>
+        <input type='text' placeholder='请输入验证码'></input>
+        <button hover-class='none'>获取验证码</button>
+      </view>
+      <view class='form-group'>
+        <input type='password' placeholder='请设置新密码'></input>
+      </view>
+      <button class='submitbtn'>提交</button>
+    </form>
+  </view>
+</view>

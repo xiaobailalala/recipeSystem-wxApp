@@ -1,0 +1,41 @@
+@import "../../we-cropper/style/common.wxss";
+page{
+  height: 100%;
+  /* background-color: #202020; */
+}
+.cropper {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.button-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 100rpx;
+  left: 0;
+  width: 100%;
+}
+
+.opBtn{
+  background-color: #ffdc44;
+  height: 70rpx;
+  padding: 0;
+  width: 9rem;
+  font-family: "宋体";
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: bold;
+  border: 0;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 35rpx 0 0 35rpx;
+  margin: 0;
+}
+.light{
+  background-color: #ffffff;
+  color: #666666;
+  border-radius: 0 35rpx 35rpx 0;
+}

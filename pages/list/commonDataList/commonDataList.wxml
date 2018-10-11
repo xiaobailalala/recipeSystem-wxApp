@@ -1,0 +1,77 @@
+<!--pages/list/commonDataList/commonDataList.wxml-->
+<view class="page">
+ 
+  <!--顶部导航栏-->
+  <view class="swiper-tab">
+    <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">最新精选</view>
+    <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">今日最新</view>
+    <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">收藏最多</view>
+  </view>
+ 
+  <!--内容主体-->
+  <swiper scroll-y='true' class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange">
+    <swiper-item class="swiper-view">
+      <scroll-view scroll-y="true" scroll-x="false" class='scroll-views' wx:if="{{recipesTab1}}">
+        <navigator url='/pages/info/commonDataInfo/commonDataInfo?rid={{item.recipe.fid}}' wx:for="{{recipesTab1}}" wx:key="recipesTab1" wx:for-item="item" hover-class='none' class='datalist'>
+          <image src='{{resPathUrl}}{{item.recipe.fcover}}'></image>
+          <view>
+            <text class='datatitle'>{{item.recipe.fname}}</text>
+            <view class='datatips'>
+              <view wx:for="{{item.recipe.recipeTips}}" wx:for-item="tips" wx:key="tipTab1">{{tips.tips.fname}}</view>
+            </view>
+            <view class='datainfo'>
+              <view>{{item.recipe.fauthor}}</view>
+              <view>{{item.recipe.fgood}}人收藏</view>
+            </view>
+            <view class='datacount'>
+              <icon class='iconfont icon-yanjing'></icon>
+              {{item.recipe.fcount}}
+            </view>
+          </view>
+        </navigator>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item class="swiper-view">
+      <scroll-view scroll-y="true" scroll-x="false" class='scroll-views' wx:if="{{recipesTab2}}">
+        <navigator url='/pages/info/commonDataInfo/commonDataInfo?rid={{item.recipe.fid}}' wx:for="{{recipesTab2}}" wx:key="recipesTab2" wx:for-item="item" hover-class='none' class='datalist'>
+          <image src='{{resPathUrl}}{{item.recipe.fcover}}'></image>
+          <view>
+            <text class='datatitle'>{{item.recipe.fname}}</text>
+            <view class='datatips'>
+              <view wx:for="{{item.recipe.recipeTips}}" wx:for-item="tips" wx:key="tipTab2">{{tips.tips.fname}}</view>
+            </view>
+            <view class='datainfo'>
+              <view>{{item.recipe.fauthor}}</view>
+              <view>{{item.recipe.fgood}}人收藏</view>
+            </view>
+            <view class='datacount'>
+              <icon class='iconfont icon-yanjing'></icon>
+              {{item.recipe.fcount}}
+            </view>
+          </view>
+        </navigator>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item class="swiper-view">
+      <scroll-view scroll-y="true" scroll-x="false" class='scroll-views' wx:if="{{recipesTab3}}">
+        <navigator url='/pages/info/commonDataInfo/commonDataInfo?rid={{item.recipe.fid}}' wx:for="{{recipesTab3}}" wx:key="recipesTab3" wx:for-item="item" hover-class='none' class='datalist'>
+          <image src='{{resPathUrl}}{{item.recipe.fcover}}'></image>
+          <view>
+            <text class='datatitle'>{{item.recipe.fname}}</text>
+            <view class='datatips'>
+              <view wx:for="{{item.recipe.recipeTips}}" wx:for-item="tips" wx:key="tipTab3">{{tips.tips.fname}}</view>
+            </view>
+            <view class='datainfo'>
+              <view>{{item.recipe.fauthor}}</view>
+              <view>{{item.recipe.fgood}}人收藏</view>
+            </view>
+            <view class='datacount'>
+              <icon class='iconfont icon-yanjing'></icon>
+              {{item.recipe.fcount}}
+            </view>
+          </view>
+        </navigator>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>

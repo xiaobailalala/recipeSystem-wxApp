@@ -1,0 +1,72 @@
+/* pages/personeditor/personeditor.wxss */
+.con-main{
+  padding: 0 50rpx;
+}
+.iconRight {
+  font-size: 40rpx !important;
+  font-weight: bold;
+  color: #000 !important;
+  margin-left: 20rpx;
+}
+.toolsBtn{
+  line-height: 1;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #dedeee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 36rpx;
+  margin: 0;
+}
+.toolsBtn::after{
+  border: 0;
+}
+.toolsBtn>view{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  color: #999;
+}
+input,textarea{
+  border-top: 1rpx solid #dedeee;
+  border-bottom: 1rpx solid #dedeee;
+  padding: 20rpx 0;
+}
+textarea{
+  border: 1rpx solid #dedeee;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 30rpx;
+  position: relative;
+}
+.countLimit{
+  font-size: 26rpx;
+  position: absolute;
+  right: 20rpx;
+  bottom: 10rpx;
+}
+label{
+  display: block;
+  padding: 30rpx 0;
+}
+.submitbtn::after{
+  border: none;
+}
+.submitbtn{
+  font-size: 28rpx;
+  color: #ffffff;
+  background-color: #ddd;
+  height: 74rpx;
+  width: 660rpx;
+  line-height: 74rpx;
+  border-radius: 37rpx;
+  margin-top: 80rpx;
+}
+.userhead{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}

@@ -1,0 +1,28 @@
+<!--pages/home/index.wxml-->
+<view>
+  <view class='con-header'>
+    <view class='head-info'>
+      <navigator hover-class='none' url='/pages/menu/menu'>
+        <text class='icon-caidan iconfont iconRight'></text>
+      </navigator>
+      <form>
+        <view class='searchInfo'>
+          <zan-icon type='search'></zan-icon>
+          <input placeholder='想看什么搜这里，如粤菜'></input>
+        </view>
+      </form>
+      <image src="{{imgPath}}/bell.png"></image>
+    </view>
+    <view class='banner-container'>
+      <swiper class='imgSwiper' autoplay="true" interval="3000" duration="1000" circular="true">
+        <block wx:for="{{image}}" wx:for-index="index">
+          <swiper-item>
+            <image src="{{item.url}}" class="slide-image" mode="aspectFill" />
+            <view>今日推荐：{{item.text}}</view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+
+  </view>
+</view>

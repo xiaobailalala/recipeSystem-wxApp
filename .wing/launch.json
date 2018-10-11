@@ -1,0 +1,73 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+
+            "name": "Wing 内置播放器调试",
+
+            "type": "chrome",
+
+            "request": "launch",
+
+            "file": "index.html",
+
+            "runtimeExecutable": "${execPath}",
+
+            "useBuildInServer": true,
+
+            "sourceMaps": true,
+
+            "webRoot": "${workspaceRoot}",
+
+            "preLaunchTask":"build",
+
+            "port":5610
+
+        },
+        {
+
+            "name": "使用本机 Chrome 调试",
+
+            "type": "chrome",
+
+            "request": "launch",
+
+            "file": "index.html",
+
+            "runtimeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+
+            "useBuildInServer": true,
+
+            "sourceMaps": true,
+
+            "webRoot": "${workspaceRoot}",
+
+            "preLaunchTask":"build",
+
+            "port":5610
+
+        },
+
+        {
+
+            "name": "附加到 Chrome 进程",
+
+            "type": "chrome",
+
+            "request": "attach",
+
+            "port": 9222,
+
+            "webRoot": "${workspaceRoot}"
+
+        },
+
+        {
+            "name": "调试微信小程序",
+            "type": "weapp",
+            "request": "launch",
+            "project": "${workspaceRoot}"
+        }
+    ]
+}

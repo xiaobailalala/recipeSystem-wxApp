@@ -1,0 +1,16 @@
+<!--pages/menu/menu.wxml-->
+<scroll-view class='left-cont' scroll-y="true">
+  <button hover-class='none' data-index="{{index}}" 
+  wx:for="{{list}}" wx:for-item="item" class="{{index==menuActive?'active':''}}" wx:key="fix1" bindtap='selectItem'>{{item.fname}}
+  </button>
+</scroll-view>
+<scroll-view scroll-y='true' class='right-cont'>
+  <view wx:for="{{secondMenu}}" wx:for-item="item" wx:key="fix2">
+    <navigator class='claTwo' style='background-color: {{item.fbg}};color: {{item.fcolor}}' url='/pages/list/commonDataList/commonDataList?twoid={{item.fid}}&threeid=0'>{{item.fname}} >
+      <image mode='aspectFit' src='{{resPathUrl}}{{item.fcover}}'></image>
+    </navigator>
+    <view class='menuInfo'>
+      <navigator wx:for="{{item.classifies}}" url='/pages/list/commonDataList/commonDataList?twoid=0&threeid={{item1.fid}}' wx:for-item="item1" wx:key="fix3">{{item1.fname}}</navigator>
+    </view>
+  </view>
+</scroll-view>

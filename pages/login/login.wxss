@@ -1,0 +1,58 @@
+/* pages/login/login.wxss */
+.con-main{
+  padding-top: 100rpx;
+}
+.con-main text{
+  font-size: 30rpx;
+  color: #888;
+  text-align: center;
+  display: block;
+  line-height: 60rpx;
+  margin-bottom: 60rpx;
+}
+.con-main text:nth-of-type(1){
+  color: #333;
+  font-size: 60rpx;
+  font-weight: bold;
+  font-family: "宋体";
+  margin-bottom: 20rpx;
+}
+input{
+  width: 540rpx;
+  margin: 0 auto;
+  font-size: 30rpx;
+  color: #999;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #eee;
+}
+.submitbtn::after{
+  border: none;
+}
+.submitbtn{
+  font-size: 28rpx;
+  color: #ffffff;
+  background-color: #ddd;
+  height: 74rpx;
+  width: 660rpx;
+  line-height: 74rpx;
+  border-radius: 37rpx;
+  margin-top: 80rpx;
+}
+.toolsLink{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 660rpx;
+  margin: 0 auto;
+  padding: 30rpx 0;
+}
+.toolsLink>navigator{
+  font-size: 24rpx;
+  color: #0a5b8c;
+}
+image{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
