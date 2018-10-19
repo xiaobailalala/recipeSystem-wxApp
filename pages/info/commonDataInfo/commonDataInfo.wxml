@@ -1,5 +1,5 @@
 <!--pages/info/commonDataInfo/commonDataInfo.wxml-->
-<view>
+<view class="testView" class="{{scrollShow}}">
   <view class='toolsNav'>
     <view class='toolStatus'>
       <view wx:if="{{isXS}}">
@@ -25,7 +25,7 @@
       </view>
     </view>
     <view class='btnList'>
-      <button hover-class='none' class='icon_menu_main' bindtap='popup'>
+      <button hover-class='none' class='icon_menu_main {{mainBtnStyle}}' bindtap='popup'>
         <view class='icon-ball'>
           <view></view>
         </view>
@@ -41,10 +41,10 @@
         <image src='{{imgPath}}/smog.png'></image>
       </button>
     </view>
-    <navigator hover-class='none'>
+    <button hover-class='none' bindtap="showModal">
       <icon class='iconfont icon-pinglun'></icon>
       1
-    </navigator>
+    </button> 
     <navigator hover-class='none'>
       <icon class='iconfont icon-zhaoxiangji'></icon>
       传作品
@@ -136,6 +136,4 @@
       </view>
     </view>
   </scroll-view>
-
-  <audio wx:if="{{audioEle}}" id='aiAudio' src='{{resPathUrl}}{{voiceData}}'></audio>
 </view>

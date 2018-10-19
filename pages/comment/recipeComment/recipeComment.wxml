@@ -1,0 +1,134 @@
+<image class="bg" src="{{imgPath}}/recipeCommentBg.jpg" />
+<view class="box_header">
+  1000093条评论
+</view>
+<view class="customTop"></view>
+<view class="main">
+  <scroll-view class="box_main" scroll-y enable-back-to-top>
+    <view class="box_main_item">
+      <navigator url="" hover-class="none">
+        <image class="" src="{{imgPath}}/banner.png"></image>
+      </navigator>
+      <view class="box_main_item_content">
+        <view>
+          <navigator url="" hover-class="none" class="item_author">
+            <icon class="iconfont icon-aite"></icon>酒上飘
+          </navigator>
+          <view class="item_content">
+            目前处于这个状态：介绍的不想处，自己找又找不到，家里边又催。哎，活在当下真羡慕以前那些刚生下来就定了娃娃亲的！
+          </view>
+          <view class="item_reply">
+            <navigator url="" hover-class="none" class="item_author">
+              <icon class="iconfont icon-aite"></icon>酒上飘
+            </navigator>
+            <view class="item_content">
+              只有我一个人长这么大还没去过上海吗
+            </view>
+          </view>
+          <view class="item_time">
+            18-10-10 22:22
+          </view>
+        </view>
+        <view>
+          <icon class="iconfont icon-aixin"></icon>
+          <view>1552</view>
+        </view>
+      </view>
+    </view>
+    <view class="box_main_item">
+      <navigator url="" hover-class="none" class="item_author">
+        <image class="" src="{{imgPath}}/banner.png"></image>
+      </navigator>
+      <view class="box_main_item_content">
+        <view>
+          <navigator url="" hover-class="none" class="item_author">
+            <icon class="iconfont icon-aite"></icon>酒上飘
+          </navigator>
+          <view class="item_content">
+            目前处于这个状态：介绍的不想处，自己找又找不到，家里边又催。哎，活在当下真羡慕以前那些刚生下来就定了娃娃亲的！
+          </view>
+          <view class="item_img">
+            <image src="{{imgPath}}/banner.png" />
+            <image src="{{imgPath}}/banner.png" />
+            <image src="{{imgPath}}/banner.png" />
+          </view>
+          <view class="item_reply">
+            <navigator url="" hover-class="none" class="item_author">
+              <icon class="iconfont icon-aite"></icon>酒上飘
+            </navigator>
+            <view class="item_content">
+              只有我一个人长这么大还没去过上海吗
+            </view>
+          </view>
+          <view class="item_time">
+            18-10-10 22:22
+          </view>
+        </view>
+        <view>
+          <icon class="iconfont icon-aixin"></icon>
+          <view>1552</view>
+        </view>
+      </view>
+    </view>
+    <view class="box_main_item">
+      <navigator url="" hover-class="none">
+        <image class="" src="{{imgPath}}/banner.png"></image>
+      </navigator>
+      <view class="box_main_item_content">
+        <view>
+          <navigator url="" hover-class="none" class="item_author">
+            <icon class="iconfont icon-aite"></icon>酒上飘
+          </navigator>
+          <view class="item_content">
+            目前处于这个状态：介绍的不想处，自己找又找不到，家里边又催。哎，活在当下真羡慕以前那些刚生下来就定了娃娃亲的！
+          </view>
+          <view class="item_reply">
+            <navigator url="" hover-class="none" class="item_author">
+              <icon class="iconfont icon-aite"></icon>酒上飘
+            </navigator>
+            <view class="item_content">
+              只有我一个人长这么大还没去过上海吗
+            </view>
+          </view>
+          <view class="item_time">
+            18-10-10 22:22
+          </view>
+        </view>
+        <view>
+          <icon class="iconfont icon-aixin"></icon>
+          <view>1552</view>
+        </view>
+      </view>
+    </view>
+    <view class="box_main_item">
+      <navigator url="" hover-class="none">
+        <image class="" src="{{imgPath}}/banner.png"></image>
+      </navigator>
+      <view class="box_main_item_content">
+        <view>
+          <navigator url="" hover-class="none" class="item_author">
+            <icon class="iconfont icon-aite"></icon>酒上飘
+          </navigator>
+          <view class="item_content">
+            目前处于这个状态：介绍的不想处，自己找又找不到，家里边又催。哎，活在当下真羡慕以前那些刚生下来就定了娃娃亲的！
+          </view>
+          <view class="item_reply">
+            <navigator url="" hover-class="none" class="item_author">
+              <icon class="iconfont icon-aite"></icon>酒上飘
+            </navigator>
+            <view class="item_content">
+              只有我一个人长这么大还没去过上海吗
+            </view>
+          </view>
+          <view class="item_time">
+            18-10-10 22:22
+          </view>
+        </view>
+        <view>
+          <icon class="iconfont icon-aixin"></icon>
+          <view>1552</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

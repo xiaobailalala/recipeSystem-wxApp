@@ -1,5 +1,15 @@
 // pages/info/commonDataInfo/commonDataInfo.js
 var Tools = require("../../../ToolsApi/toolsApi.js");
+var Stomp = require('../../../utils/stomp.js').Stomp;
+var stompClient = {};
+var fireSensorData = 0;
+var smogSensorData = 0;
+var fireTimer = null;
+var smogTimer = null;
+var tempTop, tempBottom;
+var fireVoice, smogVoice, readyVoice;
+var innerAudioContext;
+var isVoicePlay = false;
 Page({
 
   /**
@@ -22,20 +32,22 @@ Page({
     XSStyle: "safeOn",
     FireStyle: "safeOn",
     SmogStyle: "safeOn",
+    mainBtnStyle: "mainBtnOn",
     XSBtnStyle: "",
     FireBtnStyle: "",
     SmogBtnStyle: "",
+    userInfo: null,
     isSocketConnect: false
   },
 
-  previewImage: function(e) {
+  previewImage: function (e) {
     var current = e.currentTarget.dataset.src;
     wx.previewImage({
       urls: current.split(",")
     });
   },
 
-  popup: function() {
+  popup: function () {
     if (this.data.isPopping) {
       popp.call(this);
       this.setData({
@@ -52,11 +64,28 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     // var opt = options.rid;
+    innerAudioContext = wx.createInnerAudioContext();
+    innerAudioContext.onEnded(function () {
+      isVoicePlay = false;
+    });
+    wx.getStorage({
+      key: 'commonUser',
+      success: res => {
+        this.setData({
+          userInfo: res.data
+        });
+      },
+      fail: err => {
+        this.setData({
+          userInfo: null
+        });
+      }
+    });
     var opt = 5;
     wx.request({
-      url: Tools.tools.reqPathUrl + '/mob/recipe/updateRecipeCount',
+      url: Tools.urls.mob_recipe_updateRecipeCount,
       method: "GET",
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -66,7 +95,7 @@ Page({
       },
       success: res => {
         wx.request({
-          url: Tools.tools.reqPathUrl + '/mob/recipe/getRecipeById',
+          url: Tools.urls.mob_recipe_getRecipeById,
           method: "GET",
           header: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -80,19 +109,108 @@ Page({
               processLength: res.data.data.processes.length
             });
             // this.voicePlay(res.data.data.processes);
+            var temStr = this.data.recipeData.ffire;
+            if (temStr != 0) {
+              tempBottom = temStr.split("-")[0];
+              tempTop = temStr.split("-")[1];
+              if (!this.data.isSocketConnect) {
+                this.initSocket(true);
+              }
+            } else {
+              if (!this.data.isSocketConnect) {
+                this.initSocket(false);
+              }
+            }
           }
         });
       }
     })
+    wx.request({
+      url: Tools.urls.mob_aiMark_getVoiceForWXReady,
+      method: "GET",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        readyMark: "RECIPE_START",
+        fireMark: "FIRE_SENSOR_ALARM",
+        smogMark: "SMOG_SENSOR_ALARM"
+      },
+      success: res => {
+        readyVoice = res.data.data[0];
+        fireVoice = res.data.data[1];
+        smogVoice = res.data.data[2]
+        // this.setData({
+        //   audioEle: true,
+        //   voiceData: res.data.data
+        // });
+        // this.audioCtx = wx.createAudioContext('aiAudio');
+        // this.audioCtx.play();
+      }
+    })
   },
 
-  voicePlay: function(arr) {
+  initSocket: function (isFire) {
+    var socketOpen = false;
+    function sendSocketMessage(msg) {
+      if (socketOpen) {
+        wx.sendSocketMessage({
+          data: msg
+        })
+      } else {
+        socketMsgQueue.push(msg)
+      }
+    }
+    var ws = {
+      send: sendSocketMessage
+    }
+    Stomp.setInterval = function () { }
+    Stomp.clearInterval = function () { }
+    wx.connectSocket({
+      url: Tools.tools.socketUrl,
+      success: () => {
+        this.setData({
+          isSocketConnect: true
+        });
+      }
+    });
+    wx.connectSocket({
+      url: Tools.tools.socketUrl
+    });
+    wx.onSocketOpen(function (res) {
+      socketOpen = true
+      ws.onopen()
+    });
+    wx.onSocketMessage(function (res) {
+      ws.onmessage(res)
+    });
+    stompClient = Stomp.over(ws);
+    if (isFire) {
+      stompClient.connect({}, function (sessionId) {
+        stompClient.subscribe('/sensorData/fire', function (body, headers) {
+          fireSensorData = JSON.parse(body.body).tmp;
+        });
+        stompClient.subscribe('/sensorData/smog', function (body, headers) {
+          smogSensorData = JSON.parse(body.body).pm;
+        });
+        // stompClient.send("/app/helloServer", {}, JSON.stringify({ 'content': '我是客户端' }));
+      });
+    } else {
+      stompClient.connect({}, function (sessionId) {
+        stompClient.subscribe('/sensorData/smog', function (body, headers) {
+          fireSensorData = JSON.parse(body.body).tmp;
+        });
+      });
+    }
+  },
+
+  voicePlay: function (arr) {
     console.log(arr);
     var content = arr[0].fcontent;
     var id = arr[0].fid;
     if (arr[0].fvoice == 0) {
       wx.request({
-        url: Tools.tools.reqPathUrl + '/mob/process/produceVoice',
+        url: Tools.urls.mob_process_produceVoice,
         method: "GET",
         header: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -117,7 +235,7 @@ Page({
     // this.audioCtx.play()
   },
 
-  testVoice: function() {
+  testVoice: function () {
     // this.audioCtx.play();
     // console.log(this.data.recipeData.processes[0].fvoice);
     // this.setData({
@@ -126,57 +244,12 @@ Page({
     // });
     // this.audioCtx = wx.createAudioContext('aiAudio');
     // this.audioCtx.play();
-    var socketOpen = false
-
-    function sendSocketMessage(msg) {
-      console.log('send msg:')
-      console.log(msg);
-      if (socketOpen) {
-        wx.sendSocketMessage({
-          data: msg
-        })
-      } else {
-        socketMsgQueue.push(msg)
-      }
-    }
-
-
-    var ws = {
-      send: sendSocketMessage
-    }
-
-    wx.connectSocket({
-      url: Tools.tools.socketUrl
-    })
-    wx.onSocketOpen(function (res) {
-      socketOpen = true
-      ws.onopen()
-    })
-
-    wx.onSocketMessage(function (res) {
-      ws.onmessage(res)
-    })
-
-    var Stomp = require('../../../utils/stomp.js').Stomp;
-    Stomp.setInterval = function () { }
-    Stomp.clearInterval = function () { }
-    var stompClient = Stomp.over(ws);
-
-    stompClient.connect({}, function (sessionId) {
-      stompClient.subscribe('/topic/game_chat', function (body, headers) {
-        console.log(headers);
-        console.log('From MQ:', body);
-      });
-      // let openid = 'oO1Yu5Tlih1Lxqi7yh1qc7fZJE9M';
-      // stompClient.subscribe('/user/' + openid + '/message', function (body, headers) {
-      //   wx.vibrateLong()
-      //   console.log('From MQ to user:', body);
-      // });
-      stompClient.send("/app/helloServer", {}, JSON.stringify({ 'content': '我是客户端' }));
-    })
+    wx.navigateTo({
+      url: '/pages/login/login?active=true',
+    });
   },
 
-  cook: function(e) {
+  cook: function (e) {
     if (this.data.isXS) {
       this.setData({
         isXS: false,
@@ -187,81 +260,182 @@ Page({
         isXS: true,
         XSBtnStyle: "toolsOn"
       });
+      if (!isVoicePlay) {
+        isVoicePlay = true;
+        innerAudioContext.src = this.data.resPathUrl + readyVoice;
+        innerAudioContext.play();
+      }
     }
   },
 
-  fire: function() {
-    if (this.data.isFire) {
-      this.setData({
-        isFire: false,
-        FireBtnStyle: ""
+  fire: function () {
+    if (this.data.userInfo == null) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '小膳提醒您，请先登录哦',
+        confirmText: "去登陆",
+        confirmColor: "#ffb31a",
+        cancelColor: "#666666",
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login?active=true',
+            });
+          }
+        }
       });
     } else {
-      this.setData({
-        isFire: true,
-        FireBtnStyle: "toolsOn"
-      });
+      if (this.data.isFire) {
+        this.setData({
+          isFire: false,
+          FireBtnStyle: "",
+          mainBtnStyle: "mainBtnOn"
+        });
+        stompClient.send("/sensorMonitor/fireListenStop", {}, this.data.userInfo.fid);
+        this.fireMonitor(false);
+      } else {
+        this.fireMonitor(true);
+        this.setData({
+          isFire: true,
+          FireBtnStyle: "toolsOn"
+        });
+        stompClient.send("/sensorMonitor/fireListenStart", {}, JSON.stringify({ "uid": this.data.userInfo.fid, "top": tempTop }));
+      }
     }
   },
 
-  smog: function() {
-    if (this.data.isSmog) {
-      this.setData({
-        isSmog: false,
-        SmogBtnStyle: ""
+  smog: function () {
+    if (this.data.userInfo == null) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '小膳提醒您，请先登录哦',
+        confirmText: "去登陆",
+        confirmColor: "#ffb31a",
+        cancelColor: "#666666",
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login?active=true',
+            });
+          }
+        }
       });
     } else {
-      this.setData({
-        isSmog: true,
-        SmogBtnStyle: "toolsOn"
-      });
+      if (this.data.isSmog) {
+        this.setData({
+          isSmog: false,
+          SmogBtnStyle: "",
+          mainBtnStyle: "mainBtnOn"
+        });
+        stompClient.send("/sensorMonitor/smogListenStop", {}, this.data.userInfo.fid);
+        this.smogMonitor(false);
+      } else {
+        this.smogMonitor(true);
+        this.setData({
+          isSmog: true,
+          SmogBtnStyle: "toolsOn"
+        });
+        stompClient.send("/sensorMonitor/smogListenStart", {}, JSON.stringify({ "uid": this.data.userInfo.fid, "top": 90 }));
+      }
+    }
+  },
+
+  fireMonitor: function (isOpen) {
+    if (isOpen) {
+      fireTimer = setInterval(() => {
+        if (fireSensorData > tempTop) {
+          this.setData({
+            FireStyle: "safeWarn",
+            mainBtnStyle: "mainBtnWarn"
+          });
+          if (!isVoicePlay) {
+            isVoicePlay = true;
+            innerAudioContext.src = this.data.resPathUrl + fireVoice;
+            innerAudioContext.play();
+          }
+        } else {
+          this.setData({
+            FireStyle: "safeOn",
+            mainBtnStyle: "mainBtnOn"
+          });
+        }
+      }, 1500);
+    } else {
+      clearInterval(fireTimer);
+    }
+  },
+
+  smogMonitor: function (isOpen) {
+    if (isOpen) {
+      smogTimer = setInterval(() => {
+        if (smogSensorData > 90) {
+          this.setData({
+            SmogStyle: "safeWarn",
+            mainBtnStyle: "mainBtnWarn"
+          });
+          if (!isVoicePlay) {
+            isVoicePlay = true;
+            innerAudioContext.src = this.data.resPathUrl + smogVoice;
+            innerAudioContext.play();
+          }
+        } else {
+          this.setData({
+            SmogStyle: "safeOn",
+            mainBtnStyle: "mainBtnOn"
+          });
+        }
+      }, 1500);
+    } else {
+      clearInterval(smogTimer);
     }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {},
+  onReady: function () { },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
-
+  onHide: function () {
+    if (this.data.userInfo != null) {
+      stompClient.send("/sensorMonitor/allListenStop", {}, this.data.userInfo.fid);
+    }
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 

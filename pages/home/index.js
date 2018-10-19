@@ -1,5 +1,6 @@
 // pages/home/index.js
 var Tools = require("../../ToolsApi/toolsApi.js");
+
 Page({
 
   /**

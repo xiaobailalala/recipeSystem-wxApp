@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/comment/recipeComment/recipeComment",
     "pages/info/commonDataInfo/commonDataInfo",
     "pages/home/index",
     "pages/list/commonDataList/commonDataList",

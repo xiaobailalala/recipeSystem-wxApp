@@ -35,7 +35,7 @@ Page({
    */
   onLoad: function(options) {
     wx.request({
-      url: Tools.tools.reqPathUrl + '/mob/recipe/getDataByClaId',
+      url: Tools.urls.mob_recipe_getDataByClaId,
       method: "GET",
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'

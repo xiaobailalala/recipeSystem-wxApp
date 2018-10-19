@@ -12,7 +12,7 @@ function Ope(that, disabled, bg, load) {
 }
 function saveInfo(that, file, img) {
   wx.request({
-    url: Tools.tools.reqPathUrl + '/mob/commonUser/commonUserSaveInfo',
+    url: Tools.urls.mob_commonUser_commonUserSaveInfo,
     method: "POST",
     header: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -167,7 +167,7 @@ Page({
         preImg = userInfo.fcover;
       }
       wx.uploadFile({
-        url: Tools.tools.reqPathUrl + '/mob/commonUser/commonUsersaveHead',
+        url: Tools.urls.mob_commonUser_commonUsersaveHead,
         filePath: file,
         name: 'file',
         formData: {
@@ -231,7 +231,7 @@ Page({
       }
     });
     wx.request({
-      url: Tools.tools.reqPathUrl + '/mob/profession/getAllInfo',
+      url: Tools.urls.mob_profession_getAllInfo,
       method: "GET",
       success: res => {
         res.data.data.forEach(function (item, index) {

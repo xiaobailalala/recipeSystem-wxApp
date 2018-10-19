@@ -20,7 +20,8 @@ Page({
     submitbtnLoading:false,
     account:"",
     password:"",
-    imgPath:Tools.tools.imgPathUrl
+    imgPath:Tools.tools.imgPathUrl,
+    isActive: false
   },
 
   accountInput:function(e){
@@ -74,7 +75,7 @@ Page({
       });
       setTimeout(()=>{
         wx.request({
-          url: Tools.tools.reqPathUrl + '/mob/commonUser/commonUserLogin',
+          url: Tools.urls.mob_commonUser_commonUserLogin,
           method: "POST",
           header:{
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -91,14 +92,24 @@ Page({
                     key: 'commonUser',
                     data: res.data.data,
                     success: res => {
-                      wx.switchTab({
-                        url: '/pages/person/person',
-                        success:res=>{
-                          var page = getCurrentPages().pop();
-                          if (page == undefined || page == null) return;
-                          page.onLoad();
-                        }
-                      })
+                      if(this.data.isActive){
+                        wx.navigateBack({
+                          success: function(){
+                            var page = getCurrentPages().pop();
+                            if (page == undefined || page == null) return;
+                            page.onLoad();
+                          }
+                        })
+                      }else{
+                        wx.switchTab({
+                          url: '/pages/person/person',
+                          success: res => {
+                            var page = getCurrentPages().pop();
+                            if (page == undefined || page == null) return;
+                            page.onLoad();
+                          }
+                        })
+                      }
                     }
                   })
                 },1000);
@@ -131,7 +142,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    if(options.active){
+      this.setData({
+        isActive: true
+      });
+    }else{
+      this.setData({
+        isActive: false
+      });
+    }
   },
 
   /**
