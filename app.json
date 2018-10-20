@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/comment/recipeComment/commentInput/commentInput",
     "pages/comment/recipeComment/recipeComment",
     "pages/info/commonDataInfo/commonDataInfo",
     "pages/home/index",
@@ -13,8 +14,7 @@
     "pages/reg/reg",
     "pages/repwd/repwd",
     "pages/persondetail/persondetail",
-    "pages/personeditor/changeImage/changeImage",
-    "pages/comment/recipeComment/commentInput/commentInput"
+    "pages/personeditor/changeImage/changeImage"
   ],
   "window": {
     "backgroundTextStyle": "light",

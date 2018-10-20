@@ -1,11 +1,12 @@
-// pages/comment/recipeComment/commentInput/commentInput.js
+var Tools = require("../../../../ToolsApi/toolsApi.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    imgPath: Tools.tools.imgPathUrl,
+    resPathUrl: Tools.tools.resPathUrl
   },
 
   /**
