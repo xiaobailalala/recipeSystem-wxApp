@@ -13,7 +13,8 @@
     "pages/reg/reg",
     "pages/repwd/repwd",
     "pages/persondetail/persondetail",
-    "pages/personeditor/changeImage/changeImage"
+    "pages/personeditor/changeImage/changeImage",
+    "pages/comment/recipeComment/commentInput/commentInput"
   ],
   "window": {
     "backgroundTextStyle": "light",

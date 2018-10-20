@@ -7,7 +7,79 @@ Page({
    */
   data: {
     imgPath: Tools.tools.imgPathUrl,
-    resPathUrl: Tools.tools.resPathUrl
+    resPathUrl: Tools.tools.resPathUrl,
+    scrollTop: 0,
+    isOut: false,
+    animationPlus: {},
+    animationComment: {},
+    animationTop: {}
+  },
+
+  plusMenu: function () {
+    if (this.data.isOut) {
+      this.menuBack();
+      this.setData({
+        isOut: false
+      });
+    } else {
+      this.menuOut();
+      this.setData({
+        isOut: true
+      });
+    }
+  },
+
+  topMenu: function(){
+    this.setData({
+      scrollTop: 0
+    });
+    this.menuBack();
+  },
+
+  menuOut: function () {
+    var animationPlus = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    var animationComment = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    var animationTop = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    animationPlus.rotateZ(180).step();
+    animationComment.translate(0, -60).opacity(1).step();
+    animationTop.translate(-60, 0).opacity(1).step();
+    this.setData({
+      animationPlus: animationPlus.export(),
+      animationComment: animationComment.export(),
+      animationTop: animationTop.export()
+    })
+  },
+
+  menuBack: function () {
+    var animationPlus = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    var animationComment = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    var animationTop = wx.createAnimation({
+      duration: 500,
+      timingFunction: 'ease-out'
+    })
+    animationPlus.rotateZ(0).step();
+    animationComment.translate(0, 0).opacity(0).step();
+    animationTop.translate(0, 0).opacity(0).step();
+    this.setData({
+      animationPlus: animationPlus.export(),
+      animationComment: animationComment.export(),
+      animationTop: animationTop.export()
+    })
   },
 
   /**
