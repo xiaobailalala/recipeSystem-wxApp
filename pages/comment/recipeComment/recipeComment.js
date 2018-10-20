@@ -31,7 +31,8 @@ Page({
 
   topMenu: function(){
     this.setData({
-      scrollTop: 0
+      scrollTop: 0,
+      isOut: false
     });
     this.menuBack();
   },

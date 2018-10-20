@@ -6,7 +6,20 @@ Page({
    */
   data: {
     imgPath: Tools.tools.imgPathUrl,
-    resPathUrl: Tools.tools.resPathUrl
+    resPathUrl: Tools.tools.resPathUrl,
+    countLimit: 0
+  },
+
+  signInput: function(e){
+    if (e.detail.value.length <= 40) {
+      this.setData({
+        countLimit: e.detail.value.length
+      });
+    } else {
+      this.setData({
+        countLimit: e.detail.value.length
+      });
+    }
   },
 
   /**

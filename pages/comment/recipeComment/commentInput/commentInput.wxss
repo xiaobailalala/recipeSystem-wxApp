@@ -3,9 +3,107 @@ page {
     position: relative;
 }
 
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+button::after {
+    border: unset;
+}
+
+button{
+    margin: 0;
+    padding: 10rpx 20rpx;
+    line-height: unset;
+    font-size: 30rpx;
+}
+
 .bg {
     width: 100%;
     height: 100%;
     position: fixed;
     z-index: 0;
+}
+
+.main{
+    box-sizing: border-box;
+    padding: 30rpx 40rpx;
+    position: relative;
+    z-index: 5;
+}
+
+.input_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgb(233, 233, 233);
+}
+
+.input_content{
+    margin-top: 30rpx;
+}
+.input_content>textarea{
+    width: 100%;
+    border-radius: 10rpx;
+    padding: 20rpx;
+    box-sizing: border-box;
+    color: rgb(233, 233, 233);
+    position: relative;
+    height: 250rpx;
+    background-color: #33333373;
+    box-shadow: 0 0 60rpx #000000 inset;
+}
+
+.countLimit{
+    font-size: 26rpx;
+    position: absolute;
+    right: 20rpx;
+    bottom: 10rpx;
+}
+
+.input_tools{
+    color: rgb(177, 177, 177);
+    font-size: 30rpx;
+    margin-top: 20rpx;
+}
+
+.input_tools>icon{
+    font-size: 32rpx;
+    color: rgb(230, 230, 230);
+}
+
+.input_img{
+    margin-top: 40rpx;
+}
+
+.input_img>view{
+    float: left;
+    margin-right: 25rpx;
+    border: 4rpx solid #555555;
+    border-radius: 10rpx;
+    position: relative;
+    width: 180rpx;
+    height: 180rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input_img>view>icon{
+    position: absolute;
+    color: rgb(202, 202, 202);
+    right: -22rpx;
+    top: -32rpx;
+    margin: 0;
+    padding: 0;
+    line-height: unset;
+    font-size: 40rpx;
+}
+
+.input_img>view>image{
+    width: 165rpx;
+    height: 165rpx;
+    margin: 0;
 }
