@@ -41,10 +41,10 @@
         <image src='{{imgPath}}/smog.png'></image>
       </button>
     </view>
-    <button hover-class='none' bindtap="showModal">
+    <navigator hover-class='none' url="/pages/comment/recipeComment/recipeComment?rid={{recipeData.fid}}&authorid={{recipeData.fuid}}&uid={{userInfo.fid}}">
       <icon class='iconfont icon-pinglun'></icon>
       1
-    </button> 
+    </navigator>
     <navigator hover-class='none'>
       <icon class='iconfont icon-zhaoxiangji'></icon>
       传作品
@@ -79,11 +79,7 @@
       </view>
       <view class='introduction'>{{recipeData.fintroduction}}</view>
       <view class='userinfo'>
-        <navigator wx:if="{{recipeData.faid!=0}}" hover-class='none'>
-          <image src='{{resPathUrl}}{{recipeData.adminUser.fhead}}'></image>
-          {{recipeData.adminUser.fusername}}
-        </navigator>
-        <navigator wx:if="{{recipeData.faid==0}}">
+        <navigator>
           <image src='{{resPathUrl}}{{recipeData.commonUser.fcover}}'></image>
           {{recipeData.commonUser.fusername}}
         </navigator>
@@ -92,7 +88,7 @@
       <view class='recipeclassify'>
         <view class='icon'>类别</view>
         <view class='classifyList'>
-          <view wx:for="{{recipeData.recipeClassifies}}" wx:key="classify" wx:for-item="item">
+          <view wx:for="{{recipeData.recipeClassifies}}" wx:key="recipeClassify" wx:for-item="item">
             <view wx:if="{{item.ftwoId==0}}">
               {{item.classify.classifyTwo.classifyOne.fname}}
               <icon class='iconfont icon-xaingyou'></icon> {{item.classify.classifyTwo.fname}}

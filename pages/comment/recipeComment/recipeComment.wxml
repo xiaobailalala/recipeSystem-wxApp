@@ -1,132 +1,41 @@
 <image class="bg" src="{{imgPath}}/recipeCommentBg.jpg" />
 <view class="main">
   <view class="box_header">
-    1000093条评论
+    {{commentLength}}条评论
   </view>
   <scroll-view class="box_main" scroll-y enable-back-to-top scroll-top="{{scrollTop}}" scroll-with-animation>
-    <view class="box_main_item">
-      <navigator url="" hover-class="none">
-        <image class="" src="{{imgPath}}/banner.png"></image>
+    <view class="box_main_item" wx:for="{{commentList}}" wx:for-item="item" wx:key="commentList">
+      <navigator url="?uid={{item.commonUser.fid}}" hover-class="none">
+        <image src="{{resPathUrl}}{{item.commonUser.fcover}}"></image>
       </navigator>
       <view class="box_main_item_content">
         <view>
-          <navigator url="" hover-class="none" class="item_author">
-            <icon class="iconfont icon-aite"></icon>酒上飘
+          <navigator url="?uid={{item.commonUser.fid}}" hover-class="none" class="item_author">
+            <icon class="iconfont icon-aite"></icon>{{item.commonUser.fusername}}
+            <view wx:if="{{authorid==item.fuid}}" class="isAuthor">作者</view>
           </navigator>
-          <view class="item_content">
-            目前处于这个状态：介绍的不想处，自己找又找不到，家里边又催。哎，活在当下真羡慕以前那些刚生下来就定了娃娃亲的！
+          <view class="item_content" bindtap="actionSheetTab" data-replyid="{{item.fid}}" data-replyname="{{item.commonUser.fusername}}">
+            {{item.fcontent}}
           </view>
-          <view class="item_reply">
-            <navigator url="" hover-class="none" class="item_author">
-              <icon class="iconfont icon-aite"></icon>酒上飘
+          <view class="item_img" wx:if="{{item.fcover!=0}}">
+            <image wx:for="{{item.fcover}}" wx:for-item="imgItem" wx:key="commentImgList" src="{{resPathUrl}}{{imgItem}}" />
+          </view>
+          <view class="item_reply" wx:if="{{item.freplyid!=-1}}">
+            <navigator url="?uid={{item.foodComment.commonUser.fid}}" hover-class="none" class="item_author">
+              <icon class="iconfont icon-aite"></icon>{{item.foodComment.commonUser.fusername}}
+              <view wx:if="{{authorid==item.foodComment.fuid}}" class="isAuthor">作者</view>
             </navigator>
-            <view class="item_content">
-              只有我一个人长这么大还没去过上海吗
+            <view class="item_content" bindtap="actionSheetTab" data-replyid="{{item.foodComment.fid}}" data-replyname="{{item.foodComment.commonUser.fusername}}">
+              {{item.foodComment.fcontent}}
             </view>
           </view>
           <view class="item_time">
-            18-10-10 22:22
+            {{item.frelease}}
           </view>
         </view>
         <view>
           <icon class="iconfont icon-aixin"></icon>
-          <view>1552</view>
-        </view>
-      </view>
-    </view>
-    <view class="box_main_item">
-      <navigator url="" hover-class="none" class="item_author">
-        <image class="" src="{{imgPath}}/banner.png"></image>
-      </navigator>
-      <view class="box_main_item_content">
-        <view>
-          <navigator url="" hover-class="none" class="item_author">
-            <icon class="iconfont icon-aite"></icon>酒上飘
-          </navigator>
-          <view class="item_content">
-            目前处于这个状态：介绍的不想处，自己找又找不到，家里边又催。哎，活在当下真羡慕以前那些刚生下来就定了娃娃亲的！
-          </view>
-          <view class="item_img">
-            <image src="{{imgPath}}/banner.png" />
-            <image src="{{imgPath}}/banner.png" />
-            <image src="{{imgPath}}/banner.png" />
-          </view>
-          <view class="item_reply">
-            <navigator url="" hover-class="none" class="item_author">
-              <icon class="iconfont icon-aite"></icon>酒上飘
-            </navigator>
-            <view class="item_content">
-              只有我一个人长这么大还没去过上海吗
-            </view>
-          </view>
-          <view class="item_time">
-            18-10-10 22:22
-          </view>
-        </view>
-        <view>
-          <icon class="iconfont icon-aixin"></icon>
-          <view>1552</view>
-        </view>
-      </view>
-    </view>
-    <view class="box_main_item">
-      <navigator url="" hover-class="none">
-        <image class="" src="{{imgPath}}/banner.png"></image>
-      </navigator>
-      <view class="box_main_item_content">
-        <view>
-          <navigator url="" hover-class="none" class="item_author">
-            <icon class="iconfont icon-aite"></icon>酒上飘
-          </navigator>
-          <view class="item_content">
-            目前处于这个状态：介绍的不想处，自己找又找不到，家里边又催。哎，活在当下真羡慕以前那些刚生下来就定了娃娃亲的！
-          </view>
-          <view class="item_reply">
-            <navigator url="" hover-class="none" class="item_author">
-              <icon class="iconfont icon-aite"></icon>酒上飘
-            </navigator>
-            <view class="item_content">
-              只有我一个人长这么大还没去过上海吗
-            </view>
-          </view>
-          <view class="item_time">
-            18-10-10 22:22
-          </view>
-        </view>
-        <view>
-          <icon class="iconfont icon-aixin"></icon>
-          <view>1552</view>
-        </view>
-      </view>
-    </view>
-    <view class="box_main_item">
-      <navigator url="" hover-class="none">
-        <image class="" src="{{imgPath}}/banner.png"></image>
-      </navigator>
-      <view class="box_main_item_content">
-        <view>
-          <navigator url="" hover-class="none" class="item_author">
-            <icon class="iconfont icon-aite"></icon>酒上飘
-          </navigator>
-          <view class="item_content">
-            <input type="text" placeholder="测试用" />
-            目前处于这个状态：介绍的不想处，自己找又找不到，家里边又催。哎，活在当下真羡慕以前那些刚生下来就定了娃娃亲的！
-          </view>
-          <view class="item_reply">
-            <navigator url="" hover-class="none" class="item_author">
-              <icon class="iconfont icon-aite"></icon>酒上飘
-            </navigator>
-            <view class="item_content">
-              只有我一个人长这么大还没去过上海吗
-            </view>
-          </view>
-          <view class="item_time">
-            18-10-10 22:22
-          </view>
-        </view>
-        <view>
-          <icon class="iconfont icon-aixin"></icon>
-          <view>1552</view>
+          <view>{{item.fgood}}</view>
         </view>
       </view>
     </view>
@@ -138,8 +47,12 @@
     <view class="menu-top" bindtap="topMenu" animation="{{animationTop}}">
       <icon class="iconfont icon-huidaodingbu"></icon>
     </view>
-    <view class="menu-comment" animation="{{animationComment}}">
+    <view class="menu-comment" animation="{{animationComment}}" bindtap="toComment">
       <icon class="iconfont icon-tubiao_pinglun"></icon>
     </view>
   </view>
 </view>
+<action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetChange">
+  <action-sheet-item  bindtap="bindReply">回复</action-sheet-item>
+  <action-sheet-cancel >取消</action-sheet-cancel>
+</action-sheet>

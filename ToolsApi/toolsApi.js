@@ -25,9 +25,12 @@ var urlsObj = {
   mob_cla_getAllInfo: toolsObj.reqPathUrl + "/mob/cla/getAllInfo",
   mob_commonUser_commonUserSaveInfo: toolsObj.reqPathUrl + "/mob/commonUser/commonUserSaveInfo",
   mob_commonUser_commonUsersaveHead: toolsObj.reqPathUrl + "/mob/commonUser/commonUsersaveHead",
-  mob_profession_getAllInfo: "/mob/profession/getAllInfo",
-  mob_common_getCode: "/mob/common/getCode",
-  mob_commonUser_commonUserReg: "/mob/commonUser/commonUserReg"
+  mob_profession_getAllInfo: toolsObj.reqPathUrl + "/mob/profession/getAllInfo",
+  mob_common_getCode: toolsObj.reqPathUrl + "/mob/common/getCode",
+  mob_commonUser_commonUserReg: toolsObj.reqPathUrl + "/mob/commonUser/commonUserReg",
+  mob_foodComment_imgupload: toolsObj.reqPathUrl + "/mob/foodComment/imgupload",
+  mob_foodComment_saveInfo: toolsObj.reqPathUrl + "/mob/foodComment/saveInfo",
+  mob_foodComment_getInfoByRid: toolsObj.reqPathUrl + "/mob/foodComment/getInfoByRid"
 }
 module.exports = {
   tools: toolsObj,

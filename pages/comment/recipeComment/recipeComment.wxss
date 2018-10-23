@@ -163,3 +163,13 @@ button::after {
     font-size: 50rpx;
     color: rgb(233, 233, 233);
 }
+
+.isAuthor{
+    color: rgb(233, 233, 233);
+    font-size: 24rpx;
+    background-color: #d9534f;
+    border-radius: 5rpx;
+    display: inline-block;
+    padding: 3rpx 8rpx 3rpx 5rpx;
+    margin-left: 10rpx;
+}

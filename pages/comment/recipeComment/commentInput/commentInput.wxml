@@ -2,29 +2,21 @@
 <view class="main">
   <view class="input_header">
     您的评论：
-    <button type="default" hover-class="none">发表</button>
+    <button type="default" hover-class="none" bindtap="subTab">发表</button>
   </view>
   <view class="input_content">
-    <textarea placeholder="在此留下你们的评论~" bindinput='signInput' maxlength="50">
+    <textarea placeholder="{{replyname}}" bindinput='signInput' maxlength="50" value="{{content}}">
         <text class='countLimit' style="color:{{countLimitColor}}">{{countLimit}} / 50</text>
     </textarea>
     <view class="input_tools">
         分享您的附图：
-        <icon class="iconfont icon-tupian"></icon>
+        <icon class="iconfont icon-tupian" bindtap="changeImg"></icon>
     </view>
   </view>
   <view class="input_img">
-    <view class="">
-        <icon class="iconfont icon-guanbi" />
-        <image src="{{imgPath}}/banner.png" />
-    </view>
-    <view class="">
-        <icon class="iconfont icon-guanbi" />
-        <image src="{{imgPath}}/banner.png" />
-    </view>
-    <view class="">
-        <icon class="iconfont icon-guanbi" />
-        <image src="{{imgPath}}/banner.png" />
+    <view class="" wx:for="{{imgArr}}" wx:for-item="item" wx:key="imgArr">
+        <icon class="iconfont icon-guanbi" data-path="{{item}}" bindtap="deleteImg"/>
+        <image src="{{item}}" />
     </view>
   </view>
 </view>

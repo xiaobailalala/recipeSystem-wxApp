@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/comment/recipeComment/commentInput/commentInput",
-    "pages/comment/recipeComment/recipeComment",
     "pages/info/commonDataInfo/commonDataInfo",
+    "pages/comment/recipeComment/recipeComment",
+    "pages/comment/recipeComment/commentInput/commentInput",
+    "pages/person/person",
     "pages/home/index",
     "pages/list/commonDataList/commonDataList",
     "pages/menu/menu",
-    "pages/person/person",
     "pages/index/index",
     "pages/logs/logs",
     "pages/login/login",
@@ -14,7 +14,8 @@
     "pages/reg/reg",
     "pages/repwd/repwd",
     "pages/persondetail/persondetail",
-    "pages/personeditor/changeImage/changeImage"
+    "pages/personeditor/changeImage/changeImage",
+    "pages/comment/recipeComment/commentChangeImg/commentChangeImg"
   ],
   "window": {
     "backgroundTextStyle": "light",

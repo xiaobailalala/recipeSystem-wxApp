@@ -39,17 +39,6 @@ button::after {
     font-size: 30rpx;
 }
 
-.toolsNav>button{
-  margin: 0;
-  padding: 0;
-  line-height: 100rpx;
-  height: 100%;
-  background-color: unset;
-  color: #f3b443;
-  font-size: 30rpx;
-  font-weight: 700;
-}
-
 .btnList {
     position: relative;
     height: 100%;

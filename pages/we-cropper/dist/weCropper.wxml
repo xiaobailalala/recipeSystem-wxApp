@@ -1,4 +1,4 @@
 <template name="weCropper">
-  <canvas class="cropper" disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" style="width:{{width}}px;height:{{height}}px;" canvas-id="{{id}}">
+  <canvas class="cropper" disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" style="width:{{width}}px;height:80vh;" canvas-id="{{id}}">
   </canvas>
 </template>

@@ -1,0 +1,9 @@
+<import src="../../../we-cropper/dist/weCropper.wxml" />
+
+<view class="cropper-wrapper">
+  <template is="weCropper" data="{{...cropperOpt}}" />
+</view>
+<view class='button-container'>
+  <button bindtap="uploadTap" class='opBtn light' hover-class='navigator-hover'>重新选择</button>
+  <button class='opBtn' hover-class='navigator-hover' bindtap="getCropperImage">确认</button>
+</view>

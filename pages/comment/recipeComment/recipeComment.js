@@ -12,7 +12,15 @@ Page({
     isOut: false,
     animationPlus: {},
     animationComment: {},
-    animationTop: {}
+    animationTop: {},
+    uid: 0,
+    authorid: 0,
+    rid: 0,
+    actionSheetHidden: true,
+    replyid: -1,
+    replyname: "",
+    commentList: [],
+    commentLength: 0
   },
 
   plusMenu: function () {
@@ -83,11 +91,78 @@ Page({
     })
   },
 
+  toComment: function(){
+    var rid = this.data.rid;
+    var authorid = this.data.authorid;
+    var uid = this.data.uid;
+    this.menuBack();
+    wx.navigateTo({
+      url: "/pages/comment/recipeComment/commentInput/commentInput?rid=" + rid + "&authorid=" + authorid + "&uid=" + uid + "&replyid=-1"
+    });
+  },
+
+  actionSheetTab: function(e){
+    this.setData({
+      replyid: e.currentTarget.dataset.replyid,
+      replyname: e.currentTarget.dataset.replyname,
+      actionSheetHidden: !this.data.actionSheetHidden
+    });
+  },
+
+  actionSheetChange: function(e) {
+    this.setData({
+      actionSheetHidden: !this.data.actionSheetHidden
+    });
+  },
+
+  bindReply: function(){
+    var rid = this.data.rid;
+    var authorid = this.data.authorid;
+    var uid = this.data.uid;
+    var replyid = this.data.replyid;
+    var replyname = this.data.replyname;
+    this.setData({
+      actionSheetHidden: !this.data.actionSheetHidden
+    });
+    wx.navigateTo({
+      url: "/pages/comment/recipeComment/commentInput/commentInput?rid=" + rid + "&authorid=" + authorid + "&uid=" + uid + "&replyid=" + replyid + "&replyname=" + replyname
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let {
+      rid,
+      authorid,
+      uid
+    } = options
+    this.setData({
+      rid: rid,
+      authorid: authorid,
+      uid: uid
+    });
+    wx.request({
+      url: Tools.urls.mob_foodComment_getInfoByRid,
+      method: "GET",
+      data: {rid: this.data.rid},
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: res => {
+        res.data.data.forEach(function(item, index){
+          if(item.fcover!=0){
+            var jsonData = JSON.parse(item.fcover);
+            item.fcover = jsonData;
+          }
+        });
+        this.setData({
+          commentList: res.data.data,
+          commentLength: res.data.data.length
+        });
+      }
+    });
   },
 
   /**
