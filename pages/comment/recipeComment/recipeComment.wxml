@@ -3,7 +3,11 @@
   <view class="box_header">
     {{commentLength}}条评论
   </view>
-  <scroll-view class="box_main" scroll-y enable-back-to-top scroll-top="{{scrollTop}}" scroll-with-animation>
+  <view class="headerRefresh" animation="{{refreshAnimation}}">
+    <view>下拉刷新中...</view>
+    <view>{{refreshTime}}</view>
+  </view>
+  <scroll-view class="box_main" scroll-y enable-back-to-top scroll-top="{{scrollTop}}" scroll-with-animation bindscrolltoupper="refresh" bindscrolltolower="loadMore">
     <view class="box_main_item" wx:for="{{commentList}}" wx:for-item="item" wx:key="commentList">
       <navigator url="?uid={{item.commonUser.fid}}" hover-class="none">
         <image src="{{resPathUrl}}{{item.commonUser.fcover}}"></image>
@@ -38,6 +42,9 @@
           <view>{{item.fgood}}</view>
         </view>
       </view>
+    </view>
+    <view class="allDataContainer" wx:if="{{isAllData}}">
+      ---- 下面没有数据啦 ----
     </view>
   </scroll-view>
   <view class="box_footer">

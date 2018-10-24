@@ -30,7 +30,8 @@ var urlsObj = {
   mob_commonUser_commonUserReg: toolsObj.reqPathUrl + "/mob/commonUser/commonUserReg",
   mob_foodComment_imgupload: toolsObj.reqPathUrl + "/mob/foodComment/imgupload",
   mob_foodComment_saveInfo: toolsObj.reqPathUrl + "/mob/foodComment/saveInfo",
-  mob_foodComment_getInfoByRid: toolsObj.reqPathUrl + "/mob/foodComment/getInfoByRid"
+  mob_foodComment_getInfoByRid: toolsObj.reqPathUrl + "/mob/foodComment/getInfoByRid",
+  mob_foodComment_getInfoByRidAndPage: toolsObj.reqPathUrl + "/mob/foodComment/getInfoByRidAndPage"
 }
 module.exports = {
   tools: toolsObj,

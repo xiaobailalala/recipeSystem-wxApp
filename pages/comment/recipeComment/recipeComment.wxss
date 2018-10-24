@@ -164,7 +164,7 @@ button::after {
     color: rgb(233, 233, 233);
 }
 
-.isAuthor{
+.isAuthor {
     color: rgb(233, 233, 233);
     font-size: 24rpx;
     background-color: #d9534f;
@@ -172,4 +172,17 @@ button::after {
     display: inline-block;
     padding: 3rpx 8rpx 3rpx 5rpx;
     margin-left: 10rpx;
+}
+
+.headerRefresh {
+    text-align: center;
+    color: #999999;
+    height: 0;
+    opacity: 0;
+}
+
+.allDataContainer {
+    text-align: center;
+    color: #999999;
+    padding: 20rpx 0;
 }
