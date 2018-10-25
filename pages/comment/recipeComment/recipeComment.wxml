@@ -8,7 +8,7 @@
     <view>{{refreshTime}}</view>
   </view>
   <scroll-view class="box_main" scroll-y enable-back-to-top scroll-top="{{scrollTop}}" scroll-with-animation bindscrolltoupper="refresh" bindscrolltolower="loadMore">
-    <view class="box_main_item" wx:for="{{commentList}}" wx:for-item="item" wx:key="commentList">
+    <view class="box_main_item" wx:for="{{commentList}}" wx:for-item="item" wx:key="commentList" wx:for-index="index">
       <navigator url="?uid={{item.commonUser.fid}}" hover-class="none">
         <image src="{{resPathUrl}}{{item.commonUser.fcover}}"></image>
       </navigator>
@@ -22,7 +22,7 @@
             {{item.fcontent}}
           </view>
           <view class="item_img" wx:if="{{item.fcover!=0}}">
-            <image wx:for="{{item.fcover}}" wx:for-item="imgItem" wx:key="commentImgList" src="{{resPathUrl}}{{imgItem}}" />
+            <image wx:for="{{item.fcover}}" wx:for-item="imgItem" wx:key="commentImgList" bindtap='previewImage' data-src="{{resPathUrl}}{{imgItem}}" src="{{resPathUrl}}{{imgItem}}" />
           </view>
           <view class="item_reply" wx:if="{{item.freplyid!=-1}}">
             <navigator url="?uid={{item.foodComment.commonUser.fid}}" hover-class="none" class="item_author">
@@ -37,7 +37,7 @@
             {{item.frelease}}
           </view>
         </view>
-        <view>
+        <view class="{{item.userGreat==1?'greatActive':''}}" data-good="{{item.fgood}}" data-index="{{index}}" bindtap="greatTab" data-great="{{item.userGreat}}" data-cid="{{item.fid}}">
           <icon class="iconfont icon-aixin"></icon>
           <view>{{item.fgood}}</view>
         </view>

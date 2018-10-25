@@ -25,7 +25,8 @@ Page({
     refreshTime: "",
     refreshAnimation: {},
     currentPage: 1,
-    isAllData: false
+    isAllData: false,
+    userInfo: {}
   },
 
   plusMenu: function () {
@@ -142,17 +143,17 @@ Page({
     });
     this.refreshAnimation(true);
     setTimeout(() => {
-      this.getData();
+      this.getData(true);
     }, 1000);
   },
 
   loadMore: function () {
-    if(!this.data.isAllData){
+    if (!this.data.isAllData) {
       var currPage = this.data.currentPage;
       this.setData({
         currentPage: currPage + 1
       });
-      this.getData();
+      this.getData(false);
     }
   },
 
@@ -171,13 +172,14 @@ Page({
     });
   },
 
-  getData: function () {
+  getData: function (isTop) {
     wx.request({
       url: Tools.urls.mob_foodComment_getInfoByRidAndPage,
       method: "GET",
       data: {
         page: this.data.currentPage,
-        rid: this.data.rid
+        rid: this.data.rid,
+        uid: this.data.userInfo.fid
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -189,7 +191,7 @@ Page({
             item.fcover = jsonData;
           }
         });
-        if(res.data.data.isAll==1){
+        if (res.data.data.isAll == 1) {
           this.setData({
             isAllData: true
           });
@@ -199,10 +201,67 @@ Page({
           });
         }
         this.setData({
-          commentList: res.data.data.dataList,
           commentLength: res.data.data.dataLen
         });
+        if (isTop) {
+          this.setData({
+            commentList: res.data.data.dataList
+          });
+        } else {
+          var currentList = this.data.commentList;
+          currentList = currentList.concat(res.data.data.dataList);
+          this.setData({
+            commentList: currentList
+          });
+        }
         this.refreshAnimation(false);
+      }
+    });
+  },
+
+  previewImage: function (e) {
+    var current = e.currentTarget.dataset.src;
+    wx.previewImage({
+      urls: current.split(",")
+    });
+  },
+
+  greatTab: function (e) {
+    var isGreat = e.currentTarget.dataset.great;
+    var dataObj = {};
+    if (isGreat == 1) {
+      dataObj = {
+        cid: e.currentTarget.dataset.cid,
+        uid: this.data.userInfo.fid,
+        open: 0
+      }
+    } else {
+      dataObj = {
+        cid: e.currentTarget.dataset.cid,
+        uid: this.data.userInfo.fid,
+        open: 1
+      }
+    }
+    var index = e.currentTarget.dataset.index;
+    wx.request({
+      url: Tools.urls.mob_foodComment_greatOperation,
+      method: "GET",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: dataObj,
+      success: res => {
+        var currentList = this.data.commentList;
+        if (isGreat == 1) {
+          currentList[index].userGreat = 0;
+          currentList[index].fgood-=1;
+        } else {
+          currentList[index].userGreat = 1;
+          currentList[index].fgood+=1;
+        }
+        this.setData({
+          commentList: currentList
+        });
       }
     });
   },
@@ -223,32 +282,59 @@ Page({
       uid: uid,
       refreshTime: date.toLocaleTimeString()
     });
-    wx.request({
-      url: Tools.urls.mob_foodComment_getInfoByRid,
-      method: "GET",
-      data: { rid: this.data.rid },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
+    wx.getStorage({
+      key: 'commonUser',
       success: res => {
-        res.data.data.dataList.forEach(function (item, index) {
-          if (item.fcover != 0) {
-            var jsonData = JSON.parse(item.fcover);
-            item.fcover = jsonData;
+        this.setData({
+          userInfo: res.data
+        });
+        wx.request({
+          url: Tools.urls.mob_foodComment_getInfoByRid,
+          method: "GET",
+          data: {
+            rid: this.data.rid,
+            uid: this.data.userInfo.fid
+          },
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          success: res => {
+            res.data.data.dataList.forEach(function (item, index) {
+              if (item.fcover != 0) {
+                var jsonData = JSON.parse(item.fcover);
+                item.fcover = jsonData;
+              }
+            });
+            if (res.data.data.isAll == 1) {
+              this.setData({
+                isAllData: true
+              });
+            } else {
+              this.setData({
+                isAllData: false
+              });
+            }
+            this.setData({
+              commentList: res.data.data.dataList,
+              commentLength: res.data.data.dataLen
+            });
           }
         });
-        if(res.data.data.isAll==1){
-          this.setData({
-            isAllData: true
-          });
-        } else {
-          this.setData({
-            isAllData: false
-          });
-        }
-        this.setData({
-          commentList: res.data.data.dataList,
-          commentLength: res.data.data.dataLen
+      },
+      fail: err => {
+        wx.showModal({
+          title: '温馨提示',
+          content: '登录已过期，请重新登录',
+          confirmText: "去登陆",
+          confirmColor: "#ffb31a",
+          cancelColor: "#666666",
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/login/login?active=true',
+              });
+            }
+          }
         });
       }
     });

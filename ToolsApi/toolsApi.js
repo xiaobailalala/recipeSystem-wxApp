@@ -31,7 +31,8 @@ var urlsObj = {
   mob_foodComment_imgupload: toolsObj.reqPathUrl + "/mob/foodComment/imgupload",
   mob_foodComment_saveInfo: toolsObj.reqPathUrl + "/mob/foodComment/saveInfo",
   mob_foodComment_getInfoByRid: toolsObj.reqPathUrl + "/mob/foodComment/getInfoByRid",
-  mob_foodComment_getInfoByRidAndPage: toolsObj.reqPathUrl + "/mob/foodComment/getInfoByRidAndPage"
+  mob_foodComment_getInfoByRidAndPage: toolsObj.reqPathUrl + "/mob/foodComment/getInfoByRidAndPage",
+  mob_foodComment_greatOperation: toolsObj.reqPathUrl + "/mob/foodComment/greatOperation"
 }
 module.exports = {
   tools: toolsObj,
