@@ -1,13 +1,14 @@
 {
   "pages": [
+    "pages/infoadd/recipeInfoAdd/recipeInfoAdd",
+    "pages/home/index",
+    "pages/index/index",
     "pages/info/commonDataInfo/commonDataInfo",
     "pages/comment/recipeComment/recipeComment",
     "pages/comment/recipeComment/commentInput/commentInput",
     "pages/person/person",
-    "pages/home/index",
     "pages/list/commonDataList/commonDataList",
     "pages/menu/menu",
-    "pages/index/index",
     "pages/logs/logs",
     "pages/login/login",
     "pages/personeditor/personeditor",

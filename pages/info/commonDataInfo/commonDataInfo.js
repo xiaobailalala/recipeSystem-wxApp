@@ -65,7 +65,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // var opt = options.rid;
+    var opt = options.rid;
     innerAudioContext = wx.createInnerAudioContext();
     innerAudioContext.onEnded(function () {
       isVoicePlay = false;
@@ -83,7 +83,7 @@ Page({
         });
       }
     });
-    var opt = 5;
+    // var opt = 5;
     wx.request({
       url: Tools.urls.mob_recipe_updateRecipeCount,
       method: "GET",
@@ -113,13 +113,19 @@ Page({
             if (temStr != 0) {
               tempBottom = temStr.split("-")[0];
               tempTop = temStr.split("-")[1];
-              if (!this.data.isSocketConnect) {
+              // if (!this.data.isSocketConnect) {
                 this.initSocket(true);
-              }
+                this.setData({
+                  isSocketConnect: true
+                });
+              // }
             } else {
-              if (!this.data.isSocketConnect) {
+              // if (!this.data.isSocketConnect) {
                 this.initSocket(false);
-              }
+                this.setData({
+                  isSocketConnect: true
+                });
+              // }
             }
           }
         });
@@ -205,7 +211,6 @@ Page({
   },
 
   voicePlay: function (arr) {
-    console.log(arr);
     var content = arr[0].fcontent;
     var id = arr[0].fid;
     if (arr[0].fvoice == 0) {
@@ -230,7 +235,6 @@ Page({
         voiceData: arr[0].fvoice
       });
     }
-    console.log(this.data.voiceData);
 
     // this.audioCtx.play()
   },
@@ -399,7 +403,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.onLoad();
+    if(this.data.isSocketConnect){
+      this.onLoad({
+        rid: this.data.recipeData.fid
+      });
+    }
   },
 
   /**
@@ -408,6 +416,7 @@ Page({
   onHide: function () {
     if (this.data.userInfo != null) {
       stompClient.send("/sensorMonitor/allListenStop", {}, this.data.userInfo.fid);
+      wx.closeSocket();
     }
   },
 
@@ -415,7 +424,10 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    if (this.data.userInfo != null) {
+      stompClient.send("/sensorMonitor/allListenStop", {}, this.data.userInfo.fid);
+      wx.closeSocket();
+    }
   },
 
   /**

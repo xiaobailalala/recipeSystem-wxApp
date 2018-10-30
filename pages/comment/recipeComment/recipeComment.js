@@ -26,7 +26,9 @@ Page({
     refreshAnimation: {},
     currentPage: 1,
     isAllData: false,
-    userInfo: {}
+    userInfo: {},
+    isLoad: false,
+    copyContent: ""
   },
 
   plusMenu: function () {
@@ -109,6 +111,7 @@ Page({
 
   actionSheetTab: function (e) {
     this.setData({
+      copyContent: e.currentTarget.dataset.content,
       replyid: e.currentTarget.dataset.replyid,
       replyname: e.currentTarget.dataset.replyname,
       actionSheetHidden: !this.data.actionSheetHidden
@@ -135,6 +138,20 @@ Page({
     });
   },
 
+  bindCopy: function () {
+    wx.setClipboardData({
+      data: this.data.copyContent,
+      success: res => {
+        wx.showToast({
+          title: '复制成功',
+          icon: 'success',
+          duration: 2000
+        });
+        this.actionSheetChange();
+      }
+    });
+  },
+
   refresh: function () {
     var date = new Date();
     this.setData({
@@ -150,10 +167,13 @@ Page({
   loadMore: function () {
     if (!this.data.isAllData) {
       var currPage = this.data.currentPage;
-      this.setData({
-        currentPage: currPage + 1
-      });
-      this.getData(false);
+      if (!this.data.isLoad) {
+        this.setData({
+          isLoad: true,
+          currentPage: currPage + 1
+        });
+        this.getData(false);
+      }
     }
   },
 
@@ -185,36 +205,39 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: res => {
-        res.data.data.dataList.forEach(function (item, index) {
-          if (item.fcover != 0) {
-            var jsonData = JSON.parse(item.fcover);
-            item.fcover = jsonData;
+        if (res.data.data.dataList) {
+          res.data.data.dataList.forEach(function (item, index) {
+            if (item.fcover != 0) {
+              var jsonData = JSON.parse(item.fcover);
+              item.fcover = jsonData;
+            }
+          });
+          if (res.data.data.isAll == 1) {
+            this.setData({
+              isAllData: true
+            });
+          } else {
+            this.setData({
+              isAllData: false
+            });
           }
-        });
-        if (res.data.data.isAll == 1) {
           this.setData({
-            isAllData: true
+            commentLength: res.data.data.dataLen
           });
-        } else {
-          this.setData({
-            isAllData: false
-          });
+          if (isTop) {
+            this.setData({
+              commentList: res.data.data.dataList
+            });
+          } else {
+            var currentList = this.data.commentList;
+            currentList = currentList.concat(res.data.data.dataList);
+            this.setData({
+              isLoad: false,
+              commentList: currentList
+            });
+          }
+          this.refreshAnimation(false);
         }
-        this.setData({
-          commentLength: res.data.data.dataLen
-        });
-        if (isTop) {
-          this.setData({
-            commentList: res.data.data.dataList
-          });
-        } else {
-          var currentList = this.data.commentList;
-          currentList = currentList.concat(res.data.data.dataList);
-          this.setData({
-            commentList: currentList
-          });
-        }
-        this.refreshAnimation(false);
       }
     });
   },
@@ -254,10 +277,10 @@ Page({
         var currentList = this.data.commentList;
         if (isGreat == 1) {
           currentList[index].userGreat = 0;
-          currentList[index].fgood-=1;
+          currentList[index].fgood -= 1;
         } else {
           currentList[index].userGreat = 1;
-          currentList[index].fgood+=1;
+          currentList[index].fgood += 1;
         }
         this.setData({
           commentList: currentList
@@ -299,25 +322,27 @@ Page({
             'Content-Type': 'application/x-www-form-urlencoded'
           },
           success: res => {
-            res.data.data.dataList.forEach(function (item, index) {
-              if (item.fcover != 0) {
-                var jsonData = JSON.parse(item.fcover);
-                item.fcover = jsonData;
-              }
-            });
-            if (res.data.data.isAll == 1) {
-              this.setData({
-                isAllData: true
+            if (res.data.data.dataList) {
+              res.data.data.dataList.forEach(function (item, index) {
+                if (item.fcover != 0) {
+                  var jsonData = JSON.parse(item.fcover);
+                  item.fcover = jsonData;
+                }
               });
-            } else {
+              if (res.data.data.isAll == 1) {
+                this.setData({
+                  isAllData: true
+                });
+              } else {
+                this.setData({
+                  isAllData: false
+                });
+              }
               this.setData({
-                isAllData: false
+                commentList: res.data.data.dataList,
+                commentLength: res.data.data.dataLen
               });
             }
-            this.setData({
-              commentList: res.data.data.dataList,
-              commentLength: res.data.data.dataLen
-            });
           }
         });
       },

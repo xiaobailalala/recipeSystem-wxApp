@@ -18,7 +18,7 @@
             <icon class="iconfont icon-aite"></icon>{{item.commonUser.fusername}}
             <view wx:if="{{authorid==item.fuid}}" class="isAuthor">作者</view>
           </navigator>
-          <view class="item_content" bindtap="actionSheetTab" data-replyid="{{item.fid}}" data-replyname="{{item.commonUser.fusername}}">
+          <view class="item_content" bindtap="actionSheetTab" data-replyid="{{item.fid}}" data-content="{{item.fcontent}}" data-replyname="{{item.commonUser.fusername}}">
             {{item.fcontent}}
           </view>
           <view class="item_img" wx:if="{{item.fcover!=0}}">
@@ -29,7 +29,7 @@
               <icon class="iconfont icon-aite"></icon>{{item.foodComment.commonUser.fusername}}
               <view wx:if="{{authorid==item.foodComment.fuid}}" class="isAuthor">作者</view>
             </navigator>
-            <view class="item_content" bindtap="actionSheetTab" data-replyid="{{item.foodComment.fid}}" data-replyname="{{item.foodComment.commonUser.fusername}}">
+            <view class="item_content" bindtap="actionSheetTab" data-content="{{item.foodComment.fcontent}}" data-replyid="{{item.foodComment.fid}}" data-replyname="{{item.foodComment.commonUser.fusername}}">
               {{item.foodComment.fcontent}}
             </view>
           </view>
@@ -60,6 +60,8 @@
   </view>
 </view>
 <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetChange">
-  <action-sheet-item  bindtap="bindReply">回复</action-sheet-item>
-  <action-sheet-cancel >取消</action-sheet-cancel>
+  <action-sheet-item bindtap="bindReply">回复</action-sheet-item>
+  <action-sheet-item bindtap="bindCopy">复制</action-sheet-item>
+  <action-sheet-item bindtap="bindReport" style="color: #d9534f;">举报</action-sheet-item>
+  <action-sheet-cancel>取消</action-sheet-cancel>
 </action-sheet>

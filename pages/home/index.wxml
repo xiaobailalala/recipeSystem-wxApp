@@ -2,27 +2,288 @@
 <view>
   <view class='con-header'>
     <view class='head-info'>
-      <navigator hover-class='none' url='/pages/menu/menu'>
-        <text class='icon-caidan iconfont iconRight'></text>
+      <view class="head_tools">
+        <navigator hover-class='none' url='/pages/menu/menu'>
+          <icon class='icon-caidan iconfont iconRight'></icon>
+        </navigator>
+        <icon bindtap="addTab" class="iconfont icon-iconjia"></icon>
+      </view>
+      <navigator url="" hover-class="none" class="head_search">
+        <icon class="iconfont icon-sousuo"> 输入菜谱名、食材名</icon>
       </navigator>
-      <form>
-        <view class='searchInfo'>
-          <zan-icon type='search'></zan-icon>
-          <input placeholder='想看什么搜这里，如粤菜'></input>
+      <navigator hover-class="none" url="" class="head_sysInfo">
+        <icon class="iconfont icon-ziyuan1"></icon>
+      </navigator>
+    </view>
+    <scroll-view scroll-y class="scrollContentView" scroll-top="{{mainScrollTop}}" scroll-with-animation="true">
+      <view class='banner-container'>
+        <swiper class='imgSwiper' autoplay="true" interval="3000" duration="1000" circular="true">
+          <block wx:for="{{image}}" wx:for-index="index" wx:key="bannerList">
+            <swiper-item>
+              <navigator class="imgSwiperItem">  
+                <image src="{{item.url}}" class="slide-image" mode="aspectFill" />
+                <view>今日推荐：{{item.text}}</view>
+              </navigator>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      <view class="shortcutMenu">
+        <navigator url="" hover-class="none" wx:for-item="item" wx:for="{{shortcutMenu}}" wx:key="shortcutMenu">
+          <icon class="iconfont {{item.iconClass}}" style="color: {{item.color}};"></icon>
+          <view>{{item.content}}</view>
+        </navigator>
+      </view>
+      <view class="activitiesOutContainer">
+        <view class="sectionTip">
+          活动精选
         </view>
-      </form>
-      <image src="{{imgPath}}/bell.png"></image>
+        <scroll-view scroll-x class="activitiesContainer">
+          <navigator url="" hover-class="none" wx:for="{{image}}" wx:for-index="index" class="activities" wx:key="activityList">
+            <image src="{{item.url}}" />
+            <view>[即将结束]沙利亚 亚麻籽油 免费试用[即将结束]沙利亚 亚麻籽油 免费试用</view>
+          </navigator>
+          <navigator url="" hover-class="none" class="activities">
+            <text>查看更多活动 ></text>
+          </navigator>
+          <view class="clear"></view>
+        </scroll-view>
+      </view>
+      <view class="recipeListContainer">
+        <view class="sectionTip">
+          推荐食谱
+        </view>
+        <navigator class="recipeItem" url="" hover-class="none">
+          <view>
+            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
+          </view>
+          <view>
+            <view>介小姐的吃货日常</view>
+            <view class="recipeItemIcon">
+              <icon class="iconfont icon-chakan"> 67784</icon>
+              <icon class="iconfont icon-favourite"> 2335</icon>
+            </view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="recipeItem" url="" hover-class="none">
+          <view>
+            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
+          </view>
+          <view>
+            <view>介小姐的吃货日常</view>
+            <view class="recipeItemIcon">
+              <icon class="iconfont icon-chakan"> 67784</icon>
+              <icon class="iconfont icon-favourite"> 2335</icon>
+            </view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="recipeItem" url="" hover-class="none">
+          <view>
+            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
+          </view>
+          <view>
+            <view>介小姐的吃货日常</view>
+            <view class="recipeItemIcon">
+              <icon class="iconfont icon-chakan"> 67784</icon>
+              <icon class="iconfont icon-favourite"> 2335</icon>
+            </view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="recipeItem" url="" hover-class="none">
+          <view>
+            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
+          </view>
+          <view>
+            <view>介小姐的吃货日常</view>
+            <view class="recipeItemIcon">
+              <icon class="iconfont icon-chakan"> 67784</icon>
+              <icon class="iconfont icon-favourite"> 2335</icon>
+            </view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="recipeItem" url="" hover-class="none">
+          <view>
+            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
+          </view>
+          <view>
+            <view>介小姐的吃货日常</view>
+            <view class="recipeItemIcon">
+              <icon class="iconfont icon-chakan"> 67784</icon>
+              <icon class="iconfont icon-favourite"> 2335</icon>
+            </view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="recipeItem" url="" hover-class="none">
+          <view>
+            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
+          </view>
+          <view>
+            <view>介小姐的吃货日常</view>
+            <view class="recipeItemIcon">
+              <icon class="iconfont icon-chakan"> 67784</icon>
+              <icon class="iconfont icon-favourite"> 2335</icon>
+            </view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="recipeItem" url="" hover-class="none">
+          <view>
+            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
+          </view>
+          <view>
+            <view>介小姐的吃货日常</view>
+            <view class="recipeItemIcon">
+              <icon class="iconfont icon-chakan"> 67784</icon>
+              <icon class="iconfont icon-favourite"> 2335</icon>
+            </view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="recipeItem" url="" hover-class="none">
+          <view>
+            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
+          </view>
+          <view>
+            <view>介小姐的吃货日常</view>
+            <view class="recipeItemIcon">
+              <icon class="iconfont icon-chakan"> 67784</icon>
+              <icon class="iconfont icon-favourite"> 2335</icon>
+            </view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <view class="refreshRecipeListTip" animation="{{refreshTipAnimation}}">有8条更新</view>
+        <view class="refreshList" bindtap="refreshRecipeList">
+          上次看到这里 点击刷新
+          <icon class="iconfont icon-shuaxin"></icon>
+        </view>
+      </view>
+      <view class="groupListContainer">
+        <view class="sectionTip">
+          精选组合
+        </view>
+        <navigator class="groupItem" url="" hover-class="none">
+          <view class="groupOutView">
+            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
+            <view>共11道菜</view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="groupItem" url="" hover-class="none">
+          <view class="groupOutView">
+            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
+            <view>共11道菜</view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="groupItem" url="" hover-class="none">
+          <view class="groupOutView">
+            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
+            <view>共11道菜</view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="groupItem" url="" hover-class="none">
+          <view class="groupOutView">
+            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
+            <view>共11道菜</view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="groupItem" url="" hover-class="none">
+          <view class="groupOutView">
+            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
+            <view>共11道菜</view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="groupItem" url="" hover-class="none">
+          <view class="groupOutView">
+            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
+            <view>共11道菜</view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="groupItem" url="" hover-class="none">
+          <view class="groupOutView">
+            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
+            <view>共11道菜</view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <navigator class="groupItem" url="" hover-class="none">
+          <view class="groupOutView">
+            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
+            <view>共11道菜</view>
+          </view>
+          <image src="{{imgPath}}/banner.png" />
+        </navigator>
+        <view class="refreshList" bindtap="refreshGroupList">
+          上次看到这里 点击刷新
+          <icon class="iconfont icon-shuaxin"></icon>
+        </view>
+      </view>
+      <view class="likeListContainer">
+        <view class="sectionTip">
+          随便看看
+        </view>
+        <view class="likeListMain">
+          <view>
+            <navigator wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}" class="" url="" hover-class="none">
+              <image src="{{item.url}}" lazy-load="true" mode="widthFix"/>
+              <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+              <view class="likeInfo">
+                <view>
+                  <image src="{{imgPath}}/banner.png" />
+                  <view>
+                    平底锅111平底锅111平底锅111
+                  </view>
+                </view>
+                <icon class="iconfont icon-aixin"> 283</icon>
+              </view>
+            </navigator>
+          </view>
+          <view>
+            <navigator wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}" class="" url="" hover-class="none">
+              <image src="{{item.url}}" lazy-load="true" mode="widthFix"/>
+              <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+              <view class="likeInfo">
+                <view>
+                  <image src="{{imgPath}}/banner.png" />
+                  <view>
+                    平底锅111
+                  </view>
+                </view>
+                <icon class="iconfont icon-aixin"> 283</icon>
+              </view>
+            </navigator>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<view class="addMaskContainer" wx:if="{{maskShow}}" animation="{{maskAnimation}}" bindtouchstart="maskTab">
+  <view class="maskDateTime">
+    <view>{{dateTimeNow.day}}</view>
+    <view>
+      <view>{{dateTimeNow.week}}</view>
+      <view>{{dateTimeNow.month}}/{{dateTimeNow.year}}</view>
     </view>
-    <view class='banner-container'>
-      <swiper class='imgSwiper' autoplay="true" interval="3000" duration="1000" circular="true">
-        <block wx:for="{{image}}" wx:for-index="index">
-          <swiper-item>
-            <image src="{{item.url}}" class="slide-image" mode="aspectFill" />
-            <view>今日推荐：{{item.text}}</view>
-          </swiper-item>
-        </block>
-      </swiper>
-    </view>
-
+  </view>
+  <view>
+    <navigator hover-class="none" url="/pages/infoadd/recipeInfoAdd/recipeInfoAdd" animation="{{writeRecipeShow}}">
+      <view>传食谱</view>
+      <image src="{{imgPath}}/writeNote.png" />
+    </navigator>
+    <navigator hover-class="none" url="" animation="{{writeNoteShow}}">
+      <view>写笔记</view>
+      <image src="{{imgPath}}/writeRecipe.png" />
+    </navigator>
   </view>
 </view>
