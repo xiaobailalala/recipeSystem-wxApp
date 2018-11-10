@@ -1,0 +1,7 @@
+<view class="writeContainer">
+    <textarea placeholder="这道菜背后的故事" placeholder-style="color: #cbcbcb;" bindinput="introduction" maxlength="-1"
+        auto-focus="true" value="{{introduction}}"/>
+    <view>
+        <button bindtap="subBtnTab" class="subBtn" hover-class="none">提交</button>
+    </view>
+</view>

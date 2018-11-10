@@ -32,7 +32,10 @@ var urlsObj = {
   mob_foodComment_saveInfo: toolsObj.reqPathUrl + "/mob/foodComment/saveInfo",
   mob_foodComment_getInfoByRid: toolsObj.reqPathUrl + "/mob/foodComment/getInfoByRid",
   mob_foodComment_getInfoByRidAndPage: toolsObj.reqPathUrl + "/mob/foodComment/getInfoByRidAndPage",
-  mob_foodComment_greatOperation: toolsObj.reqPathUrl + "/mob/foodComment/greatOperation"
+  mob_foodComment_greatOperation: toolsObj.reqPathUrl + "/mob/foodComment/greatOperation",
+  mob_tips_getInfoRandom: toolsObj.reqPathUrl + "/mob/tips/getInfoRandom",
+  mob_recipe_uploadProcessCover: toolsObj.reqPathUrl + "/mob/recipe/uploadProcessCover",
+  mob_recipe_uploadRecipeInfo: toolsObj.reqPathUrl + "/mob/recipe/uploadRecipeInfo"
 }
 module.exports = {
   tools: toolsObj,

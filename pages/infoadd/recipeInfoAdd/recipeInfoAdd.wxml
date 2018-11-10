@@ -1,3 +1,107 @@
+<view class="uploadInfo" bindtap="subRecipeBtn">
+    <icon class="iconfont icon-shangchuan"></icon>
+</view>
 <scroll-view scroll-y class="mainContainer">
-    
+    <view class="baseInfoContainer">
+        <view class="infoTitle">基础信息</view>
+        <view class="recipeCover" bindtap="selectCover">
+            <view class="uploadImgTip" wx:if="{{!recipeCover}}">
+                <icon class="iconfont icon-iconjia"></icon>
+                上传封面
+            </view>
+            <image wx:if="{{recipeCover}}" src="{{recipeCover}}" />
+        </view>
+        <input class="recipeTitle" type="text" placeholder="添加食谱名"
+         placeholder-style="color: #cbcbcb;font-weight: normal;" bindinput="recipeTitle" />
+        <navigator class="recipeIntroduction" url="/pages/infoadd/recipeInfoAdd/recipeIntroduction/recipeIntroduction?content={{recipeIntroduction}}" hover-class="none">
+            <view class="recipeIntroductionDefault" wx:if="{{!recipeIntroduction}}">这道菜背后的故事</view>
+            {{recipeIntroduction}}
+        </navigator>
+        <view class="fireMonitor">
+            <icon class="iconfont icon-huoyan"></icon> 火候监控 : 
+            <switch class="" color="#ffdc44" bindchange="fireMonitorSwitch"/>
+            <view class="fireMonitorSelect" animation="{{fireMonitorAnimation}}">
+                <radio-group bindchange="monitorChange">
+                    <view wx:for="{{fireMonitorRadio}}" wx:key="fireMonitorRadio" wx:for-item="item">
+                        <label class="radio">
+                            <radio value="{{item.value}}" color="#ffdc44"/> {{item.content}}
+                        </label>
+                    </view>
+                </radio-group>
+            </view>
+        </view>
+    </view>
+    <view class="typeInfoContainer">
+        <view class="infoTitle">添加分类</view>
+        <view class="tip-1">（请至少添加一项二级分类）</view>
+        <view class="typeInfoPicker" wx:for="{{recipeClassify}}" wx:key="*this" wx:for-item="item" wx:for-index="index">
+            <picker mode="multiSelector" range="{{item.list}}" disabled="{{item.isConfirm}}"
+            value="{{item.index}}" bindchange="bindClassifyChange" data-index="{{index}}"
+            bindcolumnchange="classSelectChange" bindcancel="classifySelectCancel">
+                <view class="classifyPicker">
+                    <view>{{item.first.name}}<view wx:if="{{!item.first.name}}" class="classifyDefault">一级分类</view></view>
+                    <view>{{item.second.name}}<view wx:if="{{!item.second.name}}" class="classifyDefault">二级分类</view></view>
+                    <view>{{item.third.name}}<view wx:if="{{!item.third.name}}" class="classifyDefault">三级分类</view></view>
+                </view>
+            </picker>
+            <view bindtap="deleteClassify" class="deleteClassify" data-index="{{index}}"><icon class="iconfont icon-shanchu"></icon></view>
+        </view>
+        <button class="addNewClassify" hover-class="none" bindtap="addNewClassify">添加一项分类</button>
+    </view>
+    <view class="materialInfoContainer">
+        <view class="infoTitle">添加食材</view>
+        <view class="materialInfoInput" wx:for="{{recipeMaterial}}" wx:for-item="item" wx:key="*this" wx:for-index="index">
+            <view>
+                <input type="text" bindinput="materialNameInput" data-index="{{index}}" value="{{item.name}}" placeholder="食材 : 如五花肉" placeholder-style="color: #888888;"/>
+            </view>
+            <view>
+                <input type="text" bindinput="materialNumberInput" data-index="{{index}}" value="{{item.number}}" placeholder="用量 : 如250克" placeholder-style="color: #888888;"/>
+            </view>
+            <view bindtap="deleteMaterial" data-index="{{index}}" class="deleteClassify"><icon class="iconfont icon-shanchu"></icon></view>
+        </view>
+        <button class="addNewMaterial" hover-class="none" bindtap="addNewMaterial">添加一项分类</button>
+    </view>
+    <view class="processInfoContainer">
+        <view class="infoTitle">烹饪步骤</view>
+        <view class="processInfoMain" wx:for="{{recipeProcess}}" wx:for-item="item" wx:for-index="index" wx:key="*this">
+            <view class="processStep">
+                第{{index + 1}}步
+                <view bindtap="deleteProcess" data-index="{{index}}" class="deleteClassify"><icon class="iconfont icon-shanchu"></icon></view>
+            </view>
+            <view class="recipeCover" data-index="{{index}}" bindtap="selectProcessCover">
+                <view class="uploadImgTip" wx:if="{{!item.cover}}">
+                    <icon class="iconfont icon-iconjia"></icon>
+                    步骤图
+                </view>
+                <image wx:if="{{item.cover}}" src="{{item.cover}}" />
+            </view>
+            <input type="text" placeholder="步骤详细描述" data-index="{{index}}" value="{{item.content}}" bindinput="processIntroductionInput" placeholder-style="color: #888888;"/>
+            <view class="processTime">
+                <view>步骤所需时间（单位：s）</view>
+                <input type="number" placeholder="填写时间" data-index="{{index}}" value="{{item.time}}" bindinput="processTimeInput" placeholder-style="color: #888888;"/>
+            </view>
+        </view>
+        <button class="addNewProcess" hover-class="none" bindtap="addNewProcess">增加一步</button>
+    </view>
+    <view class="tipInfoContainer">
+        <view class="infoTitle">小贴士</view>
+        <view class="tip-1">（最多添加两项小贴士）
+        <icon class="iconfont icon-shuaxin" bindtap="refreshTip"> 刷新换一批</icon></view>
+        <view class="tipInfoMain">
+            <view class="selectedTips">
+                <view class="selectedTips_unselect" wx:if="{{!reciptTipLength}}">尚未添加小贴士</view>
+                <view class="selectedTips_item" wx:for="{{recipeTip}}" wx:key="recipeTip" wx:for-index="index" wx:for-item="item">
+                    {{item.content}}
+                    <view class="deleteTip" bindtap="deleteTip" data-index="{{index}}"><icon class="iconfont icon-minus-1"></icon></view>
+                </view>
+            </view>
+            <view class="selectList">
+                为您推荐：
+                <view data-id="{{item.fid}}" bindtap="addTips" data-content="{{item.fname}}" data-id="{{item.fid}}" class="selectedTips_item" wx:for="{{tip}}" wx:key="this" wx:for-item="item">{{item.fname}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="subRecipeContainer">
+        <button bindtap="subRecipeBtn" hover-class="none">发布食谱</button>
+    </view>
 </scroll-view>

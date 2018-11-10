@@ -1,4 +1,4 @@
-page{
+page {
     height: 100%;
     background-color: #ffffff;
     position: relative;
@@ -12,12 +12,325 @@ page{
     width: 0;
     height: 0;
     color: transparent;
-}
+} 
 
 button::after {
     border: unset;
 }
 
-.mainContainer{
+.baseInfoContainer,.typeInfoContainer,.materialInfoContainer,.tipInfoContainer{
+    padding-bottom: 20rpx;
+}
 
+.baseInfoContainer{
+    padding: 10rpx 36rpx 0 36rpx;
+}
+
+.typeInfoContainer,.materialInfoContainer,.processInfoContainer{
+    padding: 0 36rpx;
+}
+
+.uploadInfo {
+    position: fixed;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 10rpx;
+    top: 10rpx;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 20rpx #888888;
+    z-index: 1000;
+}
+
+.uploadInfo>icon{
+    color: #888888;
+    position: relative;
+    top: -8rpx;
+}
+
+.uploadImgTip{
+    color: #ffffff;
+    font-size: 30rpx;
+}
+
+.uploadImgTip>icon{
+    font-size: 24rpx;
+    position: relative;
+    top: -2rpx;
+}
+
+.mainContainer {
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.infoTitle {
+    color: #000000;
+    font-size: 44rpx;
+    font-weight: bold;
+    padding-bottom: 20rpx;
+}
+
+.recipeCover{
+    width: 100%;
+    height: 370rpx;
+    border-radius: 10rpx;
+    background-color: #cccccc;
+    position: relative;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.recipeCover>image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+.uploadImgTip{
+    position: relative;
+    top: -14rpx;
+    font-size: 32rpx;
+}
+
+.recipeTitle{
+    font-size: 46rpx;
+    font-weight: bold;
+    padding: 36rpx 6rpx;
+    border-bottom: 1rpx solid #f3f2f1;
+}
+
+.recipeIntroduction{
+    font-size: 32rpx;
+    padding: 36rpx 20rpx;
+}
+
+.recipeIntroductionDefault{
+    color: #cbcbcb;
+}
+
+.fireMonitor{
+    padding: 36rpx 0;
+    font-size: 30rpx;
+    color: #888888;
+}
+
+.fireMonitor>switch{
+    margin-left: 20rpx;
+    margin-bottom: 30rpx;
+}
+
+.fireMonitorSelect{
+    padding-left: 50rpx;
+    height: 0;
+    overflow: hidden;
+}
+
+.fireMonitorSelect radio-group{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.tip-1{
+    color: #888888;
+    font-size: 24rpx;
+    padding-bottom: 20rpx;
+}
+
+.addNewClassify,.addNewMaterial,.addNewProcess{
+    color: #508ad1;
+    font-size: 26rpx;
+    background-color: unset;
+    text-align: left;
+    padding: 0;
+    border-bottom: 1rpx solid #e5e3df;
+    padding-bottom: 4rpx;
+    margin-bottom: 30rpx;
+}
+
+.addNewProcess{
+    text-align: right;
+    margin-top: 20rpx;
+}
+
+.typeInfoPicker{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 16rpx 0;
+}
+
+.typeInfoPicker picker{ 
+    width: 90%;
+}
+
+.classifyPicker{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.classifyPicker>view{
+    font-size: 28rpx;
+    width: 33.3333333333333%;
+    color: #000000;
+}
+
+.deleteClassify{
+    width: 10%;
+    text-align: center;
+}
+
+.deleteClassify>icon{
+    position: relative;
+    top: -6rpx;
+    color: #eb5454;
+    font-size: 36rpx;
+}
+
+.classifyDefault{
+    color: #888888;
+}
+
+.materialInfoInput{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16rpx 0;
+}
+
+.materialInfoInput input{
+    font-size: 30rpx;
+    padding-right: 20rpx;
+    box-sizing: border-box;
+}
+
+.materialInfoInput>view:nth-of-type(1),.materialInfoInput>view:nth-of-type(2){
+    width: 45%;
+}
+
+.processInfoMain{
+    margin-top: 40rpx;
+}
+
+.processInfoMain>input{
+    padding: 20rpx 0 16rpx 0;
+    font-size: 30rpx;
+}
+
+.processStep{
+    padding-bottom: 30rpx;
+    padding-left: 5rpx;
+    font-weight: bold;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.processTime{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16rpx;
+}
+
+.processTime>view{
+    font-size: 30rpx;
+    width: 75%;
+    color: #666666;
+}
+
+.processTime>input{
+    font-size: 30rpx;
+    padding-left: 10rpx;
+    border-bottom: 1rpx solid #dadada;
+}
+
+.selectedTips,.selectList{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 10rpx 0;
+}
+
+.selectedTips_unselect{
+    color: #888888;
+    font-size: 30rpx;
+    padding: 16rpx 0;
+}
+
+.selectedTips_item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10rpx 12rpx;
+    border-radius: 10rpx;
+    background-color: #eeeeee;
+    color: #76a8e6;
+    font-size: 30rpx;
+    margin-right: 20rpx;
+}
+
+.deleteTip{
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0 10rpx;
+    margin-left: 10rpx;
+    border-radius: 30rpx;
+}
+
+.deleteTip>icon{
+    color: #ffffff;
+    font-weight: bold;
+    position: relative;
+    top: -8rpx;
+    font-size: 28rpx;
+}
+
+.tip-1>icon{
+    margin-left: 10rpx;
+    font-size: 24rpx;
+    position: relative;
+    top: 2rpx;
+}
+
+.selectList{
+    padding: 10rpx 0;
+    font-size: 30rpx;
+    color: #888888;
+}
+
+.selectList .selectedTips_item{
+    margin-bottom: 15rpx;
+}
+
+.tipInfoContainer{
+    border-bottom: 1rpx solid #e5e3df;
+    padding: 0 36rpx 30rpx 36rpx;
+}
+
+.subRecipeContainer{
+    padding: 40rpx 36rpx;
+}
+
+.subRecipeContainer>button{
+    color: #ffffff;
+    background-color: #ffb31a;
+    padding: 16rpx;
+    line-height: unset;
+    border-radius: 40rpx;
+    font-size: 30rpx;
 }

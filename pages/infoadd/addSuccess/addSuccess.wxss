@@ -1,0 +1,62 @@
+page{
+    height: 100%;
+    background-color: #ffffff;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+button::after {
+    border: unset;
+}
+
+.mainView>image{
+    width: 650rpx;
+    height: 650rpx;
+    margin: 0 auto;
+    display: block;
+}
+
+.successTitle{
+    text-align: center;
+    padding-top: 40rpx;
+    font-weight: bold;
+    color: #ffb31a;
+    font-size: 50rpx;
+}
+
+.successTip{
+    text-indent: 2em;
+    padding: 0 60rpx;
+    line-height: 1.5;
+    color: #777777;
+}
+
+.successTip1{
+    padding-top: 20rpx;
+}
+
+.successBtn{
+    padding: 0 60rpx;
+    padding-top: 40rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+button:nth-of-type(1){
+    background-color: #ffffff;
+    font-size: 30rpx;
+    color: #aaaaaa;
+    border: 1rpx solid #aaaaaa;
+}
+
+button:nth-of-type(2){
+    background-color: #ffffff;
+    font-size: 30rpx;
+    color: #ffb31a;
+    border: 1rpx solid #ffb31a;
+}

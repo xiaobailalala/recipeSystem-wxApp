@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/infoadd/recipeInfoAdd/recipeInfoAdd",
     "pages/home/index",
+    "pages/infoadd/recipeInfoAdd/recipeInfoAdd",
+    "pages/infoadd/addSuccess/addSuccess",
+    "pages/infoadd/recipeInfoAdd/recipeIntroduction/recipeIntroduction",
     "pages/index/index",
     "pages/info/commonDataInfo/commonDataInfo",
     "pages/comment/recipeComment/recipeComment",

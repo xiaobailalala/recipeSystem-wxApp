@@ -1,0 +1,16 @@
+<view class="mainView">
+    <view class="successTitle">
+        上传成功
+    </view>
+    <image src="{{imgPath}}/waiting.png" />
+    <view class="successTip successTip1">
+        您的内容已经上传成功。审核人员正在针对内容拼命审核中，审核通过后您将会受到消息通知！希望在美食的路上，都有膳食膳房陪伴您！
+    </view>
+    <view class="successTip">
+        在此期间，您可以：
+    </view>
+    <view class="successBtn">
+        <button bindtap="home" hover-class="none">返回首页</button>
+        <button bindtap="write" hover-class="none">再写一篇</button>
+    </view>
+</view>
