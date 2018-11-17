@@ -1,0 +1,72 @@
+<view class="uploadInfo" bindtap="submitTap">
+    <icon class="iconfont icon-shangchuan"></icon>
+</view>
+<view class="inputContainer">
+    <view class="pageTitle">
+        写笔记
+    </view>
+    <view class="titleInput">
+        <input maxlength="30" bindfocus="titleFocus" bindblur="titleBlur" bindinput="titleInput" type="text"
+            placeholder="标题" placeholder-style="color: #cccccc;" />
+        <view wx:if="{{titleMask.isShow}}">{{titleMask.length}}</view>
+    </view>
+    <view class="contentInput">
+        <textarea maxlength="1000" bindfocus="contentFocus" bindblur="contentBlur" bindinput="contentInput" placeholder="说说你的心得~"
+            placeholder-style="color: #cccccc;"></textarea>
+        <view wx:if="{{contentMask.isShow}}">{{contentMask.length}}</view>
+    </view>
+</view>
+<view class="toolsContainer">
+    <view>
+        <navigator class="" hover-class="none">
+            <icon class="iconfont icon-aite1"></icon>
+        </navigator>
+        <navigator class="" hover-class="none">
+            <icon class="iconfont icon-jinghao"></icon>
+        </navigator>
+        <navigator class="" hover-class="none">
+            <icon class="iconfont icon-icon-_baoyou"></icon>
+        </navigator>
+    </view>
+    <view>
+        <view class="atpeople">
+            提到的好友：
+            <view>
+                <icon class="iconfont icon-aite1">字节君</icon>
+                <icon class="iconfont icon-aite1">字节君</icon>
+                <icon class="iconfont icon-aite1">字节君</icon>
+            </view>
+        </view>
+        <view class="atarticle">
+            提到的文章：
+            <view>
+                <icon class="iconfont icon-jinghao">字节君</icon>
+                <icon class="iconfont icon-jinghao">字节君</icon>
+                <icon class="iconfont icon-jinghao">字节君</icon>
+            </view>
+        </view>
+        <view class="atrecipe">
+            提到的食谱：
+            <view>
+                <icon class="iconfont icon-icon-_baoyou">字节君</icon>
+                <icon class="iconfont icon-icon-_baoyou">字节君</icon>
+                <icon class="iconfont icon-icon-_baoyou">字节君</icon>
+                <icon class="iconfont icon-icon-_baoyou">字节君发送</icon>
+                <icon class="iconfont icon-icon-_baoyou">字节君</icon>
+                <icon class="iconfont icon-icon-_baoyou">字节君</icon>
+                <icon class="iconfont icon-icon-_baoyou">字节君发送</icon>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="imageContainer">
+    <scroll-view class="imageContainer-scroll" scroll-x>
+        <view wx:for="{{selectImgPath}}" wx:key="this" wx:for-item="item" wx:for-index="index">
+            <icon class="iconfont icon-delete" data-index="{{index}}" bindtap="deleteImg" />
+            <image src="{{item}}" />
+        </view>
+        <view class="selectImage" wx:if="{{selectImgLength!=9}}" bindtap="selectImg">
+            <icon class="iconfont icon-iconjia" />
+        </view>
+    </scroll-view>
+</view>

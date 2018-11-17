@@ -4,10 +4,12 @@ var Stomp = require('../../../utils/stomp.js').Stomp;
 var stompClient = {};
 var fireSensorData = 0;
 var smogSensorData = 0;
+var infraredSensorData = 0;
+var distanceSensorData = 0;
 var fireTimer = null;
 var smogTimer = null;
 var tempTop, tempBottom;
-var fireVoice, smogVoice, readyVoice;
+var fireVoice, smogVoice, readyVoice, distanceVoice;
 var innerAudioContext;
 var isVoicePlay = false;
 Page({
@@ -83,7 +85,7 @@ Page({
         });
       }
     });
-    // var opt = 5;
+    opt = 5;
     wx.request({
       url: Tools.urls.mob_recipe_updateRecipeCount,
       method: "GET",
@@ -114,17 +116,17 @@ Page({
               tempBottom = temStr.split("-")[0];
               tempTop = temStr.split("-")[1];
               // if (!this.data.isSocketConnect) {
-                this.initSocket(true);
-                this.setData({
-                  isSocketConnect: true
-                });
+              this.initSocket(true);
+              this.setData({
+                isSocketConnect: true
+              });
               // }
             } else {
               // if (!this.data.isSocketConnect) {
-                this.initSocket(false);
-                this.setData({
-                  isSocketConnect: true
-                });
+              this.initSocket(false);
+              this.setData({
+                isSocketConnect: true
+              });
               // }
             }
           }
@@ -140,12 +142,14 @@ Page({
       data: {
         readyMark: "RECIPE_START",
         fireMark: "FIRE_SENSOR_ALARM",
-        smogMark: "SMOG_SENSOR_ALARM"
+        smogMark: "SMOG_SENSOR_ALARM",
+        distanceMark: "FIRE_DISTANCE"
       },
       success: res => {
         readyVoice = res.data.data[0];
         fireVoice = res.data.data[1];
-        smogVoice = res.data.data[2]
+        smogVoice = res.data.data[2];
+        distanceVoice = res.data.data[3];
         // this.setData({
         //   audioEle: true,
         //   voiceData: res.data.data
@@ -198,6 +202,12 @@ Page({
         });
         stompClient.subscribe('/sensorData/smog', function (body, headers) {
           smogSensorData = JSON.parse(body.body).pm;
+        });
+        stompClient.subscribe("/sensorData/infrared", function (body, headers) {
+          infraredSensorData = JSON.parse(body.body).body;
+        });
+        stompClient.subscribe("/sensorData/distance", function (body, headers) {
+          distanceSensorData = JSON.parse(body.body).distance;
         });
         // stompClient.send("/app/helloServer", {}, JSON.stringify({ 'content': '我是客户端' }));
       });
@@ -296,6 +306,8 @@ Page({
           mainBtnStyle: "mainBtnOn"
         });
         stompClient.send("/sensorMonitor/fireListenStop", {}, this.data.userInfo.fid);
+        stompClient.send("/sensorMonitor/infraredListenStop", {}, this.data.userInfo.fid);
+        stompClient.send("/sensorMonitor/distanceListenStop", {}, this.data.userInfo.fid);
         this.fireMonitor(false);
       } else {
         this.fireMonitor(true);
@@ -304,6 +316,8 @@ Page({
           FireBtnStyle: "toolsOn"
         });
         stompClient.send("/sensorMonitor/fireListenStart", {}, JSON.stringify({ "uid": this.data.userInfo.fid, "top": tempTop }));
+        stompClient.send("/sensorMonitor/infraredListenStart", {}, JSON.stringify({ "uid": this.data.userInfo.fid, "top": 50 }));
+        stompClient.send("/sensorMonitor/distanceListenStart", {}, JSON.stringify({ "uid": this.data.userInfo.fid, "top": 50 }));
       }
     }
   },
@@ -347,15 +361,24 @@ Page({
   fireMonitor: function (isOpen) {
     if (isOpen) {
       fireTimer = setInterval(() => {
-        if (fireSensorData > tempTop) {
+        if (fireSensorData > tempTop || (infraredSensorData == 1 && distanceSensorData < 0.5)) {
           this.setData({
             FireStyle: "safeWarn",
             mainBtnStyle: "mainBtnWarn"
           });
-          if (!isVoicePlay) {
-            isVoicePlay = true;
-            innerAudioContext.src = this.data.resPathUrl + fireVoice;
-            innerAudioContext.play();
+          if (fireSensorData > tempTop) {
+            if (!isVoicePlay) {
+              isVoicePlay = true;
+              innerAudioContext.src = this.data.resPathUrl + fireVoice;
+              innerAudioContext.play();
+            }
+          }
+          if (infraredSensorData == 1 && distanceSensorData < 0.5) {
+            if (!isVoicePlay) {
+              isVoicePlay = true;
+              innerAudioContext.src = this.data.resPathUrl + distanceVoice;
+              innerAudioContext.play();
+            }
           }
         } else {
           this.setData({
@@ -403,7 +426,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if(this.data.isSocketConnect){
+    if (this.data.isSocketConnect) {
       this.onLoad({
         rid: this.data.recipeData.fid
       });
@@ -416,6 +439,8 @@ Page({
   onHide: function () {
     if (this.data.userInfo != null) {
       stompClient.send("/sensorMonitor/allListenStop", {}, this.data.userInfo.fid);
+      stompClient.send("/sensorMonitor/infraredListenStop", {}, this.data.userInfo.fid);
+      stompClient.send("/sensorMonitor/distanceListenStop", {}, this.data.userInfo.fid);
       wx.closeSocket();
     }
   },
@@ -426,6 +451,8 @@ Page({
   onUnload: function () {
     if (this.data.userInfo != null) {
       stompClient.send("/sensorMonitor/allListenStop", {}, this.data.userInfo.fid);
+      stompClient.send("/sensorMonitor/infraredListenStop", {}, this.data.userInfo.fid);
+      stompClient.send("/sensorMonitor/distanceListenStop", {}, this.data.userInfo.fid);
       wx.closeSocket();
     }
   },

@@ -36,7 +36,7 @@ Page({
         color: "#ee343a",
         content: "热门推荐"
       }, {
-        url: "",
+        url: "/pages/menu/menu",
         iconClass: "icon-leibie2",
         color: "#4fcffc",
         content: "食谱分类"
@@ -212,6 +212,19 @@ Page({
         obj.week = "星期日"
     }
     return obj;
+  },
+
+  writeNoteTap: function(){
+    wx.chooseImage({
+      count: 9,
+      sizeType: ['compressed'],
+      success: function(res){
+        var arr = res.tempFilePaths;
+        wx.navigateTo({
+          url: "/pages/infoadd/articleInfoAdd/articleInfoAdd?imgPath=" + JSON.stringify(arr)
+        });
+      }
+    });
   },
 
   /**

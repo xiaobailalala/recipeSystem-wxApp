@@ -29,7 +29,7 @@
         </swiper>
       </view>
       <view class="shortcutMenu">
-        <navigator url="" hover-class="none" wx:for-item="item" wx:for="{{shortcutMenu}}" wx:key="shortcutMenu">
+        <navigator url="{{item.url}}" hover-class="none" wx:for-item="item" wx:for="{{shortcutMenu}}" wx:key="shortcutMenu">
           <icon class="iconfont {{item.iconClass}}" style="color: {{item.color}};"></icon>
           <view>{{item.content}}</view>
         </navigator>
@@ -277,13 +277,13 @@
     </view>
   </view>
   <view>
-    <navigator hover-class="none" url="/pages/infoadd/recipeInfoAdd/recipeInfoAdd" animation="{{writeRecipeShow}}">
+    <navigator class="toolsNav" hover-class="none" url="/pages/infoadd/recipeInfoAdd/recipeInfoAdd" animation="{{writeRecipeShow}}">
       <view>传食谱</view>
       <image src="{{imgPath}}/writeNote.png" />
     </navigator>
-    <navigator hover-class="none" url="" animation="{{writeNoteShow}}">
+    <view bindtap="writeNoteTap" class="toolsNav" animation="{{writeNoteShow}}">
       <view>写笔记</view>
       <image src="{{imgPath}}/writeRecipe.png" />
-    </navigator>
+    </view>
   </view>
 </view>

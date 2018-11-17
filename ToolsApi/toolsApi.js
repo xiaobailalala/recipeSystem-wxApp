@@ -1,10 +1,14 @@
 var toolsObj = {
-  reqPathUrl: "http://192.168.1.110:8080",
-  imgPathUrl:"http://192.168.1.119:8080/recipeUpload/resource/img",
+  // reqPathUrl: "http://192.168.1.110:8080",
+  reqPathUrl: "http://localhost:8080",
+  // imgPathUrl:"http://192.168.1.119:8080/recipeUpload/resource/img",
   // imgPathUrl: "http://172.21.91.21:8080/recipeUpload/resource/img",
-  resPathUrl: "http://192.168.1.108/",
+  imgPathUrl: "http://localhost:8090/recipeUpload/resource/img",
+  // resPathUrl: "http://192.168.1.108/",
   // resPathUrl: "http://172.21.91.21/",
-  socketUrl: "ws://192.168.1.110:8080/endpoint-websocket-wxClient",
+  resPathUrl: "http://172.20.10.10/",
+  // socketUrl: "ws://192.168.1.110:8080/endpoint-websocket-wxClient",
+  socketUrl: "ws://localhost:8080/endpoint-websocket-wxClient",
   toast: function(content, icon, mask, duration, fn) {
     wx.showToast({
       title: content,
@@ -12,7 +16,7 @@ var toolsObj = {
       mask: mask,
       duration: duration,
       success: fn
-    })
+    });
   }
 }
 var urlsObj = {
@@ -35,7 +39,9 @@ var urlsObj = {
   mob_foodComment_greatOperation: toolsObj.reqPathUrl + "/mob/foodComment/greatOperation",
   mob_tips_getInfoRandom: toolsObj.reqPathUrl + "/mob/tips/getInfoRandom",
   mob_recipe_uploadProcessCover: toolsObj.reqPathUrl + "/mob/recipe/uploadProcessCover",
-  mob_recipe_uploadRecipeInfo: toolsObj.reqPathUrl + "/mob/recipe/uploadRecipeInfo"
+  mob_recipe_uploadRecipeInfo: toolsObj.reqPathUrl + "/mob/recipe/uploadRecipeInfo",
+  mob_article_uploadCover: toolsObj.reqPathUrl + "/mob/article/uploadCover",
+  mob_article_saveInfo: toolsObj.reqPathUrl + "/mob/article/saveInfo"
 }
 module.exports = {
   tools: toolsObj,
