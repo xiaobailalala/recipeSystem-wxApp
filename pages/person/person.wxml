@@ -1,6 +1,6 @@
 <!--pages/person/person.wxml-->
 <view wx:if="{{viewflag==1}}">
-  <image class='loginbg' src='{{imgPath}}/loginbg.png'/>
+  <image class='loginbg' src='{{imgPath}}/loginbg.png' />
   <view class='con-main'>
     <view class='login-con'>
       <text>愿每一餐都有美味也有你</text>
@@ -17,7 +17,7 @@
         <image class='userhead' wx:if="{{userInfo.fcover==null || userInfo.fcover==''}}" src="{{imgPath}}/defaulthead.png"></image>
         <image class='userhead' wx:else src="{{resPathUrl}}{{userInfo.fcover}}"></image>
       </navigator>
-      <navigator class='personInfo' hover-class='none'>
+      <navigator url="/pages/person/personInfo/personInfo" class='personInfo' hover-class='none'>
         <view>
           <text>{{userInfo.fusername}}</text>
           <text>{{userInfo.faccount}}</text>
@@ -26,49 +26,61 @@
       </navigator>
     </view>
     <view class='userEditor'>
-      <navigator hover-class='none' url='/pages/personeditor/personeditor'>编辑资料</navigator>
-      <navigator hover-class='none'>
-        <text>0</text>
-        <text>菜谱</text>
-      </navigator>
-      <navigator hover-class='none'>
-        <text>0</text>
-        <text>收藏</text>
-      </navigator>
+      <view>
+        <navigator hover-class='none' url='/pages/personeditor/personeditor'>编辑资料</navigator>
+        <navigator url="/pages/person/personInfo/personInfo" hover-class='none'>
+          <text>0</text>
+          <text>菜谱</text>
+        </navigator>
+        <navigator hover-class='none' url="/pages/person/personInfo/personInfo?type=article">
+          <text>0</text>
+          <text>笔记</text>
+        </navigator>
+      </view>
     </view>
-    <navigator class='toolsGo'>
-      <text>我的收藏</text>
+    <navigator class='toolsGo' url="/pages/person/personCollect/personCollect">
       <view>
-        个人收藏都在这里
-        <text class='icon-gengduo iconfont iconRight'></text>
+        <text>我的收藏</text>
+        <view>
+          个人收藏都在这里
+          <text class='icon-gengduo iconfont iconRight'></text>
+        </view>
       </view>
     </navigator>
     <navigator class='toolsGo'>
-      <text>推送信息</text>
       <view>
-        您的生活小贴士
-        <text class='icon-gengduo iconfont iconRight'></text>
+        <text>推送信息</text>
+        <view>
+          您的生活小贴士
+          <text class='icon-gengduo iconfont iconRight'></text>
+        </view>
       </view>
     </navigator>
     <navigator class='toolsGo'>
-      <text>最近浏览菜谱</text>
       <view>
-        瞅瞅我的足迹
-        <text class='icon-gengduo iconfont iconRight'></text>
+        <text>最近浏览菜谱</text>
+        <view>
+          瞅瞅我的足迹
+          <text class='icon-gengduo iconfont iconRight'></text>
+        </view>
       </view>
     </navigator>
     <navigator class='toolsGo'>
-      <text>草稿箱</text>
       <view>
-        这里的东西还没发布哦
-        <text class='icon-gengduo iconfont iconRight'></text>
+        <text>草稿箱</text>
+        <view>
+          这里的东西还没发布哦
+          <text class='icon-gengduo iconfont iconRight'></text>
+        </view>
       </view>
     </navigator>
     <button class='toolsGo' open-type='share'>
-      <text>分享膳房膳食给朋友</text>
       <view>
-        Share Me
-        <text class='icon-gengduo iconfont iconRight'></text>
+        <text>分享膳房膳食给朋友</text>
+        <view>
+          Share Me
+          <text class='icon-gengduo iconfont iconRight'></text>
+        </view>
       </view>
     </button>
   </view>

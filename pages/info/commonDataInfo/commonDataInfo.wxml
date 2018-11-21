@@ -69,8 +69,8 @@
           <button open-type='share' hover-class='none'>
             <icon class='iconfont icon-weixin'></icon>
           </button>
-          <button hover-class='none'>
-            <icon class='iconfont icon-yishoucangyingyuan' style='color: #999999;'></icon>
+          <button hover-class='none' bindtap="collectTab">
+            <icon class='iconfont icon-yishoucangyingyuan' style="color: {{isCollect}};"></icon>
           </button>
           <button hover-class='none'>
             <icon class='iconfont icon-jubao'></icon>

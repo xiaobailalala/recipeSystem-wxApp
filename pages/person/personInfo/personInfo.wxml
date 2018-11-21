@@ -1,0 +1,141 @@
+<scroll-view scroll-y bindscroll="scrollBind" style="height: 100vh;">
+    <view class="headContainer">
+        <image class="head_bg" src="{{imgPath}}/banner4.png" />
+        <view class="head_bg_shadow" bindtap="bgChange">
+            <view class="head_bg_baseInfo">
+                <view>豆粉333116</view>
+                <view>
+                    <view>程序员</view>
+                    <view>福建省 漳州市 芗城区</view>
+                </view>
+            </view>
+        </view>
+        <view class="head_userHead" bindtap="userHeadChange">
+            <image src="{{imgPath}}/banner.png" />
+        </view>
+        <view class="head_tools">
+            <icon class="iconfont icon-bianji" bindtap="editorBind"></icon>
+            <button class="shareBtn" open-type='share'>
+                <icon class="iconfont icon-shareit" bindtap="shareBind"></icon>
+            </button>
+        </view>
+    </view>
+    <view class="collectContainer">
+        <view class="collect_count">
+            <navigator hover-class="none">
+                <view>0</view>
+                <view>关注</view>
+            </navigator>
+            <navigator hover-class="none">
+                <view>0</view>
+                <view>粉丝</view>
+            </navigator>
+            <navigator hover-class="none">
+                <view>0</view>
+                <view>收藏</view>
+            </navigator>
+        </view>
+        <view class="collect_sign">
+            吃货不是在吃就是在去吃的路上，没时间写签名
+        </view>
+    </view>
+    <view class="contentContainer">
+        <view class="content_head {{contentStyle}}">
+            <view class="{{contentHeadRecipe}}" bindtap="recipeList">食谱</view>
+            <view class="{{contentHeadArticle}}" bindtap="articleList">笔记</view>
+        </view>
+        <view class="content_head_height" wx:if="{{isContentShow}}"></view>
+        <view class="content_main">
+            <view class="content_recipe" hidden="{{!recipeIsShow}}">
+                <!-- <view class="noneTips">要发布点内容才配得上我吃货的名声</view> -->
+                <view>
+                    <navigator hover-class="none">火爆ins的金枪鱼沼三明治火爆ins的金枪鱼沼三明治，超厚超满足~</navigator>
+                    <view>
+                        <icon class="iconfont icon-chakan"> 222</icon>
+                        <icon class="iconfont icon-favourite"> 333</icon>
+                    </view>
+                    <navigator hover-class="none" url="" hover-class="none">
+                        <image src="{{imgPath}}/banner.png" />
+                    </navigator>
+                </view>
+                <view>
+                    <navigator hover-class="none">火爆ins的金枪鱼沼三明治，超厚超满足~</navigator>
+                    <view>
+                        <icon class="iconfont icon-chakan"></icon>
+                        <icon class="iconfont icon-favourite"></icon>
+                    </view>
+                    <navigator hover-class="none" url="" hover-class="none">
+                        <image src="{{imgPath}}/banner.png" />
+                    </navigator>
+                </view>
+                <view>
+                    <navigator hover-class="none">火爆ins的金枪鱼沼三明治，超厚超满足~</navigator>
+                    <view>
+                        <icon class="iconfont icon-chakan"> 222</icon>
+                        <icon class="iconfont icon-favourite"> 333</icon>
+                    </view>
+                    <navigator hover-class="none" url="" hover-class="none">
+                        <image src="{{imgPath}}/banner.png" />
+                    </navigator>
+                </view>
+                <view>
+                    <navigator hover-class="none">火爆ins的金枪鱼沼三明治，超厚超满足~</navigator>
+                    <view>
+                        <icon class="iconfont icon-chakan"> 222</icon>
+                        <icon class="iconfont icon-favourite"> 333</icon>
+                    </view>
+                    <navigator hover-class="none" url="" hover-class="none">
+                        <image src="{{imgPath}}/banner.png" />
+                    </navigator>
+                </view>
+                <view>
+                    <navigator hover-class="none">火爆ins的金枪鱼沼三明治，超厚超满足~</navigator>
+                    <view>
+                        <icon class="iconfont icon-chakan"> 222</icon>
+                        <icon class="iconfont icon-favourite"> 333</icon>
+                    </view>
+                    <navigator hover-class="none" url="" hover-class="none">
+                        <image src="{{imgPath}}/banner.png" />
+                    </navigator>
+                </view>
+            </view>
+            <view class="content_article" hidden="{{!articleIsShow}}">
+                <!-- <view class="noneTips">要发布点内容才配得上我吃货的名声</view> -->
+                <view class="likeListMain">
+                    <view>
+                        <navigator hover-class="none" wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}"
+                            class="" url="" hover-class="none">
+                            <image src="{{item.url}}" lazy-load="true" mode="widthFix" />
+                            <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+                            <view class="likeInfo">
+                                <view>
+                                    <image src="{{imgPath}}/banner.png" />
+                                    <view>
+                                        平底锅111平底锅111平底锅111
+                                    </view>
+                                </view>
+                                <icon class="iconfont icon-aixin"> 283</icon>
+                            </view>
+                        </navigator>
+                    </view>
+                    <view>
+                        <navigator hover-class="none" wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}"
+                            class="" url="" hover-class="none">
+                            <image src="{{item.url}}" lazy-load="true" mode="widthFix" />
+                            <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+                            <view class="likeInfo">
+                                <view>
+                                    <image src="{{imgPath}}/banner.png" />
+                                    <view>
+                                        平底锅111
+                                    </view>
+                                </view>
+                                <icon class="iconfont icon-aixin"> 283</icon>
+                            </view>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</scroll-view>

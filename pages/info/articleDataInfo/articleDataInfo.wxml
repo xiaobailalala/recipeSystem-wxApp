@@ -1,0 +1,169 @@
+<scroll-view scroll-y style="height: 100vh;">
+    <view class="coverListContainer">
+        <swiper bindchange="swiperChange">
+            <block wx:for="{{image}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <swiper-item class="">
+                    <image src="{{imgPath}}/banner4.png" />
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="coverIndexTag">
+            {{imageIndex}} / 4
+        </view>
+    </view>
+    <view class="userInfoContainer">
+        <navigator>
+            <image src="{{imgPath}}/banner4.png" />
+            贪吃阳
+        </navigator>
+        <button hover-class='none' bindtap='testVoice'>关注</button>
+    </view>
+    <view class="articleContainer">
+        <view class="articleTitle">
+            热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜
+        </view>
+        <view class="articleContent">
+            热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜
+        </view>
+        <view class="articleLink">
+            <navigator url="" hover-class="none">
+                <icon class="iconfont icon-jinghao">我想吃遍全世界</icon>
+            </navigator>
+            <navigator url="" redirect hover-class="className">
+                <icon class="iconfont icon-aite1">我想吃遍全世界</icon>
+            </navigator>
+            <navigator url="" redirect hover-class="className">
+                <icon class="iconfont icon-icon-_baoyou">我想吃遍全世界</icon>
+            </navigator>
+        </view>
+        <view class="articleTime">
+            <view>2018-11-11</view>
+            <view>
+                <view>315次收藏</view>
+                <view>138次赞</view>
+            </view>
+        </view>
+    </view>
+    <view class="commentContainer">
+        <view class="commentHead">
+            <view>笔记评论</view>
+            <navigator class="" url="" hover-class="none">
+                全部9条评论
+            </navigator>
+        </view>
+        <view class="commentMain">
+            <view class="commentMainItem">
+                <navigator url="" hover-class="none">
+                    <image src="{{imgPath}}/banner3.png" />
+                </navigator>
+                <view>
+                    <view class="commentUserInfo">
+                        <view>
+                            <navigator url="" hover-class="none">豆教授</navigator>
+                            <view>2018-11-11</view>
+                        </view>
+                        <view><icon class="iconfont icon-aixin"> 123</icon></view>
+                    </view>
+                    <view class="commentContent">
+                        没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~
+                    </view>
+                </view>
+            </view>
+            <view class="commentMainItem">
+                <navigator url="" hover-class="none">
+                    <image src="{{imgPath}}/banner3.png" />
+                </navigator>
+                <view>
+                    <view class="commentUserInfo">
+                        <view>
+                            <navigator url="" hover-class="none">豆教授</navigator>
+                            <view>2018-11-11</view>
+                        </view>
+                        <view><icon class="iconfont icon-aixin"> 123</icon></view>
+                    </view>
+                    <view class="commentContent">
+                        没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~
+                    </view>
+                </view>
+            </view>
+            <view class="commentMainItem">
+                <navigator url="" hover-class="none">
+                    <image src="{{imgPath}}/banner3.png" />
+                </navigator>
+                <view>
+                    <view class="commentUserInfo">
+                        <view>
+                            <navigator url="" hover-class="none">豆教授</navigator>
+                            <view>2018-11-11</view>
+                        </view>
+                        <view><icon class="iconfont icon-aixin"> 123</icon></view>
+                    </view>
+                    <view class="commentContent">
+                        没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~
+                    </view>
+                </view>
+            </view>
+            <button hover-class="none">查看全部 9 条评论</button>
+        </view>
+    </view>
+    <view class="otherContainer">
+        <view class="otherHead">
+            <view>相关笔记</view>
+        </view>
+        <view class="otherContent">
+            <view>
+                <navigator wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}"
+                    class="" url="" hover-class="none">
+                    <image src="{{item.url}}" lazy-load="true" mode="widthFix" />
+                    <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+                    <view class="likeInfo">
+                        <view>
+                            <image src="{{imgPath}}/banner.png" />
+                            <view>
+                                平底锅111平底锅111平底锅111
+                            </view>
+                        </view>
+                        <icon class="iconfont icon-aixin"> 283</icon>
+                    </view>
+                </navigator>
+            </view>
+            <view>
+                <navigator wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}"
+                    class="" url="" hover-class="none">
+                    <image src="{{item.url}}" lazy-load="true" mode="widthFix" />
+                    <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+                    <view class="likeInfo">
+                        <view>
+                            <image src="{{imgPath}}/banner.png" />
+                            <view>
+                                平底锅111
+                            </view>
+                        </view>
+                        <icon class="iconfont icon-aixin"> 283</icon>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <view class="bottomFixedContainer" style="bottom: {{fixedBottom}}rpx">
+        <view class="fixedSearch">
+            <icon class="iconfont icon-bianji"></icon>
+            <input type="text" bindfocus="focusBind" cursor-spacing="8" adjust-position="false" bindblur="blurBind" placeholder="我想说两句" placeholder-style="color: #a0a0a0;" />
+        </view>
+        <view class="fixedIcon">
+            <button>
+                <icon class="iconfont icon-weixin1"></icon>
+                分享好友
+            </button>
+            <button>
+                <icon class="iconfont icon-aixin"></icon>
+                赞 123
+            </button>
+            <button>
+                <icon class="iconfont icon-shoucang"></icon>
+                收藏 315
+            </button>
+        </view>
+    </view>
+    <view class="occupiedBottom"></view>
+</scroll-view>

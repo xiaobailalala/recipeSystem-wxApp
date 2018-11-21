@@ -58,15 +58,11 @@ page {
   border-radius: 35px;
 }
 
-.info-main {
-  padding: 0 40rpx;
-}
-
 .info-main>view {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24rpx 0;
+  padding: 24rpx 40rpx;
 }
 
 .userhead {
@@ -97,13 +93,21 @@ page {
   color: #999;
 }
 
-.userEditor {
+view.userEditor{
+  padding: 0 40rpx;
+}
+
+.userEditor>view{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1rpx solid #dedeee;
   padding-bottom: 44rpx !important;
   padding-top: 10rpx !important;
 }
 
-.userEditor>navigator:nth-of-type(1) {
+.userEditor>view>navigator:nth-of-type(1) {
   color: #4385c4;
   font-size: 30rpx;
   position: relative;
@@ -111,21 +115,25 @@ page {
   top: 24rpx;
 }
 
-.userEditor>navigator {
+.userEditor>view>navigator {
   width: 33.33%;
 }
 
-.userEditor>navigator>text {
+.userEditor>view>navigator>text {
   display: block;
   color: #999;
 }
 
-.userEditor>navigator>text:nth-of-type(1) {
+.userEditor>view>navigator>text:nth-of-type(1) {
   color: #333;
   margin-bottom: 12rpx;
 }
 
 .toolsGo {
+  padding: 0 40rpx;
+}
+
+.toolsGo>view{
   padding: 30rpx 10rpx;
   display: flex;
   align-items: center;
@@ -133,7 +141,7 @@ page {
   border-bottom: 1rpx solid #dedeee;
 }
 
-.toolsGo>view {
+.toolsGo>view>view {
   display: flex;
   align-items: center;
   justify-content: space-between;

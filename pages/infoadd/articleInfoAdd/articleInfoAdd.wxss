@@ -95,7 +95,7 @@ button::after {
 }
 
 .toolsContainer>view:nth-of-type(1)>navigator {
-    margin-right: 40rpx;
+    margin-right: 30rpx;
     font-weight: bold;
     color: #a3a3a3;
 }
@@ -179,4 +179,25 @@ button::after {
     vertical-align: top;
     border-radius: 10rpx;
     margin-right: 0;
+}
+
+.enterTopic{
+    color: #888888;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 16rpx 0;
+}
+
+.enterTopic switch{
+    margin-left: 20rpx;
+}
+
+.topicSelect{
+    margin-left: 20rpx;
+    font-size: 28rpx;
+    background-color: #f7f7f7;
+    color: #87ceeb;
+    padding: 6rpx 15rpx;
+    border-radius: 5rpx;
 }

@@ -41,7 +41,8 @@ var urlsObj = {
   mob_recipe_uploadProcessCover: toolsObj.reqPathUrl + "/mob/recipe/uploadProcessCover",
   mob_recipe_uploadRecipeInfo: toolsObj.reqPathUrl + "/mob/recipe/uploadRecipeInfo",
   mob_article_uploadCover: toolsObj.reqPathUrl + "/mob/article/uploadCover",
-  mob_article_saveInfo: toolsObj.reqPathUrl + "/mob/article/saveInfo"
+  mob_article_saveInfo: toolsObj.reqPathUrl + "/mob/article/saveInfo",
+  mob_recipe_collectRecipe: toolsObj.reqPathUrl + "/mob/recipe/collectRecipe"
 }
 module.exports = {
   tools: toolsObj,

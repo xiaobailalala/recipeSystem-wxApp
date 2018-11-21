@@ -28,6 +28,10 @@
             <icon class="iconfont icon-icon-_baoyou"></icon>
         </navigator>
     </view>
+    <view class="enterTopic">
+        加入话题 <switch class=""/>
+        <view class="topicSelect">请选择</view>
+    </view>
     <view>
         <view class="atpeople">
             提到的好友：

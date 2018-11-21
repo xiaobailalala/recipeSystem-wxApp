@@ -39,7 +39,8 @@ Page({
     FireBtnStyle: "",
     SmogBtnStyle: "",
     userInfo: null,
-    isSocketConnect: false
+    isSocketConnect: false,
+    isCollect: "#999999"
   },
 
   previewImage: function (e) {
@@ -78,14 +79,18 @@ Page({
         this.setData({
           userInfo: res.data
         });
+        this.getInitData(opt, res.data.fid, 1);
       },
       fail: err => {
         this.setData({
           userInfo: null
         });
+        this.getInitData(opt, 0, 1);
       }
     });
-    opt = 5;
+  },
+
+  getInitData: function(rid,uid,type){
     wx.request({
       url: Tools.urls.mob_recipe_updateRecipeCount,
       method: "GET",
@@ -93,7 +98,7 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: {
-        id: opt,
+        id: rid,
       },
       success: res => {
         wx.request({
@@ -103,36 +108,42 @@ Page({
             'Content-Type': 'application/x-www-form-urlencoded'
           },
           data: {
-            id: opt,
+            fRid: rid,
+            fUid: uid,
+            fType: type
           },
           success: res => {
             this.setData({
-              recipeData: res.data.data,
-              processLength: res.data.data.processes.length
+              recipeData: res.data.data.item,
+              processLength: res.data.data.item.processes.length
             });
-            // this.voicePlay(res.data.data.processes);
+            if (res.data.data.isCollect) {
+              this.setData({
+                isCollect: "#ffdc44"
+              });
+            } else {
+              this.setData({
+                isCollect: "#999999"
+              });
+            }
             var temStr = this.data.recipeData.ffire;
             if (temStr != 0) {
               tempBottom = temStr.split("-")[0];
               tempTop = temStr.split("-")[1];
-              // if (!this.data.isSocketConnect) {
               this.initSocket(true);
               this.setData({
                 isSocketConnect: true
               });
-              // }
             } else {
-              // if (!this.data.isSocketConnect) {
               this.initSocket(false);
               this.setData({
                 isSocketConnect: true
               });
-              // }
             }
           }
         });
       }
-    })
+    });
     wx.request({
       url: Tools.urls.mob_aiMark_getVoiceForWXReady,
       method: "GET",
@@ -150,14 +161,8 @@ Page({
         fireVoice = res.data.data[1];
         smogVoice = res.data.data[2];
         distanceVoice = res.data.data[3];
-        // this.setData({
-        //   audioEle: true,
-        //   voiceData: res.data.data
-        // });
-        // this.audioCtx = wx.createAudioContext('aiAudio');
-        // this.audioCtx.play();
       }
-    })
+    });
   },
 
   initSocket: function (isFire) {
@@ -414,6 +419,74 @@ Page({
       }, 1500);
     } else {
       clearInterval(smogTimer);
+    }
+  },
+
+  collectTab: function () {
+    if(this.data.userInfo){
+      if(this.data.isCollect == "#999999") {
+        wx.request({
+          url: Tools.urls.mob_recipe_collectRecipe,
+          method: "GET",
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            fUid: this.data.userInfo.fid,
+            fRid: this.data.recipeData.fid,
+            fType: 1
+          },
+          success: res => {
+            var oldObj = this.data.recipeData;
+            oldObj.fgood++;
+            this.setData({
+              isCollect: "#ffdc44",
+              recipeData: oldObj
+            });
+            wx.showToast({
+              title: "收藏成功",
+              icon: "success"
+            });
+          }
+        });
+      } else {
+        wx.request({
+          url: Tools.urls.mob_recipe_collectRecipe,
+          method: "POST",
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            fUid: this.data.userInfo.fid,
+            fRid: this.data.recipeData.fid,
+            fType: 1,
+            _method: "DELETE"
+          },
+          success: res => {
+            var oldObj = this.data.recipeData;
+            oldObj.fgood--;
+            this.setData({
+              isCollect: "#999999",
+              recipeData: oldObj
+            });
+          }
+        });
+      }
+    } else {
+      wx.showModal({
+        title: '温馨提示',
+        content: '小膳提醒您，请先登录哦',
+        confirmText: "去登陆",
+        confirmColor: "#ffb31a",
+        cancelColor: "#666666",
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login?active=true',
+            });
+          }
+        }
+      });
     }
   },
 

@@ -1,0 +1,69 @@
+<scroll-view style="height: 100vh;" scroll-y>
+    <view class="bannerContainer">
+        <view class="bannerImg">
+            <swiper autoplay="true" interval="3000" duration="1000" circular="true">
+                <block wx:for="{{image}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                    <swiper-item>
+                        <navigator class="" url="" hover-class="none">
+                            <image src="{{item.url}}" />
+                        </navigator>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+        <view class="bannerTag">
+            <navigator class="" hover-class="none">
+                <image src="{{imgPath}}/breakfirst.png" />
+                秀早餐
+            </navigator>
+            <navigator class="" hover-class="none">
+                <image src="{{imgPath}}/lunch.png" />
+                秀午餐
+            </navigator>
+            <navigator class="" hover-class="none">
+                <image src="{{imgPath}}/dinner.png" />
+                秀晚餐
+            </navigator>
+        </view>
+        <view class="bannerLine">
+            <view></view>
+        </view>
+    </view>
+    <view class="articleContainer">
+        <view>
+            <navigator wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}"
+                class="" url="" hover-class="none">
+                <image src="{{item.url}}" lazy-load="true" mode="widthFix" />
+                <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+                <view class="likeInfo">
+                    <view>
+                        <image src="{{imgPath}}/banner.png" />
+                        <view>
+                            平底锅111平底锅111平底锅111
+                        </view>
+                    </view>
+                    <icon class="iconfont icon-aixin"> 283</icon>
+                </view>
+            </navigator>
+        </view>
+        <view>
+            <navigator wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}"
+                class="" url="" hover-class="none">
+                <image src="{{item.url}}" lazy-load="true" mode="widthFix" />
+                <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+                <view class="likeInfo">
+                    <view>
+                        <image src="{{imgPath}}/banner.png" />
+                        <view>
+                            平底锅111
+                        </view>
+                    </view>
+                    <icon class="iconfont icon-aixin"> 283</icon>
+                </view>
+            </navigator>
+        </view>
+    </view>
+    <view class="fixedWriteTag">
+        <icon class="iconfont icon-tubiao_pinglun"></icon>写笔记
+    </view>
+</scroll-view>

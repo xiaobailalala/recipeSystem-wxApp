@@ -1,0 +1,369 @@
+page {
+    height: 100%;
+    background-color: #ffffff;
+    position: relative;
+}
+
+.clear {
+    clear: both;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+button::after {
+    border: unset;
+}
+
+.coverListContainer {
+    height: 500rpx;
+    position: relative;
+}
+
+.coverListContainer swiper {
+    height: 100%;
+}
+
+.coverListContainer image {
+    width: 100%;
+    height: 500rpx;
+}
+
+.coverIndexTag {
+    position: absolute;
+    color: #ffffff;
+    font-size: 36rpx;
+    right: 24rpx;
+    bottom: 12rpx;
+}
+
+.userInfoContainer {
+    padding: 0 40rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24rpx;
+}
+
+.userInfoContainer>navigator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.userInfoContainer>navigator>image {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+}
+
+.userInfoContainer>button {
+    margin: 0;
+    display: inline;
+    background-color: #ffb31a;
+    color: #ffffff;
+    padding: 10rpx 32rpx;
+    line-height: unset;
+    font-size: 30rpx;
+    border-radius: 30rpx;
+}
+
+.articleContainer {
+    padding: 0 40rpx;
+}
+
+.articleTitle {
+    line-height: 1.5;
+    font-weight: bold;
+    margin-top: 20rpx;
+    font-size: 30rpx;
+}
+
+.articleContent {
+    font-size: 30rpx;
+    line-height: 1.5;
+    margin-top: 20rpx;
+}
+
+.bottomFixedContainer {
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    background-color: #333333;
+    width: 100%;
+    height: 110rpx;
+    padding: 0 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.fixedSearch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding-left: 20rpx;
+    border-radius: 37rpx;
+    height: 74rpx;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 55%;
+}
+
+.fixedSearch>icon {
+    color: #afafaf;
+    position: relative;
+    top: -6rpx;
+    font-size: 36rpx;
+}
+
+.fixedSearch>input {
+    font-size: 30rpx;
+    padding-left: 20rpx;
+    height: 100%;
+    color: #888888;
+    box-sizing: border-box;
+    padding-right: 10rpx;
+}
+
+.fixedIcon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fixedIcon>button {
+    margin: 0;
+    line-height: unset;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: transparent;
+    font-size: 20rpx;
+    color: #c3c3c3;
+    margin-left: 24rpx;
+}
+
+.fixedIcon>button>icon {
+    font-size: 40rpx;
+    position: relative;
+    top: -4rpx;
+}
+
+.fixedIcon>button:nth-of-type(1)>icon {
+    color: #09ba08;
+}
+
+.occupiedBottom {
+    height: 110rpx;
+}
+
+.articleLink>navigator {
+    display: inline-block;
+    margin-right: 20rpx;
+}
+
+.articleLink>navigator>icon {
+    font-size: 30rpx;
+    color: #3e7ecc;
+}
+
+.articleTime{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #888888;
+    font-size: 26rpx;
+    margin-top: 30rpx;
+    padding-bottom: 30rpx;
+    border-bottom: 1rpx solid #dadada;
+}
+
+.articleTime>view:nth-of-type(2){
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.articleTime>view:nth-of-type(2)>view{
+    margin-left: 30rpx;
+}
+
+.commentContainer{
+    padding: 30rpx 40rpx 0 40rpx;
+}
+
+.commentHead{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.commentHead>view{
+    font-size: 36rpx;
+    font-weight: bold;
+}
+
+.commentHead>navigator{
+    font-size: 28rpx;
+    color: #3e7ecc;
+}
+
+.commentMainItem{
+    position: relative;
+    padding: 36rpx 0;
+    border-bottom: 1rpx solid #dadada;
+}
+
+.commentMainItem>navigator{
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    position: absolute;
+    top: 36rpx;
+    left: 0;
+    overflow: hidden;
+}
+
+.commentMainItem>navigator>image{
+    width: 100%;
+    height: 100%;
+}
+
+.commentMainItem>view{
+    padding-left: 100rpx;
+}
+
+.commentUserInfo{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.commentUserInfo>view:nth-of-type(1)>navigator{
+    font-size: 33rpx;
+    font-weight: bold;
+}
+
+.commentUserInfo>view:nth-of-type(1)>view{
+    font-size: 27rpx;
+    color: #888888;
+    margin-top: 10rpx;
+}
+
+.commentUserInfo>view:nth-of-type(2)>icon{
+    color: #999999;
+    font-size: 28rpx;
+}
+
+.commentContent{
+    line-height: 1.3;
+    margin-top: 24rpx;
+    font-size: 30rpx;
+    color: #333333;
+}
+
+.commentMain>button{
+    margin-top: 40rpx;
+    background-color: #ffffff;
+    color: #ffb725;
+    border: 1rpx solid #ffb725;
+    line-height: unset;
+    font-size: 32rpx;
+    height: 76rpx;
+    border-radius: 38rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.otherContainer{
+    padding: 40rpx 40rpx 0 40rpx;
+}
+
+.otherHead{
+    font-size: 36rpx;
+    font-weight: bold;
+}
+
+.otherContent{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 40rpx;
+}
+
+.otherContent>view {
+    width: 47.2%;
+    background-color: #ffffff;
+}
+
+.otherContent>view>navigator {
+    width: 100%;
+    border-radius: 10rpx;
+    box-shadow: 0 0 16rpx rgb(180, 180, 180);
+    overflow: hidden;
+    margin-bottom: 30rpx;
+    padding-bottom: 20rpx;
+}
+
+.otherContent>view>navigator>image {
+    width: 100%;
+    vertical-align: top;
+}
+
+.otherContent>view>navigator>view:nth-of-type(1) {
+    font-size: 26rpx;
+    padding: 12rpx 16rpx 0 16rpx;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-height: 104rpx;
+    box-sizing: border-box;
+}
+
+.likeInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16rpx;
+    padding: 0 16rpx;
+    font-size: 20rpx;
+}
+
+.likeInfo>view {
+    display: flex;
+    align-items: center;
+    color: #888888;
+}
+
+.likeInfo>view>image {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    margin-right: 10rpx;
+}
+
+.likeInfo>view>view {
+    max-width: 150rpx;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.likeInfo>icon {
+    font-size: 20rpx;
+    position: relative;
+    top: -13rpx;
+    color: #888888;
+}
