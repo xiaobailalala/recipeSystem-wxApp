@@ -14,6 +14,7 @@ Page({
     authorid: 0,
     uid: 0,
     replyid: -1,
+    type: "",
     replyname: "在此留下您的评论~"
   },
 
@@ -42,14 +43,14 @@ Page({
         count: 1,
         sizeType: ['compressed'],
         success: res => {
-          const src = res.tempFilePaths[0]
-          var newArr = JSON.stringify(this.data.imgArr);
-          var content = this.data.content;
-          var rid = this.data.rid;
-          var authorid = this.data.authorid;
-          var uid = this.data.uid;
           wx.navigateTo({
-            url: '../commentChangeImg/commentChangeImg?src=' + src + '&imgArr=' + newArr + "&content=" + content + '&rid=' + rid + '&authorid=' + authorid + '&uid=' + uid
+            url: '../commentChangeImg/commentChangeImg?src=' + res.tempFilePaths[0] + 
+            '&imgArr=' + JSON.stringify(this.data.imgArr) + 
+            "&content=" + this.data.content + 
+            '&rid=' + this.data.rid + 
+            '&authorid=' + this.data.authorid + 
+            '&uid=' + this.data.uid +
+            '&type=' + this.data.type
           });
           // this.setData({
           //   imgPath: res.tempFilePaths[0]
@@ -78,6 +79,7 @@ Page({
       if (this.data.imgArr.length == 0) {
         this.sendData({
           fRid: this.data.rid,
+          fAid: this.data.rid,
           fUid: this.data.uid,
           fContent: this.data.content,
           fRelease: this.getDateTime(),
@@ -94,7 +96,7 @@ Page({
   uploadImg: function (i, imgData, newArr) {
     var len = imgData.length;
     wx.uploadFile({
-      url: Tools.urls.mob_foodComment_imgupload,
+      url: this.data.type=="recipe" ? Tools.urls.mob_foodComment_imgupload : Tools.urls.mob_articleComment_imgupload,
       filePath: imgData[i],
       name: "commentImg",
       success: res => {
@@ -103,6 +105,7 @@ Page({
         if (i == len) {
           this.sendData({
             fRid: this.data.rid,
+            fAid: this.data.rid,
             fUid: this.data.uid,
             fContent: this.data.content,
             fRelease: this.getDateTime(),
@@ -118,7 +121,7 @@ Page({
 
   sendData: function (dataArr) {
     wx.request({
-      url: Tools.urls.mob_foodComment_saveInfo,
+      url: this.data.type=="recipe" ? Tools.urls.mob_foodComment_saveInfo : Tools.urls.mob_articleComment_saveInfo,
       method: "POST",
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -130,7 +133,8 @@ Page({
         prePage.onLoad({
           rid: this.data.rid,
           authorid: this.data.authorid,
-          uid: this.data.uid
+          uid: this.data.uid,
+          type: this.data.type
         });
         wx.navigateBack({
           delta: 1
@@ -159,12 +163,14 @@ Page({
       authorid,
       uid,
       replyid,
-      replyname
+      replyname,
+      type
     } = options
     this.setData({
       rid: rid,
       authorid: authorid,
-      uid: uid
+      uid: uid,
+      type: type
     });
     if (replyid && replyid != -1) {
       this.setData({

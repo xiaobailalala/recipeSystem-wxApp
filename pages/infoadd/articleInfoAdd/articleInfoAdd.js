@@ -17,7 +17,11 @@ Page({
     selectImgPath: [],
     selectImgLength: 0,
     articleTitle: "",
-    articleContent: ""
+    articleContent: "",
+    isTopicSelect: false,
+    topicArray: ["请选择", "秀早餐", "秀午餐", "秀晚餐"],
+    topicIndex: 0,
+    topicSelectContent: "请选择"
   },
 
   titleFocus: function () {
@@ -116,12 +120,19 @@ Page({
                 mask: true,
                 success: res => {
                   var newArr = [];
+                  var topic = 0;
+                  if (this.data.isTopicSelect){
+                    topic = this.data.topicIndex;
+                  } else {
+                    topic = 0;
+                  }
                   this.uploadImg(0, this.data.selectImgPath, newArr, {
                     fName: this.data.articleTitle,
                     fContent: this.data.articleContent,
                     fType: "待审核",
                     fUid: uid,
-                    fRelease: this.getDateTime
+                    fRelease: this.getDateTime(),
+                    fTopic: topic
                   });
                 }
               });
@@ -196,9 +207,30 @@ Page({
       data: infoObj,
       success: res => {
         wx.reLaunch({
-          url: "/pages/infoadd/addSuccess/addSuccess?target=recipe"
+          url: "/pages/infoadd/addSuccess/addSuccess?target=article"
         });
       }
+    });
+  },
+
+  topicChange: function(e){
+    if(e.detail.value){
+      this.setData({
+        isTopicSelect: true
+      });
+    } else {
+      this.setData({
+        isTopicSelect: false
+      });
+    }
+  },
+
+  topicSelectChange: function(e){
+    var index = e.detail.value;
+    var newArr = this.data.topicArray;
+    this.setData({
+      topicIndex: e.detail.value,
+      topicSelectContent: newArr[index]
     });
   },
 
@@ -209,8 +241,7 @@ Page({
     var day = dateTime.getDate() < 10 ? "0" + dateTime.getDate() : dateTime.getDate();
     var hours = dateTime.getHours() < 10 ? "0" + dateTime.getHours() : dateTime.getHours();
     var minutes = dateTime.getMinutes() < 10 ? "0" + dateTime.getMinutes() : dateTime.getMinutes();
-    var seconds = dateTime.getSeconds() < 10 ? "0" + dateTime.getSeconds() : dateTime.getSeconds()
-    return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+    return year + "-" + month + "-" + day + " " + hours + ":" + minutes;
   },
 
   /**

@@ -211,7 +211,7 @@ Page({
           userInfo: res.data,
           sexIndex: ["男", "女"].indexOf(res.data.fsex),
           addressArray: [res.data.fprovince, res.data.fcity, res.data.farea],
-          countLimit: res.data.fsign.length,
+          countLimit: res.data.fsign ? res.data.fsign.length : 0,
           imgPath: img
         });
         let {

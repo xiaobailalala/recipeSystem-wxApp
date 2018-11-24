@@ -2,7 +2,7 @@
 <view class='con-main'>
   <form>
     <view>
-      <button class='toolsBtn' bindtap='chooseImg' hover-class='navigator-hover'>
+      <button class='toolsBtn' bindtap='chooseImg' hover-class='none'>
         头像
         <view>
           <view>
@@ -18,7 +18,7 @@
     </view>
     <view>
       <picker range='{{sexArray}}' value='{{sexIndex}}' bindchange='sexChange'>
-        <button class='toolsBtn' hover-class='navigator-hover'>
+        <button class='toolsBtn' hover-class='none'>
           性别
           <view>
             <view>{{sexArray[sexIndex]}}</view>
@@ -29,7 +29,7 @@
     </view>
     <view>
       <picker range='{{professionArray}}' value='{{professionIndex==-1?0:professionIndex}}' bindchange='professionChange'>
-        <button class='toolsBtn' hover-class='navigator-hover'>
+        <button class='toolsBtn' hover-class='none'>
           职业
           <view>
             <view wx:if="{{professionIndex==-1}}">请选择</view>
@@ -41,7 +41,7 @@
     </view>
     <view>
       <picker mode="region" value='{{addressArray}}' bindchange='addressChange'>
-        <button class='toolsBtn' hover-class='navigator-hover'>
+        <button class='toolsBtn' hover-class='none'>
           家乡
           <view>
             <view>{{addressArray[0]}} {{addressArray[1]}} {{addressArray[2]}}</view>

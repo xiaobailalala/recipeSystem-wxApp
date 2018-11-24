@@ -41,7 +41,7 @@
         <image src='{{imgPath}}/smog.png'></image>
       </button>
     </view>
-    <navigator hover-class='none' url="/pages/comment/recipeComment/recipeComment?rid={{recipeData.fid}}&authorid={{recipeData.fuid}}&uid={{userInfo.fid}}">
+    <navigator hover-class='none' url="/pages/comment/recipeComment/recipeComment?rid={{recipeData.fid}}&authorid={{recipeData.fuid}}&type=recipe">
       <icon class='iconfont icon-pinglun'></icon>
       1
     </navigator>

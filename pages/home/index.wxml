@@ -20,7 +20,7 @@
         <swiper class='imgSwiper' autoplay="true" interval="3000" duration="1000" circular="true">
           <block wx:for="{{image}}" wx:for-index="index" wx:key="bannerList">
             <swiper-item>
-              <navigator class="imgSwiperItem">  
+              <navigator class="imgSwiperItem">
                 <image src="{{item.url}}" class="slide-image" mode="aspectFill" />
                 <view>今日推荐：{{item.text}}</view>
               </navigator>
@@ -53,109 +53,18 @@
         <view class="sectionTip">
           推荐食谱
         </view>
-        <navigator class="recipeItem" url="" hover-class="none">
+        <navigator wx:for="{{recipeRandom}}" wx:key="index" wx:for-index="index" wx:for-item="item" class="recipeItem" url="/pages/info/commonDataInfo/commonDataInfo?rid={{item.fid}}" hover-class="none">
           <view>
-            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
+            {{item.fname}}
           </view>
           <view>
-            <view>介小姐的吃货日常</view>
+            <view>{{item.commonUser.fusername}}</view>
             <view class="recipeItemIcon">
-              <icon class="iconfont icon-chakan"> 67784</icon>
-              <icon class="iconfont icon-favourite"> 2335</icon>
+              <icon class="iconfont icon-chakan"> {{item.fcount}}</icon>
+              <icon class="iconfont icon-favourite"> {{item.fgood}}</icon>
             </view>
           </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="recipeItem" url="" hover-class="none">
-          <view>
-            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
-          </view>
-          <view>
-            <view>介小姐的吃货日常</view>
-            <view class="recipeItemIcon">
-              <icon class="iconfont icon-chakan"> 67784</icon>
-              <icon class="iconfont icon-favourite"> 2335</icon>
-            </view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="recipeItem" url="" hover-class="none">
-          <view>
-            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
-          </view>
-          <view>
-            <view>介小姐的吃货日常</view>
-            <view class="recipeItemIcon">
-              <icon class="iconfont icon-chakan"> 67784</icon>
-              <icon class="iconfont icon-favourite"> 2335</icon>
-            </view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="recipeItem" url="" hover-class="none">
-          <view>
-            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
-          </view>
-          <view>
-            <view>介小姐的吃货日常</view>
-            <view class="recipeItemIcon">
-              <icon class="iconfont icon-chakan"> 67784</icon>
-              <icon class="iconfont icon-favourite"> 2335</icon>
-            </view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="recipeItem" url="" hover-class="none">
-          <view>
-            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
-          </view>
-          <view>
-            <view>介小姐的吃货日常</view>
-            <view class="recipeItemIcon">
-              <icon class="iconfont icon-chakan"> 67784</icon>
-              <icon class="iconfont icon-favourite"> 2335</icon>
-            </view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="recipeItem" url="" hover-class="none">
-          <view>
-            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
-          </view>
-          <view>
-            <view>介小姐的吃货日常</view>
-            <view class="recipeItemIcon">
-              <icon class="iconfont icon-chakan"> 67784</icon>
-              <icon class="iconfont icon-favourite"> 2335</icon>
-            </view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="recipeItem" url="" hover-class="none">
-          <view>
-            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
-          </view>
-          <view>
-            <view>介小姐的吃货日常</view>
-            <view class="recipeItemIcon">
-              <icon class="iconfont icon-chakan"> 67784</icon>
-              <icon class="iconfont icon-favourite"> 2335</icon>
-            </view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="recipeItem" url="" hover-class="none">
-          <view>
-            赤小豆粉葛鲮鱼汤，下火利器！赤小豆粉葛鲮鱼汤，下火利器！
-          </view>
-          <view>
-            <view>介小姐的吃货日常</view>
-            <view class="recipeItemIcon">
-              <icon class="iconfont icon-chakan"> 67784</icon>
-              <icon class="iconfont icon-favourite"> 2335</icon>
-            </view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
+          <image src="{{resPath}}{{item.fcover}}" />
         </navigator>
         <view class="refreshRecipeListTip" animation="{{refreshTipAnimation}}">有8条更新</view>
         <view class="refreshList" bindtap="refreshRecipeList">
@@ -234,32 +143,28 @@
         </view>
         <view class="likeListMain">
           <view>
-            <navigator wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}" class="" url="" hover-class="none">
-              <image src="{{item.url}}" lazy-load="true" mode="widthFix"/>
-              <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+            <navigator wx:for="{{articleList}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}" url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.fid}}" hover-class="none">
+              <image src="{{resPath}}{{item.firstCover}}" lazy-load="true" mode="widthFix"/>
+              <view>{{item.fname}}</view>
               <view class="likeInfo">
                 <view>
-                  <image src="{{imgPath}}/banner.png" />
-                  <view>
-                    平底锅111平底锅111平底锅111
-                  </view>
+                  <image src="{{resPath}}{{item.commonUser.fcover}}" />
+                  <view>{{item.commonUser.fusername}}</view>
                 </view>
-                <icon class="iconfont icon-aixin"> 283</icon>
+                <icon class="iconfont icon-aixin"> {{item.fgood}}</icon>
               </view>
             </navigator>
           </view>
           <view>
-            <navigator wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}" class="" url="" hover-class="none">
-              <image src="{{item.url}}" lazy-load="true" mode="widthFix"/>
-              <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+            <navigator wx:for="{{articleList}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}" url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.fid}}" hover-class="none">
+              <image src="{{resPath}}{{item.firstCover}}" lazy-load="true" mode="widthFix"/>
+              <view>{{item.fname}}</view>
               <view class="likeInfo">
                 <view>
-                  <image src="{{imgPath}}/banner.png" />
-                  <view>
-                    平底锅111
-                  </view>
+                  <image src="{{resPath}}{{item.commonUser.fcover}}" />
+                  <view>{{item.commonUser.fusername}}</view>
                 </view>
-                <icon class="iconfont icon-aixin"> 283</icon>
+                <icon class="iconfont icon-aixin"> {{item.fgood}}</icon>
               </view>
             </navigator>
           </view>

@@ -18,12 +18,12 @@ Page({
 
   write: function () {
     if (this.data.target == "recipe") {
-      wx.reLaunch({
+      wx.navigateTo({
         url: "/pages/infoadd/recipeInfoAdd/recipeInfoAdd"
       });
     } else {
-      wx.reLaunch({
-        url: ""
+      wx.navigateTo({
+        url: "/pages/infoadd/articleInfoAdd/articleInfoAdd"
       });
     }
   },

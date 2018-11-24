@@ -13,7 +13,6 @@ Page({
     animationPlus: {},
     animationComment: {},
     animationTop: {},
-    uid: 0,
     authorid: 0,
     rid: 0,
     actionSheetHidden: true,
@@ -28,7 +27,8 @@ Page({
     isAllData: false,
     userInfo: {},
     isLoad: false,
-    copyContent: ""
+    copyContent: "",
+    type: ""
   },
 
   plusMenu: function () {
@@ -73,7 +73,7 @@ Page({
       animationPlus: animationPlus.export(),
       animationComment: animationComment.export(),
       animationTop: animationTop.export()
-    })
+    });
   },
 
   menuBack: function () {
@@ -102,10 +102,14 @@ Page({
   toComment: function () {
     var rid = this.data.rid;
     var authorid = this.data.authorid;
-    var uid = this.data.uid;
+    var uid = this.data.userInfo.fid;
     this.menuBack();
     wx.navigateTo({
-      url: "/pages/comment/recipeComment/commentInput/commentInput?rid=" + rid + "&authorid=" + authorid + "&uid=" + uid + "&replyid=-1"
+      url: "/pages/comment/recipeComment/commentInput/commentInput?rid=" + rid + 
+      "&authorid=" + authorid + 
+      "&uid=" + uid + 
+      "&replyid=-1" + 
+      "&type=" + this.data.type
     });
   },
 
@@ -127,14 +131,19 @@ Page({
   bindReply: function () {
     var rid = this.data.rid;
     var authorid = this.data.authorid;
-    var uid = this.data.uid;
+    var uid = this.data.userInfo.fid;
     var replyid = this.data.replyid;
     var replyname = this.data.replyname;
     this.setData({
       actionSheetHidden: !this.data.actionSheetHidden
     });
     wx.navigateTo({
-      url: "/pages/comment/recipeComment/commentInput/commentInput?rid=" + rid + "&authorid=" + authorid + "&uid=" + uid + "&replyid=" + replyid + "&replyname=" + replyname
+      url: "/pages/comment/recipeComment/commentInput/commentInput?rid=" + rid + 
+      "&authorid=" + authorid + 
+      "&uid=" + uid + 
+      "&replyid=" + replyid + 
+      "&replyname=" + replyname + 
+      "&type=" + this.data.type
     });
   },
 
@@ -194,7 +203,7 @@ Page({
 
   getData: function (isTop) {
     wx.request({
-      url: Tools.urls.mob_foodComment_getInfoByRidAndPage,
+      url: this.data.type == "recipe" ? Tools.urls.mob_foodComment_getInfoByRidAndPage : Tools.urls.mob_articleComment_getInfoByRidAndPage,
       method: "GET",
       data: {
         page: this.data.currentPage,
@@ -206,7 +215,7 @@ Page({
       },
       success: res => {
         if (res.data.data.dataList) {
-          res.data.data.dataList.forEach(function (item, index) {
+          res.data.data.dataList.forEach((item) => {
             if (item.fcover != 0) {
               var jsonData = JSON.parse(item.fcover);
               item.fcover = jsonData;
@@ -250,30 +259,19 @@ Page({
   },
 
   greatTab: function (e) {
-    var isGreat = e.currentTarget.dataset.great;
-    var dataObj = {};
-    if (isGreat == 1) {
-      dataObj = {
-        cid: e.currentTarget.dataset.cid,
-        uid: this.data.userInfo.fid,
-        open: 0
-      }
-    } else {
-      dataObj = {
-        cid: e.currentTarget.dataset.cid,
-        uid: this.data.userInfo.fid,
-        open: 1
-      }
-    }
-    var index = e.currentTarget.dataset.index;
     wx.request({
-      url: Tools.urls.mob_foodComment_greatOperation,
+      url: this.data.type == "recipe" ? Tools.urls.mob_foodComment_greatOperation : Tools.urls.mob_articleComment_greatOperation,
       method: "GET",
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      data: dataObj,
+      data: {
+        cid: e.currentTarget.dataset.cid,
+        uid: this.data.userInfo.fid,
+        open: e.currentTarget.dataset.great == 1 ? 0 : 1
+      },
       success: res => {
+        var index = e.currentTarget.dataset.index;
         var currentList = this.data.commentList;
         if (isGreat == 1) {
           currentList[index].userGreat = 0;
@@ -296,14 +294,14 @@ Page({
     let {
       rid,
       authorid,
-      uid
+      type
     } = options
     var date = new Date();
     this.setData({
       rid: rid,
       authorid: authorid,
-      uid: uid,
-      refreshTime: date.toLocaleTimeString()
+      refreshTime: date.toLocaleTimeString(),
+      type: type
     });
     wx.getStorage({
       key: 'commonUser',
@@ -312,7 +310,7 @@ Page({
           userInfo: res.data
         });
         wx.request({
-          url: Tools.urls.mob_foodComment_getInfoByRid,
+          url: this.data.type == "recipe" ? Tools.urls.mob_foodComment_getInfoByRid : Tools.urls.mob_articleComment_getInfoByRid,
           method: "GET",
           data: {
             rid: this.data.rid,
@@ -323,7 +321,7 @@ Page({
           },
           success: res => {
             if (res.data.data.dataList) {
-              res.data.data.dataList.forEach(function (item, index) {
+              res.data.data.dataList.forEach(item => {
                 if (item.fcover != 0) {
                   var jsonData = JSON.parse(item.fcover);
                   item.fcover = jsonData;
@@ -353,10 +351,14 @@ Page({
           confirmText: "去登陆",
           confirmColor: "#ffb31a",
           cancelColor: "#666666",
-          success: function (res) {
+          success: res => {
             if (res.confirm) {
               wx.navigateTo({
-                url: '/pages/login/login?active=true',
+                url: '/pages/login/login?active=true&type=info&rid=' + this.data.rid + '&authorid=' + this.data.authorid + '&type=' + this.data.type
+              });
+            } else {
+              wx.navigateBack({
+                delta: 1
               });
             }
           }

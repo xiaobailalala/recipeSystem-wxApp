@@ -81,6 +81,7 @@ button::after {
     font-weight: bold;
     margin-top: 20rpx;
     font-size: 30rpx;
+    word-wrap: break-word;
 }
 
 .articleContent {
@@ -141,7 +142,7 @@ button::after {
 .fixedIcon>button {
     margin: 0;
     line-height: unset;
-    padding: 0;
+    padding: 0 10rpx;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -366,4 +367,12 @@ button::after {
     position: relative;
     top: -13rpx;
     color: #888888;
+}
+
+.greatActive {
+    color: #d9534f !important;
+}
+
+.collectActive{
+    color: #ffdc44 !important;
 }

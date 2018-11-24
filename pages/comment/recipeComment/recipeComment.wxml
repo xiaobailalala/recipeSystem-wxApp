@@ -33,9 +33,7 @@
               {{item.foodComment.fcontent}}
             </view>
           </view>
-          <view class="item_time">
-            {{item.frelease}}
-          </view>
+          <view class="item_time">{{item.frelease}}</view>
         </view>
         <view class="{{item.userGreat==1?'greatActive':''}}" data-good="{{item.fgood}}" data-index="{{index}}" bindtap="greatTab" data-great="{{item.userGreat}}" data-cid="{{item.fid}}">
           <icon class="iconfont icon-aixin"></icon>

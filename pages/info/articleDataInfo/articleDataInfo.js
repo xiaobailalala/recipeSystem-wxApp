@@ -7,6 +7,7 @@ Page({
    */
   data: {
     imgPath: Tools.tools.imgPathUrl,
+    resPath: Tools.tools.resPathUrl,
     image: [
       {
         url: Tools.tools.imgPathUrl + "/banner.png",
@@ -30,24 +31,155 @@ Page({
       }
     ],
     fixedBottom: 0,
-    imageIndex: 1
+    imageIndex: 1,
+    articleInfo: {},
+    coverLength: 0,
+    isGreat: false,
+    isCollect: false,
+    userInfo: null
   },
 
-  swiperChange: function(e){
+  swiperChange: function (e) {
     this.setData({
       imageIndex: e.detail.current + 1
     });
   },
 
-  focusBind: function(e){
-    
+  greatTab: function () {
+    if (this.data.userInfo) {
+      wx.request({
+        url: Tools.urls.mob_article_greatOperation,
+        method: "GET",
+        data: {
+          open: this.data.isGreat ? 0 : 1,
+          fAid: this.data.articleInfo.fid,
+          fUid: this.data.userInfo.fid,
+          fTypr: 2
+        },
+        success: res => {
+          var newObj = this.data.articleInfo;
+          if (this.data.isGreat) {
+            newObj.fgood = newObj.fgood - 1;
+            this.setData({
+              isGreat: false,
+              articleInfo: newObj
+            });
+          } else {
+            newObj.fgood = newObj.fgood + 1;
+            this.setData({
+              isGreat: true,
+              articleInfo: newObj
+            });
+          }
+        }
+      });
+    } else {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请先登录哦',
+        confirmText: "去登陆",
+        confirmColor: "#ffb31a",
+        cancelColor: "#666666",
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login?active=true',
+            });
+          }
+        }
+      });
+    }
+  },
+
+  collectTab: function(){
+    if (this.data.userInfo) {
+      wx.request({
+        url: Tools.urls.mob_article_collectArticle,
+        method: "GET",
+        data: {
+          open: this.data.isCollect ? 0 : 1,
+          fRid: this.data.articleInfo.fid,
+          fUid: this.data.userInfo.fid,
+          fType: 2
+        },
+        success: res => {
+          var newObj = this.data.articleInfo;
+          if (this.data.isCollect) {
+            newObj.fcollect = newObj.fcollect - 1;
+            this.setData({
+              isCollect: false,
+              articleInfo: newObj
+            });
+          } else {
+            newObj.fcollect = newObj.fcollect + 1;
+            this.setData({
+              isCollect: true,
+              articleInfo: newObj
+            });
+          }
+        }
+      });
+    } else {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请先登录哦',
+        confirmText: "去登陆",
+        confirmColor: "#ffb31a",
+        cancelColor: "#666666",
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login?active=true',
+            });
+          }
+        }
+      });
+    }
+  },
+
+  focusBind: function (e) {
+
+  },
+
+  initData: function(aid, uid){
+    wx.request({
+      url: Tools.urls.mob_article_index,
+      method: "GET",
+      data: { 
+        aid: aid,
+        uid: uid
+      },
+      success: res => {
+        var article = res.data.data.article;
+        article.fcover = JSON.parse(article.fcover);
+        this.setData({
+          articleInfo: res.data.data.article,
+          coverLength: article.fcover.length,
+          isGreat: res.data.data.isGreat ? true : false,
+          isCollect: res.data.data.isCollect ? true : false
+        });
+      }
+    });
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // var aid = options.aid;
+    var aid = 1;
+    wx.getStorage({
+      key: 'commonUser',
+      success: res => {
+        this.setData({
+          userInfo: res.data
+        });
+        this.initData(aid, res.data.fid);
+      },
+      fail: err=> {
+        this.initData(aid, -1);
+      }
+    });
   },
 
   /**

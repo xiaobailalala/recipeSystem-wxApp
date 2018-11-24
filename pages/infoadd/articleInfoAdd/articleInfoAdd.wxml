@@ -10,6 +10,7 @@
             placeholder="标题" placeholder-style="color: #cccccc;" />
         <view wx:if="{{titleMask.isShow}}">{{titleMask.length}}</view>
     </view>
+    
     <view class="contentInput">
         <textarea maxlength="1000" bindfocus="contentFocus" bindblur="contentBlur" bindinput="contentInput" placeholder="说说你的心得~"
             placeholder-style="color: #cccccc;"></textarea>
@@ -18,19 +19,21 @@
 </view>
 <view class="toolsContainer">
     <view>
-        <navigator class="" hover-class="none">
+        <navigator url="/pages/info/articleDataInfo/articleDataInfo" class="" hover-class="none">
             <icon class="iconfont icon-aite1"></icon>
         </navigator>
-        <navigator class="" hover-class="none">
+        <navigator url="" class="" hover-class="none">
             <icon class="iconfont icon-jinghao"></icon>
         </navigator>
-        <navigator class="" hover-class="none">
+        <navigator url="" class="" hover-class="none">
             <icon class="iconfont icon-icon-_baoyou"></icon>
         </navigator>
     </view>
     <view class="enterTopic">
-        加入话题 <switch class=""/>
-        <view class="topicSelect">请选择</view>
+        加入话题 <switch bindchange="topicChange"/>
+        <picker class="" mode="selector" range="{{topicArray}}" bindchange="topicSelectChange" value="{{topicIndex}}"> 
+            <view class="topicSelect" wx:if="{{!isTopicSelect}}">{{topicSelectContent}}</view>
+        </picker>
     </view>
     <view>
         <view class="atpeople">

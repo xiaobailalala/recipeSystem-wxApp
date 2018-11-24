@@ -1,30 +1,26 @@
 <scroll-view scroll-y style="height: 100vh;">
     <view class="coverListContainer">
         <swiper bindchange="swiperChange">
-            <block wx:for="{{image}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+            <block wx:for="{{articleInfo.fcover}}" wx:for-item="item" wx:for-index="index" wx:key="index">
                 <swiper-item class="">
-                    <image src="{{imgPath}}/banner4.png" />
+                    <image src="{{resPath}}{{item}}" />
                 </swiper-item>
             </block>
         </swiper>
         <view class="coverIndexTag">
-            {{imageIndex}} / 4
+            {{imageIndex}} / {{coverLength}}
         </view>
     </view>
     <view class="userInfoContainer">
         <navigator>
-            <image src="{{imgPath}}/banner4.png" />
-            贪吃阳
+            <image src="{{resPath}}{{articleInfo.commonUser.fcover}}" />
+            {{articleInfo.commonUser.fusername}}
         </navigator>
         <button hover-class='none' bindtap='testVoice'>关注</button>
     </view>
     <view class="articleContainer">
-        <view class="articleTitle">
-            热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜
-        </view>
-        <view class="articleContent">
-            热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜热腾腾的猪油糕洁白晶莹，咬上一口，糯软润湿，油而不腻，两层米粉之间还流淌着厚厚的一层芝麻酱，又香又甜
-        </view>
+        <view class="articleTitle">{{articleInfo.fname}}</view>
+        <view class="articleContent"><text>{{articleInfo.fcontent}}</text></view>
         <view class="articleLink">
             <navigator url="" hover-class="none">
                 <icon class="iconfont icon-jinghao">我想吃遍全世界</icon>
@@ -37,17 +33,17 @@
             </navigator>
         </view>
         <view class="articleTime">
-            <view>2018-11-11</view>
+            <view>{{articleInfo.frelease}}</view>
             <view>
-                <view>315次收藏</view>
-                <view>138次赞</view>
+                <view>{{articleInfo.fcount}}次浏览</view>
+                <view>{{articleInfo.fgood}}次赞</view>
             </view>
         </view>
     </view>
     <view class="commentContainer">
         <view class="commentHead">
             <view>笔记评论</view>
-            <navigator class="" url="" hover-class="none">
+            <navigator url="/pages/comment/recipeComment/recipeComment?rid={{articleInfo.fid}}&authorid={{articleInfo.commonUser.fid}}&type=article" hover-class="none">
                 全部9条评论
             </navigator>
         </view>
@@ -151,17 +147,17 @@
             <input type="text" bindfocus="focusBind" cursor-spacing="8" adjust-position="false" bindblur="blurBind" placeholder="我想说两句" placeholder-style="color: #a0a0a0;" />
         </view>
         <view class="fixedIcon">
-            <button>
+            <button hover-class="none" open-type="share">
                 <icon class="iconfont icon-weixin1"></icon>
                 分享好友
             </button>
-            <button>
+            <button class="{{isGreat?'greatActive':''}}" bindtap="greatTab" hover-class="none">
                 <icon class="iconfont icon-aixin"></icon>
-                赞 123
+                赞 {{articleInfo.fgood}}
             </button>
-            <button>
+            <button class="{{isCollect?'collectActive':''}}" hover-class="none" bindtap="collectTab">
                 <icon class="iconfont icon-shoucang"></icon>
-                收藏 315
+                收藏 {{articleInfo.fcollect}}
             </button>
         </view>
     </view>

@@ -42,7 +42,17 @@ var urlsObj = {
   mob_recipe_uploadRecipeInfo: toolsObj.reqPathUrl + "/mob/recipe/uploadRecipeInfo",
   mob_article_uploadCover: toolsObj.reqPathUrl + "/mob/article/uploadCover",
   mob_article_saveInfo: toolsObj.reqPathUrl + "/mob/article/saveInfo",
-  mob_recipe_collectRecipe: toolsObj.reqPathUrl + "/mob/recipe/collectRecipe"
+  mob_recipe_collectRecipe: toolsObj.reqPathUrl + "/mob/recipe/collectRecipe",
+  mob_common_index: toolsObj.reqPathUrl + "/mob/common/index",
+  mob_common_randomRecipe: toolsObj.reqPathUrl + "/mob/common/randomRecipe",
+  mob_article_index: toolsObj.reqPathUrl + "/mob/article/index",
+  mob_article_greatOperation: toolsObj.reqPathUrl + "/mob/article/greatOperation",
+  mob_article_collectArticle: toolsObj.reqPathUrl + "/mob/article/collectArticle",
+  mob_articleComment_getInfoByRid: toolsObj.reqPathUrl + "/mob/articleComment/getInfoByRid",
+  mob_articleComment_greatOperation: toolsObj.reqPathUrl + "/mob/articleComment/greatOperation",
+  mob_articleComment_getInfoByRidAndPage: toolsObj.reqPathUrl + "/mob/articleComment/getInfoByRidAndPage",
+  mob_articleComment_saveInfo: toolsObj.reqPathUrl + "/mob/articleComment/saveInfo",
+  mob_articleComment_imgupload: toolsObj.reqPathUrl + "/mob/articleComment/imgupload"
 }
 module.exports = {
   tools: toolsObj,

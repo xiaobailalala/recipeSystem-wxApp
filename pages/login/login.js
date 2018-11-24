@@ -94,10 +94,14 @@ Page({
                     success: res => {
                       if(this.data.isActive){
                         wx.navigateBack({
-                          success: function(){
+                          success: ()=> {
                             var page = getCurrentPages().pop();
                             if (page == undefined || page == null) return;
-                            page.onLoad();
+                            if(this.data.textInfo){
+                              page.onLoad(this.data.textInfo);
+                            } else {
+                              page.onLoad();
+                            }
                           }
                         })
                       }else{
@@ -143,6 +147,16 @@ Page({
    */
   onLoad: function (options) {
     if(options.active){
+      if(options.type=="info"){
+        var textInfo={
+          rid: options.rid,
+          authorid: options.authorid,
+          type: options.type
+        }
+        this.setData({
+          textInfo: textInfo
+        });
+      }
       this.setData({
         isActive: true
       });

@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/articleIndex/articleIndex",
     "pages/home/index",
-    "pages/infoadd/articleInfoAdd/articleInfoAdd",
     "pages/info/articleDataInfo/articleDataInfo",
+    "pages/infoadd/articleInfoAdd/articleInfoAdd",
+    "pages/articleIndex/articleIndex",
     "pages/person/personCollect/personCollect",
     "pages/person/personInfo/personInfo",
     "pages/info/commonDataInfo/commonDataInfo",

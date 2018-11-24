@@ -79,10 +79,22 @@ Page({
     dateTimeNow: {},
     mainScrollTop: 0,
     imgPath: Tools.tools.imgPathUrl,
+    resPath: Tools.tools.resPathUrl,
     refreshTipAnimation: {},
+    recipeRandom: [],
+    articleList: []
   },
 
   refreshRecipeList: function () {
+    wx.request({
+      url: Tools.urls.mob_common_randomRecipe,
+      method: "GET",
+      success: res => {
+        this.setData({
+          recipeRandom: res.data.data
+        });
+      }
+    });
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: 'ease-out'
@@ -231,6 +243,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.request({
+      url: Tools.urls.mob_common_index,
+      method: "GET",
+      success: res=> {
+        var articles = res.data.data.articleList;
+        articles.forEach(element => {
+          var coverArr = JSON.parse(element.fcover)
+          element.firstCover = coverArr[0];
+        });
+        this.setData({
+          recipeRandom: res.data.data.randomRecipe,
+          articleList: articles
+        });
+      }
+    });
   },
 
   /**

@@ -27,7 +27,8 @@ Page({
     content: "",
     rid: 0,
     authorid: 0,
-    uid: 0
+    uid: 0,
+    type: ""
   },
 
 
@@ -81,14 +82,16 @@ Page({
       content,
       rid,
       authorid,
-      uid
+      uid,
+      type
     } = option
     this.setData({
       temporary: imgArr,
       content: content,
       rid: rid,
       authorid: authorid,
-      uid: uid
+      uid: uid,
+      type: type
     });
     if (src) {
       Object.assign(cropperOpt, {

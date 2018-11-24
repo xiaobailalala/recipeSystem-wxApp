@@ -514,8 +514,8 @@ Page({
       stompClient.send("/sensorMonitor/allListenStop", {}, this.data.userInfo.fid);
       stompClient.send("/sensorMonitor/infraredListenStop", {}, this.data.userInfo.fid);
       stompClient.send("/sensorMonitor/distanceListenStop", {}, this.data.userInfo.fid);
-      wx.closeSocket();
     }
+    wx.closeSocket();
   },
 
   /**
@@ -526,8 +526,8 @@ Page({
       stompClient.send("/sensorMonitor/allListenStop", {}, this.data.userInfo.fid);
       stompClient.send("/sensorMonitor/infraredListenStop", {}, this.data.userInfo.fid);
       stompClient.send("/sensorMonitor/distanceListenStop", {}, this.data.userInfo.fid);
-      wx.closeSocket();
     }
+    wx.closeSocket();
   },
 
   /**
