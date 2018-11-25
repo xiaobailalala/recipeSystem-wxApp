@@ -95,12 +95,14 @@ Page({
                       if(this.data.isActive){
                         wx.navigateBack({
                           success: ()=> {
-                            var page = getCurrentPages().pop();
-                            if (page == undefined || page == null) return;
-                            if(this.data.textInfo){
-                              page.onLoad(this.data.textInfo);
-                            } else {
-                              page.onLoad();
+                            if (!this.data.textInfo.recipeUnload) {
+                              var page = getCurrentPages().pop();
+                              if (page == undefined || page == null) return;
+                              if(this.data.textInfo){
+                                page.onLoad(this.data.textInfo);
+                              } else {
+                                page.onLoad();
+                              }
                             }
                           }
                         })
@@ -148,15 +150,20 @@ Page({
   onLoad: function (options) {
     if(options.active){
       if(options.type=="info"){
-        var textInfo={
-          rid: options.rid,
-          authorid: options.authorid,
-          type: options.type
-        }
+        // var textInfo={
+        //   rid: options.rid,
+        //   authorid: options.authorid,
+        //   type: options.type
+        // }
+        // var textInfo = options;
+        // this.setData({
+        //   textInfo: textInfo
+        // });
+      }
+      var textInfo = options;
         this.setData({
           textInfo: textInfo
         });
-      }
       this.setData({
         isActive: true
       });

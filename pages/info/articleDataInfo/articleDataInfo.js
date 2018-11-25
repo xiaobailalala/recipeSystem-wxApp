@@ -36,7 +36,9 @@ Page({
     coverLength: 0,
     isGreat: false,
     isCollect: false,
-    userInfo: null
+    userInfo: null,
+    commentLen: 0,
+    isAttention: false
   },
 
   swiperChange: function (e) {
@@ -54,7 +56,7 @@ Page({
           open: this.data.isGreat ? 0 : 1,
           fAid: this.data.articleInfo.fid,
           fUid: this.data.userInfo.fid,
-          fTypr: 2
+          fType: 2
         },
         success: res => {
           var newObj = this.data.articleInfo;
@@ -80,10 +82,10 @@ Page({
         confirmText: "去登陆",
         confirmColor: "#ffb31a",
         cancelColor: "#666666",
-        success: function (res) {
+        success: res => {
           if (res.confirm) {
             wx.navigateTo({
-              url: '/pages/login/login?active=true',
+              url: '/pages/login/login?active=true&aid=' + this.data.articleInfo.fid,
             });
           }
         }
@@ -126,15 +128,23 @@ Page({
         confirmText: "去登陆",
         confirmColor: "#ffb31a",
         cancelColor: "#666666",
-        success: function (res) {
+        success: res => {
           if (res.confirm) {
             wx.navigateTo({
-              url: '/pages/login/login?active=true',
+              url: '/pages/login/login?active=true&aid=' + this.data.articleInfo.fid,
             });
           }
         }
       });
     }
+  },
+
+  moreTab: function(){
+    wx.navigateTo({
+      url: "/pages/comment/recipeComment/recipeComment?rid=" + this.data.articleInfo.fid + 
+      "&authorid=" + this.data.articleInfo.commonUser.fid + 
+      "&type=article"
+    });
   },
 
   focusBind: function (e) {
@@ -153,6 +163,7 @@ Page({
         var article = res.data.data.article;
         article.fcover = JSON.parse(article.fcover);
         this.setData({
+          commentLen: res.data.data.article.articleComments.length,
           articleInfo: res.data.data.article,
           coverLength: article.fcover.length,
           isGreat: res.data.data.isGreat ? true : false,
@@ -166,8 +177,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // var aid = options.aid;
-    var aid = 1;
+    var aid = options.aid;
+    // var aid = 1;
     wx.getStorage({
       key: 'commonUser',
       success: res => {

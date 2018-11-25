@@ -77,13 +77,13 @@
           </button>
         </view>
       </view>
-      <view class='introduction'>{{recipeData.fintroduction}}</view>
+      <view class='introduction'><text decode="true">{{recipeData.fintroduction}}</text></view>
       <view class='userinfo'>
         <navigator>
           <image src='{{resPathUrl}}{{recipeData.commonUser.fcover}}'></image>
           {{recipeData.commonUser.fusername}}
         </navigator>
-        <button hover-class='none' bindtap='testVoice'>关注</button>
+        <button class="{{(userInfo==null||!isAttention)?'attention':'attentionOn'}}" wx:if="{{userInfo.fid!=recipeData.commonUser.fid}}" data-oid="{{recipeData.commonUser.fid}}" hover-class='none' bindtap='attentionTab'>{{(userInfo==null||!isAttention)?'关注':'已关注'}}</button>
       </view>
       <view class='recipeclassify'>
         <view class='icon'>类别</view>

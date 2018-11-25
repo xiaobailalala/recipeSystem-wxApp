@@ -7,278 +7,54 @@
         <view class="search_head">
             <view>
                 <icon class="iconfont icon-sousuo"></icon>
-                <input bindfocus="bindFocus" bindblur="bindBlur" class="" placeholder="搜索收藏的食谱 / 笔记" placeholder-style="color: #e1e1e1;" />
+                <input bindinput="bindInput" bindfocus="bindFocus" bindblur="bindBlur" placeholder="搜索收藏的食谱 / 笔记" placeholder-style="color: #e1e1e1;" />
             </view>
         </view>
     </view>
     <view class="occupiedTag" animation="{{occupiedAnimation}}"></view>
     <view class="contentContainer">
         <view class="recipe_content" hidden="{{!recipeIsShow}}">
-            <navigator class="" url="" hover-class="none">
-                <image src="{{imgPath}}/banner.png" />
+            <navigator url="/pages/info/commonDataInfo/commonDataInfo?rid={{item.recipe.fid}}" hover-class="none" wx:for="{{recipeList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <image src="{{resPath}}{{item.recipe.fcover}}" />
                 <view>
-                    <view class="recipeTitle">
-                        糖心酥烧饼
-                    </view>
+                    <view class="recipeTitle">{{item.recipe.fname}}</view>
                     <view class="recipeMaterial">
-                        面团 面粉 油 水 油酥 面粉 油 糖心 棉白
+                        <block wx:for="{{item.recipe.recipeMaterials}}" wx:for-index="ind" wx:key="ind" wx:for-item="ite">{{ite.fname}} </block>
                     </view>
-                    <view class="recipeAuthor">
-                        甜言无语的美食之旅
-                    </view>
+                    <view class="recipeAuthor">{{item.commonUser.fusername}}</view>
                     <view class="recipeTag">
-                        <icon class="iconfont icon-chakan"> 8137</icon>
-                        <icon class="iconfont icon-favourite"> 225</icon>
-                    </view>
-                </view>
-            </navigator>
-            <navigator class="" url="" hover-class="none">
-                <image src="{{imgPath}}/banner.png" />
-                <view>
-                    <view class="recipeTitle">
-                        糖心酥烧饼
-                    </view>
-                    <view class="recipeMaterial">
-                        面团 面粉 油 水 油酥 面粉 油 糖心 棉白
-                    </view>
-                    <view class="recipeAuthor">
-                        甜言无语的美食之旅
-                    </view>
-                    <view class="recipeTag">
-                        <icon class="iconfont icon-chakan">8137</icon>
-                        <icon class="iconfont icon-favourite">225</icon>
-                    </view>
-                </view>
-            </navigator>
-            <navigator class="" url="" hover-class="none">
-                <image src="{{imgPath}}/banner.png" />
-                <view>
-                    <view class="recipeTitle">
-                        糖心酥烧饼
-                    </view>
-                    <view class="recipeMaterial">
-                        面团 面粉 油 水 油酥 面粉 油 糖心 棉白
-                    </view>
-                    <view class="recipeAuthor">
-                        甜言无语的美食之旅
-                    </view>
-                    <view class="recipeTag">
-                        <icon class="iconfont icon-chakan">8137</icon>
-                        <icon class="iconfont icon-favourite">225</icon>
-                    </view>
-                </view>
-            </navigator>
-            <navigator class="" url="" hover-class="none">
-                <image src="{{imgPath}}/banner.png" />
-                <view>
-                    <view class="recipeTitle">
-                        糖心酥烧饼
-                    </view>
-                    <view class="recipeMaterial">
-                        面团 面粉 油 水 油酥 面粉 油 糖心 棉白
-                    </view>
-                    <view class="recipeAuthor">
-                        甜言无语的美食之旅
-                    </view>
-                    <view class="recipeTag">
-                        <icon class="iconfont icon-chakan">8137</icon>
-                        <icon class="iconfont icon-favourite">225</icon>
-                    </view>
-                </view>
-            </navigator>
-            <navigator class="" url="" hover-class="none">
-                <image src="{{imgPath}}/banner.png" />
-                <view>
-                    <view class="recipeTitle">
-                        糖心酥烧饼
-                    </view>
-                    <view class="recipeMaterial">
-                        面团 面粉 油 水 油酥 面粉 油 糖心 棉白
-                    </view>
-                    <view class="recipeAuthor">
-                        甜言无语的美食之旅
-                    </view>
-                    <view class="recipeTag">
-                        <icon class="iconfont icon-chakan">8137</icon>
-                        <icon class="iconfont icon-favourite">225</icon>
-                    </view>
-                </view>
-            </navigator>
-            <navigator class="" url="" hover-class="none">
-                <image src="{{imgPath}}/banner.png" />
-                <view>
-                    <view class="recipeTitle">
-                        糖心酥烧饼
-                    </view>
-                    <view class="recipeMaterial">
-                        面团 面粉 油 水 油酥 面粉 油 糖心 棉白
-                    </view>
-                    <view class="recipeAuthor">
-                        甜言无语的美食之旅
-                    </view>
-                    <view class="recipeTag">
-                        <icon class="iconfont icon-chakan">8137</icon>
-                        <icon class="iconfont icon-favourite">225</icon>
-                    </view>
-                </view>
-            </navigator>
-            <navigator class="" url="" hover-class="none">
-                <image src="{{imgPath}}/banner.png" />
-                <view>
-                    <view class="recipeTitle">
-                        糖心酥烧饼
-                    </view>
-                    <view class="recipeMaterial">
-                        面团 面粉 油 水 油酥 面粉 油 糖心 棉白
-                    </view>
-                    <view class="recipeAuthor">
-                        甜言无语的美食之旅
-                    </view>
-                    <view class="recipeTag">
-                        <icon class="iconfont icon-chakan">8137</icon>
-                        <icon class="iconfont icon-favourite">225</icon>
-                    </view>
-                </view>
-            </navigator>
-            <navigator class="" url="" hover-class="none">
-                <image src="{{imgPath}}/banner.png" />
-                <view>
-                    <view class="recipeTitle">
-                        糖心酥烧饼
-                    </view>
-                    <view class="recipeMaterial">
-                        面团 面粉 油 水 油酥 面粉 油 糖心 棉白
-                    </view>
-                    <view class="recipeAuthor">
-                        甜言无语的美食之旅
-                    </view>
-                    <view class="recipeTag">
-                        <icon class="iconfont icon-chakan">8137</icon>
-                        <icon class="iconfont icon-favourite">225</icon>
-                    </view>
-                </view>
-            </navigator>
-            <navigator class="" url="" hover-class="none">
-                <image src="{{imgPath}}/banner.png" />
-                <view>
-                    <view class="recipeTitle">
-                        糖心酥烧饼
-                    </view>
-                    <view class="recipeMaterial">
-                        面团 面粉 油 水 油酥 面粉 油 糖心 棉白
-                    </view>
-                    <view class="recipeAuthor">
-                        甜言无语的美食之旅
-                    </view>
-                    <view class="recipeTag">
-                        <icon class="iconfont icon-chakan">8137</icon>
-                        <icon class="iconfont icon-favourite">225</icon>
-                    </view>
-                </view>
-            </navigator>
-            <navigator class="" url="" hover-class="none">
-                <image src="{{imgPath}}/banner.png" />
-                <view>
-                    <view class="recipeTitle">
-                        糖心酥烧饼
-                    </view>
-                    <view class="recipeMaterial">
-                        面团 面粉 油 水 油酥 面粉 油 糖心 棉白
-                    </view>
-                    <view class="recipeAuthor">
-                        甜言无语的美食之旅
-                    </view>
-                    <view class="recipeTag">
-                        <icon class="iconfont icon-chakan">8137</icon>
-                        <icon class="iconfont icon-favourite">225</icon>
-                    </view>
-                </view>
-            </navigator>
-            <navigator class="" url="" hover-class="none">
-                <image src="{{imgPath}}/banner.png" />
-                <view>
-                    <view class="recipeTitle">
-                        糖心酥烧饼
-                    </view>
-                    <view class="recipeMaterial">
-                        面团 面粉 油 水 油酥 面粉 油 糖心 棉白
-                    </view>
-                    <view class="recipeAuthor">
-                        甜言无语的美食之旅
-                    </view>
-                    <view class="recipeTag">
-                        <icon class="iconfont icon-chakan">8137</icon>
-                        <icon class="iconfont icon-favourite">225</icon>
-                    </view>
-                </view>
-            </navigator>
-            <navigator class="" url="" hover-class="none">
-                <image src="{{imgPath}}/banner.png" />
-                <view>
-                    <view class="recipeTitle">
-                        糖心酥烧饼
-                    </view>
-                    <view class="recipeMaterial">
-                        面团 面粉 油 水 油酥 面粉 油 糖心 棉白
-                    </view>
-                    <view class="recipeAuthor">
-                        甜言无语的美食之旅
-                    </view>
-                    <view class="recipeTag">
-                        <icon class="iconfont icon-chakan">8137</icon>
-                        <icon class="iconfont icon-favourite">225</icon>
-                    </view>
-                </view>
-            </navigator>
-            <navigator class="" url="" hover-class="none">
-                <image src="{{imgPath}}/banner.png" />
-                <view>
-                    <view class="recipeTitle">
-                        糖心酥烧饼
-                    </view>
-                    <view class="recipeMaterial">
-                        面团 面粉 油 水 油酥 面粉 油 糖心 棉白
-                    </view>
-                    <view class="recipeAuthor">
-                        甜言无语的美食之旅
-                    </view>
-                    <view class="recipeTag">
-                        <icon class="iconfont icon-chakan">8137</icon>
-                        <icon class="iconfont icon-favourite">225</icon>
+                        <icon class="iconfont icon-chakan"> {{item.recipe.fcount}}</icon>
+                        <icon class="iconfont icon-favourite"> {{item.recipe.fgood}}</icon>
                     </view>
                 </view>
             </navigator>
         </view>
         <view class="article_content" hidden="{{!articleIsShow}}">
             <view>
-                <navigator wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}"
-                    class="" url="" hover-class="none">
-                    <image src="{{item.url}}" lazy-load="true" mode="widthFix" />
-                    <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+                <navigator wx:for="{{articleList}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}"
+                    url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.article.fid}}" hover-class="none">
+                    <image src="{{resPath}}{{item.article.fcover}}" lazy-load="true" mode="widthFix" />
+                    <view>{{item.article.fname}}</view>
                     <view class="likeInfo">
                         <view>
-                            <image src="{{imgPath}}/banner.png" />
-                            <view>
-                                平底锅111平底锅111平底锅111
-                            </view>
+                            <image src="{{resPath}}{{item.commonUser.fcover}}" />
+                            <view>{{item.commonUser.fusername}}</view>
                         </view>
-                        <icon class="iconfont icon-aixin"> 283</icon>
+                        <icon class="iconfont icon-aixin"> {{item.article.fgood}}</icon>
                     </view>
                 </navigator>
             </view>
             <view>
-                <navigator wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}"
-                    class="" url="" hover-class="none">
-                    <image src="{{item.url}}" lazy-load="true" mode="widthFix" />
-                    <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+                <navigator wx:for="{{articleList}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}"
+                    url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.article.fid}}" hover-class="none">
+                    <image src="{{resPath}}{{item.article.fcover}}" lazy-load="true" mode="widthFix" />
+                    <view>{{item.article.fname}}</view>
                     <view class="likeInfo">
                         <view>
-                            <image src="{{imgPath}}/banner.png" />
-                            <view>
-                                平底锅111
-                            </view>
+                            <image src="{{resPath}}{{item.commonUser.fcover}}" />
+                            <view>{{item.commonUser.fusername}}</view>
                         </view>
-                        <icon class="iconfont icon-aixin"> 283</icon>
+                        <icon class="iconfont icon-aixin"> {{item.article.fgood}}</icon>
                     </view>
                 </navigator>
             </view>

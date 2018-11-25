@@ -6,6 +6,7 @@ Page({
    */
   data: {
     imgPath: Tools.tools.imgPathUrl,
+    resPath: Tools.tools.resPathUrl,
     headAnimation: {},
     occupiedAnimation: {},
     image: [
@@ -33,10 +34,15 @@ Page({
     contentHeadRecipe: "content_head_on",
     contentHeadArticle: "",
     recipeIsShow: true,
-    articleIsShow: false
+    articleIsShow: false,
+    userInfo: {},
+    recipeList: [],
+    articleList: [],
+    recipeListAll: [],
+    articleListAll: []
   },
 
-  bindFocus: function(){
+  bindFocus: function () {
     var headAnimation = wx.createAnimation({
       duration: 100,
       timingFunction: "ease-out"
@@ -53,7 +59,7 @@ Page({
     });
   },
 
-  bindBlur: function(){
+  bindBlur: function () {
     var headAnimation = wx.createAnimation({
       duration: 100,
       timingFunction: "ease-out"
@@ -70,7 +76,7 @@ Page({
     });
   },
 
-  recipeList: function(){
+  recipeList: function () {
     this.setData({
       contentHeadRecipe: "content_head_on",
       contentHeadArticle: "",
@@ -79,7 +85,7 @@ Page({
     });
   },
 
-  articleList: function(){
+  articleList: function () {
     this.setData({
       contentHeadRecipe: "",
       contentHeadArticle: "content_head_on",
@@ -88,11 +94,71 @@ Page({
     });
   },
 
+  bindInput: function (e) {
+    var value = e.detail.value;
+    var newArr = [];
+    if (this.data.recipeIsShow) {
+      if (value) {
+        var recipeArr = this.data.recipeList;
+        recipeArr.forEach(item => {
+          if (item.recipe.fname.indexOf(value) != -1) {
+            newArr.push(item);
+          }
+        });
+      } else {
+        newArr = this.data.recipeListAll;
+      }
+      this.setData({
+        recipeList: newArr
+      });
+    } else {
+      if (value) {
+        var articleArr = this.data.articleList;
+        articleArr.forEach(item => {
+          if (item.article.fname.indexOf(value) != -1) {
+            newArr.push(item);
+          }
+        });
+      } else {
+        newArr = this.data.articleListAll;
+      }
+      this.setData({
+        articleList: newArr
+      });
+    }
+
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.getStorage({
+      key: "commonUser",
+      success: res => {
+        this.setData({
+          userInfo: res.data
+        });
+        wx.request({
+          url: Tools.urls.mob_commonUser_collectionInfo,
+          data: {
+            uid: this.data.userInfo.fid
+          },
+          method: 'GET',
+          success: res => {
+            res.data.data.article.forEach(item => {
+              item.article.fcover = JSON.parse(item.article.fcover)[0];
+            });
+            this.setData({
+              recipeList: res.data.data.recipe,
+              recipeListAll: res.data.data.recipe,
+              articleList: res.data.data.article,
+              articleListAll: res.data.data.article
+            });
+          }
+        })
+      }
+    });
   },
 
   /**

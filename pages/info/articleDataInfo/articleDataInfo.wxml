@@ -16,7 +16,7 @@
             <image src="{{resPath}}{{articleInfo.commonUser.fcover}}" />
             {{articleInfo.commonUser.fusername}}
         </navigator>
-        <button hover-class='none' bindtap='testVoice'>关注</button>
+        <button wx:if="{{userInfo.fid!=articleInfo.commonUser.fid}}" hover-class='none' bindtap='testVoice'>关注</button>
     </view>
     <view class="articleContainer">
         <view class="articleTitle">{{articleInfo.fname}}</view>
@@ -44,62 +44,28 @@
         <view class="commentHead">
             <view>笔记评论</view>
             <navigator url="/pages/comment/recipeComment/recipeComment?rid={{articleInfo.fid}}&authorid={{articleInfo.commonUser.fid}}&type=article" hover-class="none">
-                全部9条评论
+                全部{{commentLen}}条评论
             </navigator>
         </view>
         <view class="commentMain">
-            <view class="commentMainItem">
+            <view class="commentMainItem" wx:for="{{articleInfo.articleComments}}" wx:key="index" wx:for-index="index" wx:for-item="item">
                 <navigator url="" hover-class="none">
-                    <image src="{{imgPath}}/banner3.png" />
+                    <image src="{{resPath}}{{item.commonUser.fcover}}"/>
                 </navigator>
                 <view>
                     <view class="commentUserInfo">
                         <view>
-                            <navigator url="" hover-class="none">豆教授</navigator>
-                            <view>2018-11-11</view>
+                            <navigator url="" hover-class="none">{{item.commonUser.fusername}}</navigator>
+                            <view>{{item.frelease}}</view>
                         </view>
-                        <view><icon class="iconfont icon-aixin"> 123</icon></view>
+                        <view><icon class="iconfont icon-aixin"> {{item.fgood}}</icon></view>
                     </view>
                     <view class="commentContent">
-                        没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~
+                        {{item.fcontent}}
                     </view>
                 </view>
             </view>
-            <view class="commentMainItem">
-                <navigator url="" hover-class="none">
-                    <image src="{{imgPath}}/banner3.png" />
-                </navigator>
-                <view>
-                    <view class="commentUserInfo">
-                        <view>
-                            <navigator url="" hover-class="none">豆教授</navigator>
-                            <view>2018-11-11</view>
-                        </view>
-                        <view><icon class="iconfont icon-aixin"> 123</icon></view>
-                    </view>
-                    <view class="commentContent">
-                        没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~
-                    </view>
-                </view>
-            </view>
-            <view class="commentMainItem">
-                <navigator url="" hover-class="none">
-                    <image src="{{imgPath}}/banner3.png" />
-                </navigator>
-                <view>
-                    <view class="commentUserInfo">
-                        <view>
-                            <navigator url="" hover-class="none">豆教授</navigator>
-                            <view>2018-11-11</view>
-                        </view>
-                        <view><icon class="iconfont icon-aixin"> 123</icon></view>
-                    </view>
-                    <view class="commentContent">
-                        没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~没吃过猪油糕~想试试~
-                    </view>
-                </view>
-            </view>
-            <button hover-class="none">查看全部 9 条评论</button>
+            <button hover-class="none" bindtap="moreTab">查看全部 {{commentLen}} 条评论</button>
         </view>
     </view>
     <view class="otherContainer">

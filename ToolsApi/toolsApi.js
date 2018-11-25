@@ -52,7 +52,10 @@ var urlsObj = {
   mob_articleComment_greatOperation: toolsObj.reqPathUrl + "/mob/articleComment/greatOperation",
   mob_articleComment_getInfoByRidAndPage: toolsObj.reqPathUrl + "/mob/articleComment/getInfoByRidAndPage",
   mob_articleComment_saveInfo: toolsObj.reqPathUrl + "/mob/articleComment/saveInfo",
-  mob_articleComment_imgupload: toolsObj.reqPathUrl + "/mob/articleComment/imgupload"
+  mob_articleComment_imgupload: toolsObj.reqPathUrl + "/mob/articleComment/imgupload",
+  mob_commonUser_collectionInfo: toolsObj.reqPathUrl + "/mob/commonUser/collectionInfo",
+  mob_attention_addAttention: toolsObj.reqPathUrl + "/mob/attention/addAttention",
+  mob_attention_deleteAttention: toolsObj.reqPathUrl + "/mob/attention/deleteAttention"
 }
 module.exports = {
   tools: toolsObj,

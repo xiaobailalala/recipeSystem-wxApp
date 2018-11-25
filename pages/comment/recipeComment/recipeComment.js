@@ -273,7 +273,7 @@ Page({
       success: res => {
         var index = e.currentTarget.dataset.index;
         var currentList = this.data.commentList;
-        if (isGreat == 1) {
+        if (e.currentTarget.dataset.great == 1) {
           currentList[index].userGreat = 0;
           currentList[index].fgood -= 1;
         } else {

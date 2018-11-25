@@ -40,7 +40,8 @@ Page({
     SmogBtnStyle: "",
     userInfo: null,
     isSocketConnect: false,
-    isCollect: "#999999"
+    isCollect: "#999999",
+    isAttention: false
   },
 
   previewImage: function (e) {
@@ -114,6 +115,7 @@ Page({
           },
           success: res => {
             this.setData({
+              isAttention: res.data.data.isAttention ? true : false,
               recipeData: res.data.data.item,
               processLength: res.data.data.item.processes.length
             });
@@ -264,7 +266,7 @@ Page({
     // this.audioCtx = wx.createAudioContext('aiAudio');
     // this.audioCtx.play();
     wx.navigateTo({
-      url: '/pages/login/login?active=true',
+      url: '/pages/login/login?active=true&recipeUnload=true&rid=' + this.data.recipeData.fid
     });
   },
 
@@ -298,7 +300,7 @@ Page({
         success: function (res) {
           if (res.confirm) {
             wx.navigateTo({
-              url: '/pages/login/login?active=true',
+              url: '/pages/login/login?active=true&recipeUnload=true&rid=' + this.data.recipeData.fid
             });
           }
         }
@@ -338,7 +340,7 @@ Page({
         success: function (res) {
           if (res.confirm) {
             wx.navigateTo({
-              url: '/pages/login/login?active=true',
+              url: '/pages/login/login?active=true&recipeUnload=true&rid=' + this.data.recipeData.fid
             });
           }
         }
@@ -479,15 +481,56 @@ Page({
         confirmText: "去登陆",
         confirmColor: "#ffb31a",
         cancelColor: "#666666",
-        success: function (res) {
+        success: res => {
           if (res.confirm) {
             wx.navigateTo({
-              url: '/pages/login/login?active=true',
+              url: '/pages/login/login?active=true&recipeUnload=true&rid=' + this.data.recipeData.fid
             });
           }
         }
       });
     }
+  },
+
+  attentionTab: function(e){
+    wx.getStorage({
+      key: "commonUser",
+      success: res => {
+        wx.request({
+          url: this.data.isAttention ? Tools.urls.mob_attention_deleteAttention : Tools.urls.mob_attention_addAttention,
+          method: "POST",
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            fUid: res.data.fid,
+            fOid: e.currentTarget.dataset.oid,
+            fType: 1
+          },
+          success: res => {
+            this.setData({
+              isAttention: this.data.isAttention ? false : true
+            });
+          }
+        });
+      },
+      fail: err => {
+        wx.showModal({
+          title: '温馨提示',
+          content: '小膳提醒您，请先登录哦',
+          confirmText: "去登陆",
+          confirmColor: "#ffb31a",
+          cancelColor: "#666666",
+          success: res => {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/login/login?active=true&recipeUnload=true&rid=' + this.data.recipeData.fid,
+              });
+            }
+          }
+        });
+      }
+    });
   },
 
   /**
