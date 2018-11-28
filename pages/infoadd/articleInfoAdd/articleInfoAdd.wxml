@@ -32,7 +32,7 @@
     <view class="enterTopic">
         加入话题 <switch bindchange="topicChange"/>
         <picker class="" mode="selector" range="{{topicArray}}" bindchange="topicSelectChange" value="{{topicIndex}}"> 
-            <view class="topicSelect" wx:if="{{!isTopicSelect}}">{{topicSelectContent}}</view>
+            <view class="topicSelect" wx:if="{{isTopicSelect}}">{{topicSelectContent}}</view>
         </picker>
     </view>
     <view>

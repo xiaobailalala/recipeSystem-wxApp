@@ -148,7 +148,8 @@
               <view>{{item.fname}}</view>
               <view class="likeInfo">
                 <view>
-                  <image src="{{resPath}}{{item.commonUser.fcover}}" />
+                  <image wx:if="{{item.commonUser.fcover==null}}" src="{{imgPath}}/defaulthead.png"></image>
+                  <image wx:else src="{{resPath}}{{item.commonUser.fcover}}" />
                   <view>{{item.commonUser.fusername}}</view>
                 </view>
                 <icon class="iconfont icon-aixin"> {{item.fgood}}</icon>
@@ -161,7 +162,8 @@
               <view>{{item.fname}}</view>
               <view class="likeInfo">
                 <view>
-                  <image src="{{resPath}}{{item.commonUser.fcover}}" />
+                  <image wx:if="{{item.commonUser.fcover==null}}" src="{{imgPath}}/defaulthead.png"></image>
+                  <image wx:else src="{{resPath}}{{item.commonUser.fcover}}" />
                   <view>{{item.commonUser.fusername}}</view>
                 </view>
                 <icon class="iconfont icon-aixin"> {{item.fgood}}</icon>

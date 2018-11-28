@@ -13,10 +13,11 @@
     </view>
     <view class="userInfoContainer">
         <navigator>
-            <image src="{{resPath}}{{articleInfo.commonUser.fcover}}" />
+            <image wx:if="{{articleInfo.commonUser.fcover==null}}" src="{{imgPath}}/defaulthead.png"></image>
+            <image wx:else src="{{resPath}}{{articleInfo.commonUser.fcover}}" />
             {{articleInfo.commonUser.fusername}}
         </navigator>
-        <button wx:if="{{userInfo.fid!=articleInfo.commonUser.fid}}" hover-class='none' bindtap='testVoice'>关注</button>
+        <button class="{{(userInfo==null||!isAttention)?'attention':'attentionOn'}}" wx:if="{{userInfo.fid!=articleInfo.commonUser.fid}}" data-oid="{{articleInfo.commonUser.fid}}" hover-class='none' bindtap='attentionTab'>{{(userInfo==null||!isAttention)?'关注':'已关注'}}</button>
     </view>
     <view class="articleContainer">
         <view class="articleTitle">{{articleInfo.fname}}</view>

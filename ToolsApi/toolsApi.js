@@ -1,14 +1,17 @@
 var toolsObj = {
   // reqPathUrl: "http://192.168.1.110:8080",
-  reqPathUrl: "http://localhost:8080",
+  // reqPathUrl: "http://192.168.1.110:8080",
+  reqPathUrl: "http://172.20.10.2:8080",
   // imgPathUrl:"http://192.168.1.119:8080/recipeUpload/resource/img",
   // imgPathUrl: "http://172.21.91.21:8080/recipeUpload/resource/img",
-  imgPathUrl: "http://localhost:8090/recipeUpload/resource/img",
+  // imgPathUrl: "http://192.168.1.110:8090/recipeUpload/resource/img",
+  imgPathUrl: "http://172.20.10.2:8090/recipeUpload/resource/img",
   // resPathUrl: "http://192.168.1.108/",
+  // resPathUrl: "http://172.20.10.2/",
   // resPathUrl: "http://172.21.91.21/",
   resPathUrl: "http://172.20.10.10/",
   // socketUrl: "ws://192.168.1.110:8080/endpoint-websocket-wxClient",
-  socketUrl: "ws://localhost:8080/endpoint-websocket-wxClient",
+  socketUrl: "ws://172.20.10.2:8080/endpoint-websocket-wxClient",
   toast: function(content, icon, mask, duration, fn) {
     wx.showToast({
       title: content,
@@ -55,7 +58,8 @@ var urlsObj = {
   mob_articleComment_imgupload: toolsObj.reqPathUrl + "/mob/articleComment/imgupload",
   mob_commonUser_collectionInfo: toolsObj.reqPathUrl + "/mob/commonUser/collectionInfo",
   mob_attention_addAttention: toolsObj.reqPathUrl + "/mob/attention/addAttention",
-  mob_attention_deleteAttention: toolsObj.reqPathUrl + "/mob/attention/deleteAttention"
+  mob_attention_deleteAttention: toolsObj.reqPathUrl + "/mob/attention/deleteAttention",
+  mob_attention_attentionInfo: toolsObj.reqPathUrl + "/mob/attention/attentionInfo"
 }
 module.exports = {
   tools: toolsObj,

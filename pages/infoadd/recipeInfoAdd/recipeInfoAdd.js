@@ -537,7 +537,7 @@ Page({
     var hours = dateTime.getHours() < 10 ? "0" + dateTime.getHours() : dateTime.getHours();
     var minutes = dateTime.getMinutes() < 10 ? "0" + dateTime.getMinutes() : dateTime.getMinutes();
     var seconds = dateTime.getSeconds() < 10 ? "0" + dateTime.getSeconds() : dateTime.getSeconds()
-    return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+    return year + "-" + month + "-" + day + " " + hours + ":" + minutes;
   },
 
   customToast: function (content) {

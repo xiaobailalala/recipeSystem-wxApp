@@ -150,6 +150,54 @@ Page({
   focusBind: function (e) {
 
   },
+  
+  attentionTab: function(e){
+    wx.getStorage({
+      key: "commonUser",
+      success: res => {
+        wx.request({
+          url: this.data.isAttention ? Tools.urls.mob_attention_deleteAttention : Tools.urls.mob_attention_addAttention,
+          method: "POST",
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            fUid: res.data.fid,
+            fOid: e.currentTarget.dataset.oid,
+            fType: 1
+          },
+          success: res => {
+            if (!this.data.isAttention) {
+              wx.showToast({
+                title: "成功添加关注",
+                icon: "success",
+                mask: true
+              });
+            }
+            this.setData({
+              isAttention: this.data.isAttention ? false : true
+            });
+          }
+        });
+      },
+      fail: err => {
+        wx.showModal({
+          title: '温馨提示',
+          content: '小膳提醒您，请先登录哦',
+          confirmText: "去登陆",
+          confirmColor: "#ffb31a",
+          cancelColor: "#666666",
+          success: res => {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/login/login?active=true&recipeUnload=true&rid=' + this.data.recipeData.fid,
+              });
+            }
+          }
+        });
+      }
+    });
+  },
 
   initData: function(aid, uid){
     wx.request({
@@ -167,7 +215,8 @@ Page({
           articleInfo: res.data.data.article,
           coverLength: article.fcover.length,
           isGreat: res.data.data.isGreat ? true : false,
-          isCollect: res.data.data.isCollect ? true : false
+          isCollect: res.data.data.isCollect ? true : false,
+          isAttention: res.data.data.isAttention ? true : false
         });
       }
     });

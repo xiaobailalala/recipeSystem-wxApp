@@ -508,6 +508,13 @@ Page({
             fType: 1
           },
           success: res => {
+            if (!this.data.isAttention) {
+              wx.showToast({
+                title: "成功添加关注",
+                icon: "success",
+                mask: true
+              });
+            }
             this.setData({
               isAttention: this.data.isAttention ? false : true
             });

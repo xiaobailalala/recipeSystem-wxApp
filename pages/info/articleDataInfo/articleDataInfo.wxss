@@ -64,12 +64,22 @@ button::after {
 .userInfoContainer>button {
     margin: 0;
     display: inline;
-    background-color: #ffb31a;
-    color: #ffffff;
     padding: 10rpx 32rpx;
     line-height: unset;
     font-size: 30rpx;
     border-radius: 30rpx;
+    box-sizing: border-box;
+    border: 1rpx solid #ffb31a;
+}
+
+.attention {
+    background-color: #ffb31a;
+    color: #ffffff;
+}
+
+.attentionOn {
+    background-color: #ffffff;
+    color: #ffb31a;
 }
 
 .articleContainer {

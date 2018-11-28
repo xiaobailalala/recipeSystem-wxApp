@@ -1,0 +1,42 @@
+<view class="personContainer">
+    <scroll-view animation="{{personScrollAnimation}}" class="personScroll" scroll-x>
+        <navigator wx:for="{{people}}" wx:for-index="index" wx:for-item="item"
+        wx:key="index" url="" hover-class="none">
+            <image wx:if="{{(isAttePeople&&item.commonUserPassivity.fcover==null) || (!isAttePeople&&item.commonUserInitiative.fcover==null)}}" src="{{imgPath}}/defaulthead.png" />
+            <image wx:else src="{{resPath}}{{isAttePeople ? item.commonUserPassivity.fcover : item.commonUserInitiative.fcover}}" />
+            <view>{{isAttePeople ? item.commonUserPassivity.fusername : item.commonUserInitiative.fusername}}</view>
+        </navigator>
+    </scroll-view>
+    <view class="attentionTag">
+        <button bindtap="atteTap" hover-class="none" class="{{isAtteShow?'attentionTagOn':''}}"><image src="{{imgPath}}/atte.png"/>关注<view>{{atteLen}}</view></button>
+        <button bindtap="fansTap" hover-class="none" class="{{isFansShow?'attentionTagOn':''}}"><image src="{{imgPath}}/fans.png"/>粉丝<view>{{fansLen}}</view></button>
+    </view>
+</view>
+<scroll-view class="contentContainer" style="height: 100vh;" scroll-y>
+    <view class="contentItem" wx:for="{{attentionDataList}}" wx:index="index" wx:item="item" wx:key="index">
+        <view class="itemUser">
+            <navigator hover-class="none" url="">
+                <image wx:if="{{item.commonUser.fcover==null}}" src="{{imgPath}}/defaulthead.png"/>
+                <image wx:else src="{{resPath}}{{item.commonUser.fcover}}"/>
+            </navigator>
+            <navigator url="" hover-class="none">{{item.commonUser.fusername}}</navigator>
+            <view class="{{item.isRecipe ? 'itemRecipe' : 'itemArticle'}}">{{item.isRecipe ? '食谱' : '笔记'}}</view>
+        </view>
+        <view>
+            <navigator url="{{item.isRecipe ? '/pages/info/commonDataInfo/commonDataInfo?rid='+item.fid : '/pages/info/articleDataInfo/articleDataInfo?aid='+item.fid}}" hover-class="none" class="itemInfo">
+                <image src="{{resPath}}{{item.fcover}}" />
+                <view>
+                    <view>{{item.fname}}</view>
+                    <view wx:if="{{item.isRecipe}}"><block wx:for="{{item.recipeMaterials}}" wx:for-item="ite" wx:for-index="ind" wx:key="ind">{{ite.fname}} </block></view>
+                    <view wx:else>{{item.fcontent}}</view>
+                    <view>
+                        <icon class="iconfont icon-chakan"> {{item.fcount}}</icon>
+                        <icon class="iconfont icon-favourite"> {{item.isRecipe ? item.fgood : item.fcollect}}</icon>
+                        <icon class="iconfont icon-pinglun1"> {{item.commentCount}}</icon>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+    <view class="occupied" animation="{{bottomScrollAnimation}}"></view>
+</scroll-view>

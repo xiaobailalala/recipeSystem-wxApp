@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/login/login",
+    "pages/person/person",
+    "pages/attention/attentionIndex",
     "pages/info/articleDataInfo/articleDataInfo",
     "pages/infoadd/articleInfoAdd/articleInfoAdd",
     "pages/articleIndex/articleIndex",
@@ -13,11 +16,9 @@
     "pages/index/index",
     "pages/comment/recipeComment/recipeComment",
     "pages/comment/recipeComment/commentInput/commentInput",
-    "pages/person/person",
     "pages/list/commonDataList/commonDataList",
     "pages/menu/menu",
     "pages/logs/logs",
-    "pages/login/login",
     "pages/personeditor/personeditor",
     "pages/reg/reg",
     "pages/repwd/repwd",
@@ -51,6 +52,12 @@
         "iconPath": "icon/unstore.png",
         "selectedIconPath": "icon/instore.png",
         "text": "周边"
+      },
+      {
+        "pagePath": "pages/attention/attentionIndex",
+        "iconPath": "icon/unattention.png",
+        "selectedIconPath": "icon/attention.png",
+        "text": "关注"
       },
       {
         "pagePath": "pages/person/person",

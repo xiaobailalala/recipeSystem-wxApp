@@ -1,0 +1,207 @@
+page {
+    height: 100%;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.clear {
+    clear: both;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+button::after {
+    border: unset;
+}
+
+.personScroll {
+    white-space: nowrap;
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #eeeeee;
+    box-shadow: 0 0 60rpx rgb(200, 200, 200) inset;
+    padding-top: 15rpx;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.occupied {
+    height: 130rpx;
+}
+
+.personScroll navigator {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    width: 90rpx;
+    margin-right: 30rpx;
+    position: relative;
+}
+
+.personScroll navigator:first-of-type {
+    margin-left: 30rpx;
+}
+
+.personScroll navigator>image {
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 50%;
+}
+
+.personScroll navigator>view {
+    color: #888888;
+    font-size: 22rpx;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.attentionTag {
+    height: 100rpx;
+    display: flex;
+    align-items: center;
+    padding-left: 30rpx;
+}
+
+.attentionTag>button {
+    line-height: unset;
+    margin: 0;
+    padding: 10rpx 30rpx;
+    margin-right: 30rpx;
+    color: #888888;
+    font-size: 30rpx;
+    background-color: #ffffff;
+    border: 1rpx solid gainsboro;
+}
+
+.attentionTagOn {
+    box-shadow: 0 0 30rpx rgb(200, 200, 200) inset;
+}
+
+.attentionTag>button>image {
+    width: 36rpx;
+    height: 36rpx;
+    vertical-align: middle;
+    position: relative;
+    top: -4rpx;
+    margin-right: 10rpx;
+}
+
+.attentionTag>button>view {
+    display: inline;
+    margin-left: 10rpx;
+    font-size: 22rpx;
+    color: #a7a7a7;
+}
+
+.contentContainer {
+    padding: 10rpx 0;
+    box-sizing: border-box;
+}
+
+.contentItem {
+    padding: 30rpx;
+}
+
+.contentItem>view:nth-of-type(2){
+    padding-bottom: 50rpx;
+    border-bottom: 1rpx solid #dbdbdb;
+}
+
+.itemUser {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 30rpx;
+    position: relative;
+}
+
+.itemUser>navigator:nth-of-type(1) {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.itemUser>navigator>image {
+    width: 100%;
+    height: 100%;
+}
+
+.itemUser>navigator:nth-of-type(2) {
+    margin-left: 10rpx;
+    font-size: 30rpx;
+    color: #888888;
+}
+
+.itemInfo {
+    position: relative;
+}
+
+.itemInfo>image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 246rpx;
+    height: 200rpx;
+    border-radius: 8rpx;
+}
+
+.itemInfo>view {
+    padding-left: 278rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    height: 200rpx;
+    box-sizing: border-box;
+}
+
+.itemInfo>view>view:nth-of-type(1),
+.itemInfo>view>view:nth-of-type(2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    font-size: 32rpx;
+    font-weight: bold;
+}
+
+.itemInfo>view>view:nth-of-type(2) {
+    -webkit-line-clamp: 2;
+    font-size: 28rpx;
+    margin-top: 12rpx;
+    color: #444444;
+    font-weight: normal;
+}
+
+.itemInfo>view>view:nth-of-type(3)>icon {
+    color: #888888;
+    font-size: 24rpx;
+    margin-right: 20rpx;
+    position: relative;
+    top: -6rpx;
+}
+
+.itemRecipe,.itemArticle{
+    position: absolute;
+    right: 0;
+    color: #ffffff;
+    font-size: 24rpx;
+    background-color: #5cb85c;
+    padding: 4rpx 10rpx;
+    border-radius: 10rpx;
+}
+
+.itemArticle {
+    background-color: #5bc0de;
+}
