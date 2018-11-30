@@ -96,7 +96,8 @@ Page({
                         wx.navigateBack({
                           success: ()=> {
                             if (!this.data.textInfo.recipeUnload) {
-                              var page = getCurrentPages().pop();
+                              var page = getCurrentPages();
+                              page = page[page.length - 2];
                               if (page == undefined || page == null) return;
                               if(this.data.textInfo){
                                 page.onLoad(this.data.textInfo);
@@ -110,7 +111,8 @@ Page({
                         wx.switchTab({
                           url: '/pages/person/person',
                           success: res => {
-                            var page = getCurrentPages().pop();
+                            var page = getCurrentPages();
+                            page = page[page.length - 2];
                             if (page == undefined || page == null) return;
                             page.onLoad();
                           }

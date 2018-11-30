@@ -2,25 +2,26 @@
     <view class="bannerContainer">
         <view class="bannerImg">
             <swiper autoplay="true" interval="3000" duration="1000" circular="true">
-                <block wx:for="{{image}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <block wx:for="{{bannerList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
                     <swiper-item>
-                        <navigator class="" url="" hover-class="none">
-                            <image src="{{item.url}}" />
+                        <navigator url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.fid}}" hover-class="none">
+                            <image mode="center" src="{{resPath}}{{item.fcover}}" />
+                            <view class="mask">{{item.fname}}</view>
                         </navigator>
                     </swiper-item>
                 </block>
             </swiper>
         </view>
         <view class="bannerTag">
-            <navigator class="" hover-class="none">
+            <navigator url="/pages/articleIndex/articleClassify/articleClassify?classify=1" hover-class="none">
                 <image src="{{imgPath}}/breakfirst.png" />
                 秀早餐
             </navigator>
-            <navigator class="" hover-class="none">
+            <navigator url="/pages/articleIndex/articleClassify/articleClassify?classify=2" hover-class="none">
                 <image src="{{imgPath}}/lunch.png" />
                 秀午餐
             </navigator>
-            <navigator class="" hover-class="none">
+            <navigator url="/pages/articleIndex/articleClassify/articleClassify?classify=3" hover-class="none">
                 <image src="{{imgPath}}/dinner.png" />
                 秀晚餐
             </navigator>
@@ -31,39 +32,37 @@
     </view>
     <view class="articleContainer">
         <view>
-            <navigator wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}"
-                class="" url="" hover-class="none">
-                <image src="{{item.url}}" lazy-load="true" mode="widthFix" />
-                <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+            <navigator wx:for="{{dataList}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}"
+                url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.fid}}" hover-class="none">
+                <image src="{{resPath}}{{item.fcover}}" lazy-load="true" mode="widthFix" />
+                <view>{{item.fname}}</view>
                 <view class="likeInfo">
                     <view>
-                        <image src="{{imgPath}}/banner.png" />
-                        <view>
-                            平底锅111平底锅111平底锅111
-                        </view>
+                        <image wx:if="{{item.commonUser.fcover==null}}" src="{{imgPath}}/banner.png" />
+                        <image wx:else src="{{resPath}}{{item.commonUser.fcover}}" />
+                        <view>{{item.fname}}</view>
                     </view>
-                    <icon class="iconfont icon-aixin"> 283</icon>
+                    <icon class="iconfont icon-aixin"> {{item.fgood}}</icon>
                 </view>
             </navigator>
         </view>
         <view>
-            <navigator wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}"
-                class="" url="" hover-class="none">
-                <image src="{{item.url}}" lazy-load="true" mode="widthFix" />
-                <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+            <navigator wx:for="{{dataList}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}"
+                url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.fid}}" hover-class="none">
+                <image src="{{resPath}}{{item.fcover}}" lazy-load="true" mode="widthFix" />
+                <view>{{item.fname}}</view>
                 <view class="likeInfo">
                     <view>
-                        <image src="{{imgPath}}/banner.png" />
-                        <view>
-                            平底锅111
-                        </view>
+                        <image wx:if="{{item.commonUser.fcover==null}}" src="{{imgPath}}/banner.png" />
+                        <image wx:else src="{{resPath}}{{item.commonUser.fcover}}" />
+                        <view>{{item.fname}}</view>
                     </view>
-                    <icon class="iconfont icon-aixin"> 283</icon>
+                    <icon class="iconfont icon-aixin"> {{item.fgood}}</icon>
                 </view>
             </navigator>
         </view>
     </view>
-    <view class="fixedWriteTag">
+    <view class="fixedWriteTag" bindtap="writeNoteTap">
         <icon class="iconfont icon-tubiao_pinglun"></icon>写笔记
     </view>
 </scroll-view>

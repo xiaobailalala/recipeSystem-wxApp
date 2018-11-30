@@ -6,6 +6,7 @@ Page({
    */
   data: {
     imgPath: Tools.tools.imgPathUrl,
+    resPath: Tools.tools.resPathUrl,
     image: [
       {
         url: Tools.tools.imgPathUrl + "/banner.png",
@@ -27,7 +28,22 @@ Page({
         url: Tools.tools.imgPathUrl + "/banner4.png",
         text: "小奶油雪纷纷"
       }
-    ]
+    ],
+    bannerList: [],
+    dataList: []
+  },
+
+  writeNoteTap: function(){
+    wx.chooseImage({
+      count: 9,
+      sizeType: ['compressed'],
+      success: function(res){
+        var arr = res.tempFilePaths;
+        wx.navigateTo({
+          url: "/pages/infoadd/articleInfoAdd/articleInfoAdd?imgPath=" + JSON.stringify(arr)
+        });
+      }
+    });
   },
 
   /**
@@ -48,7 +64,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.request({
+      url: Tools.urls.mob_article_listIndex,
+      method: "GET",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: res => {
+        res.data.data.bannerList.forEach(item => item.fcover = JSON.parse(item.fcover)[0]);
+        res.data.data.dataList.forEach(item => item.fcover = JSON.parse(item.fcover)[0]);
+        this.setData({
+          bannerList: res.data.data.bannerList,
+          dataList: res.data.data.dataList
+        });
+        console.log(res.data.data.bannerList);
+        console.log(res.data.data.dataList);
+      }
+    });
   },
 
   /**

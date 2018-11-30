@@ -1,17 +1,17 @@
 var toolsObj = {
   // reqPathUrl: "http://192.168.1.110:8080",
-  // reqPathUrl: "http://192.168.1.110:8080",
-  reqPathUrl: "http://172.20.10.2:8080",
+  reqPathUrl: "http://192.168.1.110:8080",
+  // reqPathUrl: "http://172.20.10.2:8080",
   // imgPathUrl:"http://192.168.1.119:8080/recipeUpload/resource/img",
   // imgPathUrl: "http://172.21.91.21:8080/recipeUpload/resource/img",
-  // imgPathUrl: "http://192.168.1.110:8090/recipeUpload/resource/img",
-  imgPathUrl: "http://172.20.10.2:8090/recipeUpload/resource/img",
-  // resPathUrl: "http://192.168.1.108/",
+  imgPathUrl: "http://192.168.1.110:8090/recipeUpload/resource/img",
+  // imgPathUrl: "http://172.20.10.2:8090/recipeUpload/resource/img",
+  resPathUrl: "http://192.168.1.108/",
   // resPathUrl: "http://172.20.10.2/",
   // resPathUrl: "http://172.21.91.21/",
-  resPathUrl: "http://172.20.10.10/",
-  // socketUrl: "ws://192.168.1.110:8080/endpoint-websocket-wxClient",
-  socketUrl: "ws://172.20.10.2:8080/endpoint-websocket-wxClient",
+  // resPathUrl: "http://172.20.10.10/",
+  socketUrl: "ws://192.168.1.110:8080/endpoint-websocket-wxClient",
+  // socketUrl: "ws://172.20.10.2:8080/endpoint-websocket-wxClient",
   toast: function(content, icon, mask, duration, fn) {
     wx.showToast({
       title: content,
@@ -59,7 +59,11 @@ var urlsObj = {
   mob_commonUser_collectionInfo: toolsObj.reqPathUrl + "/mob/commonUser/collectionInfo",
   mob_attention_addAttention: toolsObj.reqPathUrl + "/mob/attention/addAttention",
   mob_attention_deleteAttention: toolsObj.reqPathUrl + "/mob/attention/deleteAttention",
-  mob_attention_attentionInfo: toolsObj.reqPathUrl + "/mob/attention/attentionInfo"
+  mob_attention_attentionInfo: toolsObj.reqPathUrl + "/mob/attention/attentionInfo",
+  mob_article_listIndex: toolsObj.reqPathUrl + "/mob/article/listIndex",
+  mob_article_articleForClassify: toolsObj.reqPathUrl + "/mob/article/articleForClassify",
+  mob_commonUser_peopleInfoDetail: toolsObj.reqPathUrl + "/mob/commonUser/peopleInfoDetail",
+  mob_commonUser_updateCommonUserBg: toolsObj.reqPathUrl + "/mob/commonUser/updateCommonUserBg"
 }
 module.exports = {
   tools: toolsObj,

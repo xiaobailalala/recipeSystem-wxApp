@@ -13,6 +13,7 @@
     </view>
 </view>
 <scroll-view class="contentContainer" style="height: 100vh;" scroll-y>
+    <view class="occupied" animation="{{bottomScrollAnimation}}"></view>
     <view class="contentItem" wx:for="{{attentionDataList}}" wx:index="index" wx:item="item" wx:key="index">
         <view class="itemUser">
             <navigator hover-class="none" url="">
@@ -38,5 +39,4 @@
             </navigator>
         </view>
     </view>
-    <view class="occupied" animation="{{bottomScrollAnimation}}"></view>
 </scroll-view>

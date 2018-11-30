@@ -43,7 +43,7 @@ function saveInfo(that, file, img) {
             }, 2000);
           });
         }
-      })
+      });
     },
     fail: err => {
       var b = this;
@@ -79,8 +79,8 @@ Page({
       sizeType: ['compressed'],
       success: res => {
         const src = res.tempFilePaths[0]
-        wx.redirectTo({
-          url: './changeImage/changeImage?src=' + src
+        wx.navigateTo({
+          url: '/pages/personeditor/changeImage/changeImage?src=' + src
         });
         // this.setData({
         //   imgPath: res.tempFilePaths[0]

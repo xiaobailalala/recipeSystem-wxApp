@@ -97,7 +97,7 @@ Page({
       duration: 300,
       timingFunction: "ease-out"
     });
-    animation.opacity(1).height(isBottom ? "280rpx" : "160rpx").step();
+    animation.opacity(1).height(isBottom ? "230rpx" : "160rpx").step();
     return animation;
   },
 
@@ -106,7 +106,7 @@ Page({
       duration: 300,
       timingFunction: "ease-out"
     });
-    animation.opacity(0).height(isBottom ? "130rpx" : "0").step();
+    animation.opacity(0).height(isBottom ? "80rpx" : "0").step();
     return animation;
   },
 

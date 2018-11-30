@@ -17,7 +17,7 @@
         <image class='userhead' wx:if="{{userInfo.fcover==null || userInfo.fcover==''}}" src="{{imgPath}}/defaulthead.png"></image>
         <image class='userhead' wx:else src="{{resPathUrl}}{{userInfo.fcover}}"></image>
       </navigator>
-      <navigator url="/pages/person/personInfo/personInfo" class='personInfo' hover-class='none'>
+      <navigator url="/pages/person/personInfo/personInfo?uid={{userInfo.fid}}" class='personInfo' hover-class='none'>
         <view>
           <text>{{userInfo.fusername}}</text>
           <text>{{userInfo.faccount}}</text>
@@ -28,17 +28,17 @@
     <view class='userEditor'>
       <view>
         <navigator hover-class='none' url='/pages/personeditor/personeditor'>编辑资料</navigator>
-        <navigator url="/pages/person/personInfo/personInfo" hover-class='none'>
+        <navigator url="/pages/person/personInfo/personInfo?uid={{userInfo.fid}}" hover-class='none'>
           <text>0</text>
           <text>菜谱</text>
         </navigator>
-        <navigator hover-class='none' url="/pages/person/personInfo/personInfo?type=article">
+        <navigator hover-class='none' url="/pages/person/personInfo/personInfo?type=article&uid={{userInfo.fid}}">
           <text>0</text>
           <text>笔记</text>
         </navigator>
       </view>
     </view>
-    <navigator class='toolsGo' url="/pages/person/personCollect/personCollect">
+    <navigator class='toolsGo' url="/pages/person/personCollect/personCollect?uid={{userInfo.fid}}">
       <view>
         <text>我的收藏</text>
         <view>

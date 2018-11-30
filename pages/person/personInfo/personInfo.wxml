@@ -1,19 +1,21 @@
 <scroll-view scroll-y bindscroll="scrollBind" style="height: 100vh;">
     <view class="headContainer">
-        <image class="head_bg" src="{{imgPath}}/banner4.png" />
-        <view class="head_bg_shadow" bindtap="bgChange">
+        <image wx:if="{{user.fbg==null}}" class="head_bg" src="{{imgPath}}/banner4.png" />
+        <image wx:else class="head_bg" src="{{resPath}}{{user.fbg}}" />
+        <view class="head_bg_shadow" bindtap="{{(userInfo!=null&&userInfo.fid==user.fid)?'bgChange':''}}">
             <view class="head_bg_baseInfo">
-                <view>豆粉333116</view>
+                <view>{{user.fusername}}</view>
                 <view>
-                    <view>程序员</view>
-                    <view>福建省 漳州市 芗城区</view>
+                    <view>{{user.profession.fname}}</view>
+                    <view>{{user.fprovince}} {{user.fcity}} {{user.farea}}</view>
                 </view>
             </view>
         </view>
-        <view class="head_userHead" bindtap="userHeadChange">
-            <image src="{{imgPath}}/banner.png" />
+        <view class="head_userHead" bindtap="{{(userInfo!=null&&userInfo.fid==user.fid)?'userHeadChange':''}}">
+            <image wx:if="{{user.fcover==null}}" src="{{imgPath}}/banner.png" />
+            <image wx:else src="{{resPath}}{{user.fcover}}" />
         </view>
-        <view class="head_tools">
+        <view class="head_tools" wx:if="{{userInfo!=null&&userInfo.fid==user.fid}}">
             <icon class="iconfont icon-bianji" bindtap="editorBind"></icon>
             <button class="shareBtn" open-type='share'>
                 <icon class="iconfont icon-shareit" bindtap="shareBind"></icon>
@@ -23,21 +25,19 @@
     <view class="collectContainer">
         <view class="collect_count">
             <navigator hover-class="none">
-                <view>0</view>
+                <view>{{atteLen}}</view>
                 <view>关注</view>
             </navigator>
             <navigator hover-class="none">
-                <view>0</view>
+                <view>{{fansLen}}</view>
                 <view>粉丝</view>
             </navigator>
-            <navigator hover-class="none">
-                <view>0</view>
+            <navigator url="/pages/person/personCollect/personCollect?uid={{user.fid}}" hover-class="none">
+                <view>{{user.collectCount}}</view>
                 <view>收藏</view>
             </navigator>
         </view>
-        <view class="collect_sign">
-            吃货不是在吃就是在去吃的路上，没时间写签名
-        </view>
+        <view class="collect_sign">{{(user.fsign==null||user.fsign=='')?'吃货不是在吃就是在去吃的路上，没时间写签名':user.fsign}}</view>
     </view>
     <view class="contentContainer">
         <view class="content_head {{contentStyle}}">
@@ -47,90 +47,48 @@
         <view class="content_head_height" wx:if="{{isContentShow}}"></view>
         <view class="content_main">
             <view class="content_recipe" hidden="{{!recipeIsShow}}">
-                <!-- <view class="noneTips">要发布点内容才配得上我吃货的名声</view> -->
-                <view>
-                    <navigator hover-class="none">火爆ins的金枪鱼沼三明治火爆ins的金枪鱼沼三明治，超厚超满足~</navigator>
+                <view wx:if="{{user.recipes.length==0}}" class="noneTips">要发布点内容才配得上我吃货的名声</view>
+                <view wx:for="{{user.recipes}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+                    <navigator hover-class="none">{{item.fname}}</navigator>
                     <view>
-                        <icon class="iconfont icon-chakan"> 222</icon>
-                        <icon class="iconfont icon-favourite"> 333</icon>
+                        <icon class="iconfont icon-chakan"> {{item.fcount}}</icon>
+                        <icon class="iconfont icon-favourite"> {{item.fgood}}</icon>
                     </view>
                     <navigator hover-class="none" url="" hover-class="none">
-                        <image src="{{imgPath}}/banner.png" />
-                    </navigator>
-                </view>
-                <view>
-                    <navigator hover-class="none">火爆ins的金枪鱼沼三明治，超厚超满足~</navigator>
-                    <view>
-                        <icon class="iconfont icon-chakan"></icon>
-                        <icon class="iconfont icon-favourite"></icon>
-                    </view>
-                    <navigator hover-class="none" url="" hover-class="none">
-                        <image src="{{imgPath}}/banner.png" />
-                    </navigator>
-                </view>
-                <view>
-                    <navigator hover-class="none">火爆ins的金枪鱼沼三明治，超厚超满足~</navigator>
-                    <view>
-                        <icon class="iconfont icon-chakan"> 222</icon>
-                        <icon class="iconfont icon-favourite"> 333</icon>
-                    </view>
-                    <navigator hover-class="none" url="" hover-class="none">
-                        <image src="{{imgPath}}/banner.png" />
-                    </navigator>
-                </view>
-                <view>
-                    <navigator hover-class="none">火爆ins的金枪鱼沼三明治，超厚超满足~</navigator>
-                    <view>
-                        <icon class="iconfont icon-chakan"> 222</icon>
-                        <icon class="iconfont icon-favourite"> 333</icon>
-                    </view>
-                    <navigator hover-class="none" url="" hover-class="none">
-                        <image src="{{imgPath}}/banner.png" />
-                    </navigator>
-                </view>
-                <view>
-                    <navigator hover-class="none">火爆ins的金枪鱼沼三明治，超厚超满足~</navigator>
-                    <view>
-                        <icon class="iconfont icon-chakan"> 222</icon>
-                        <icon class="iconfont icon-favourite"> 333</icon>
-                    </view>
-                    <navigator hover-class="none" url="" hover-class="none">
-                        <image src="{{imgPath}}/banner.png" />
+                        <image src="{{resPath}}{{item.fcover}}" />
                     </navigator>
                 </view>
             </view>
             <view class="content_article" hidden="{{!articleIsShow}}">
-                <!-- <view class="noneTips">要发布点内容才配得上我吃货的名声</view> -->
+                <view wx:if="{{user.articles.length==0}}" class="noneTips">要发布点内容才配得上我吃货的名声</view>
                 <view class="likeListMain">
                     <view>
-                        <navigator hover-class="none" wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}"
-                            class="" url="" hover-class="none">
-                            <image src="{{item.url}}" lazy-load="true" mode="widthFix" />
-                            <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+                        <navigator hover-class="none" wx:for="{{user.articles}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}"
+                            url="">
+                            <image src="{{resPath}}{{item.fcover}}" lazy-load="true" mode="widthFix" />
+                            <view>{{item.fname}}</view>
                             <view class="likeInfo">
                                 <view>
-                                    <image src="{{imgPath}}/banner.png" />
-                                    <view>
-                                        平底锅111平底锅111平底锅111
-                                    </view>
+                                    <image wx:if="{{item.commonUser.fcover==null}}" src="{{imgPath}}/defaulthead.png" />
+                                    <image wx:else src="{{resPath}}{{item.commonUser.fcover}}" />
+                                    <view>{{item.commonUser.fusername}}</view>
                                 </view>
-                                <icon class="iconfont icon-aixin"> 283</icon>
+                                <icon class="iconfont icon-aixin"> {{item.fgood}}</icon>
                             </view>
                         </navigator>
                     </view>
                     <view>
-                        <navigator hover-class="none" wx:for="{{image}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}"
-                            class="" url="" hover-class="none">
-                            <image src="{{item.url}}" lazy-load="true" mode="widthFix" />
-                            <view>从128减到103的减肥餐出炉啦！！2个月减了100斤哦！</view>
+                        <navigator hover-class="none" wx:for="{{user.articles}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}"
+                            url="">
+                            <image src="{{resPath}}{{item.fcover}}" lazy-load="true" mode="widthFix" />
+                            <view>{{item.fname}}</view>
                             <view class="likeInfo">
                                 <view>
-                                    <image src="{{imgPath}}/banner.png" />
-                                    <view>
-                                        平底锅111
-                                    </view>
+                                    <image wx:if="{{item.commonUser.fcover==null}}" src="{{imgPath}}/defaulthead.png" />
+                                    <image wx:else src="{{resPath}}{{item.commonUser.fcover}}" />
+                                    <view>{{item.commonUser.fusername}}</view>
                                 </view>
-                                <icon class="iconfont icon-aixin"> 283</icon>
+                                <icon class="iconfont icon-aixin"> {{item.fgood}}</icon>
                             </view>
                         </navigator>
                     </view>

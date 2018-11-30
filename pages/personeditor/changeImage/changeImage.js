@@ -1,5 +1,5 @@
 import weCropper from '../../we-cropper/dist/weCropper.js'
-
+var Tools = require("../../../ToolsApi/toolsApi.js");
 const device = wx.getSystemInfoSync();
 const width = device.windowWidth;
 const height = device.windowHeight - 50;
@@ -21,7 +21,9 @@ Page({
         width: 300,
         height: 300
       }
-    }
+    },
+    optionObj: {},
+    isChangeHead: false
   },
 
   touchStart(e) {
@@ -37,9 +39,50 @@ Page({
     this.wecropper.getCropperImage((avatar) => {
       if (avatar) {
         //  获取到裁剪后的图片
-        wx.redirectTo({
-          url: '../personeditor?avatar=' + avatar
-        })
+        var page = getCurrentPages();
+        page = page[page.length - 2];
+        if (page == undefined || page == null) return;
+        var optionObj = this.data.optionObj;
+        if (this.data.isChangeHead) {
+          wx.uploadFile({
+            url: Tools.urls.mob_commonUser_commonUsersaveHead,
+            filePath: avatar,
+            name: 'file',
+            formData: {
+              fId: optionObj.uid,
+              img: 2,
+              preImg: optionObj.preImg
+            },
+            header: {
+              'content-type': 'multipart/form-data'
+            },
+            success: res => {
+              wx.getStorage({
+                key: "commonUser",
+                success: result => {
+                  var obj = result.data;
+                  obj.fcover = JSON.parse(res.data).data;
+                  wx.setStorage({
+                    key: "commonUser",
+                    data: obj,
+                    success: () => {
+                      page.onLoad(optionObj);
+                      wx.navigateBack({
+                        delta: 1
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          });
+        } else {
+          optionObj.avatar = avatar;
+          page.onLoad(optionObj);
+          wx.navigateBack({
+            delta: 1
+          });
+        }
       } else {
         console.log('获取图片失败，请稍后重试')
       }
@@ -62,6 +105,14 @@ Page({
   },
   onLoad(option) {
     // do something
+    this.setData({
+      optionObj: option
+    });
+    if (option.isChangeHead) {
+      this.setData({
+        isChangeHead: option.isChangeHead
+      });
+    }
     const {
       cropperOpt
     } = this.data

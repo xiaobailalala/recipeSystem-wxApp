@@ -9,33 +9,10 @@ Page({
     resPath: Tools.tools.resPathUrl,
     headAnimation: {},
     occupiedAnimation: {},
-    image: [
-      {
-        url: Tools.tools.imgPathUrl + "/banner.png",
-        text: "这是第一张banner"
-      },
-      {
-        url: Tools.tools.imgPathUrl + "/banner1.png",
-        text: "草莓奶油纸杯蛋糕"
-      },
-      {
-        url: Tools.tools.imgPathUrl + "/banner2.png",
-        text: "巧克力被子蛋糕"
-      },
-      {
-        url: Tools.tools.imgPathUrl + "/banner3.png",
-        text: "提拉米苏（简易版）"
-      },
-      {
-        url: Tools.tools.imgPathUrl + "/banner4.png",
-        text: "小奶油雪纷纷"
-      }
-    ],
     contentHeadRecipe: "content_head_on",
     contentHeadArticle: "",
     recipeIsShow: true,
     articleIsShow: false,
-    userInfo: {},
     recipeList: [],
     articleList: [],
     recipeListAll: [],
@@ -133,30 +110,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.getStorage({
-      key: "commonUser",
+    var uid = options.uid;
+    wx.request({
+      url: Tools.urls.mob_commonUser_collectionInfo,
+      data: {
+        uid: uid
+      },
+      method: 'GET',
       success: res => {
-        this.setData({
-          userInfo: res.data
+        res.data.data.article.forEach(item => {
+          item.article.fcover = JSON.parse(item.article.fcover)[0];
         });
-        wx.request({
-          url: Tools.urls.mob_commonUser_collectionInfo,
-          data: {
-            uid: this.data.userInfo.fid
-          },
-          method: 'GET',
-          success: res => {
-            res.data.data.article.forEach(item => {
-              item.article.fcover = JSON.parse(item.article.fcover)[0];
-            });
-            this.setData({
-              recipeList: res.data.data.recipe,
-              recipeListAll: res.data.data.recipe,
-              articleList: res.data.data.article,
-              articleListAll: res.data.data.article
-            });
-          }
-        })
+        this.setData({
+          recipeList: res.data.data.recipe,
+          recipeListAll: res.data.data.recipe,
+          articleList: res.data.data.article,
+          articleListAll: res.data.data.article
+        });
       }
     });
   },

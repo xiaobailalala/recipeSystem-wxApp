@@ -19,19 +19,25 @@ button::after {
     border: unset;
 }
 
+.personContainer {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
 .personScroll {
     white-space: nowrap;
     box-sizing: border-box;
     border-bottom: 1rpx solid #eeeeee;
     box-shadow: 0 0 60rpx rgb(200, 200, 200) inset;
-    padding-top: 15rpx;
+    background-color: #ffffff;
     height: 0;
     opacity: 0;
     overflow: hidden;
 }
 
 .occupied {
-    height: 130rpx;
+    height: 80rpx;
 }
 
 .personScroll navigator {
@@ -41,6 +47,7 @@ button::after {
     width: 90rpx;
     margin-right: 30rpx;
     position: relative;
+    margin-top: 15rpx;
 }
 
 .personScroll navigator:first-of-type {
@@ -69,6 +76,8 @@ button::after {
     display: flex;
     align-items: center;
     padding-left: 30rpx;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.7), #ffffff);
+    box-sizing: border-box;
 }
 
 .attentionTag>button {
