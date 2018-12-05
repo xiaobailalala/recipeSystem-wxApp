@@ -1,0 +1,186 @@
+page {
+    height: 100%;
+    background-color: #ffffff;
+    position: relative;
+}
+
+.clear {
+    clear: both;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+button::after {
+    border: unset;
+}
+
+.bg {
+    width: 100%;
+    height: 360rpx;
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+
+.transparency {
+    height: 300rpx;
+    background-color: transparent;
+}
+
+.scrollContainer {
+    height: 100vh;
+}
+
+.mainContainer {
+    background-color: #ffffff;
+}
+
+.mainHead {
+    position: relative;
+    padding: 0 40rpx;
+    height: 100rpx;
+}
+
+.mainHead>image {
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 14rpx solid #ffffff;
+    border-radius: 50%;
+    width: 200rpx;
+    height: 200rpx;
+    position: absolute;
+    left: 80rpx;
+    top: -50%;
+    margin-top: -50rpx;
+}
+
+.mainHead>view {
+    padding-left: 300rpx;
+    padding-top: 10rpx;
+    font-size: 28rpx;
+    color: #888888;
+    text-indent: 2em;
+}
+
+.recipeListContainer,
+.noteListContainer {
+    padding: 0 40rpx;
+    padding-top: 50rpx;
+    background-color: #ffffff;
+}
+
+.noteListContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.recipeItem {
+    margin-bottom: 80rpx;
+}
+
+.recipeItem>view:nth-of-type(1) {
+    font-size: 40rpx;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.recipeItem>view:nth-of-type(2) {
+    color: #9c9cb3;
+    font-size: 26rpx;
+    margin-top: 4rpx;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.recipeItemIcon>icon {
+    font-size: 22rpx;
+    color: #9c9cb3;
+    margin-left: 20rpx;
+    position: relative;
+    top: -4rpx;
+}
+
+.recipeItem>image {
+    margin-top: 16rpx;
+    width: 100%;
+    height: 340rpx;
+    border-radius: 10rpx;
+}
+
+.noteListContainer>view {
+    width: 47.2%;
+    background-color: #ffffff;
+}
+
+.noteListContainer>view>navigator {
+    width: 100%;
+    border-radius: 10rpx;
+    box-shadow: 0 0 16rpx rgb(180, 180, 180);
+    overflow: hidden;
+    margin-bottom: 30rpx;
+    padding-bottom: 20rpx;
+}
+
+.noteListContainer>view>navigator>image {
+    width: 100%;
+    vertical-align: top;
+}
+
+.noteListContainer>view>navigator>view:nth-of-type(1) {
+    font-size: 26rpx;
+    padding: 12rpx 16rpx 0 16rpx;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-height: 104rpx;
+    box-sizing: border-box;
+}
+
+.likeInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16rpx;
+    padding: 0 16rpx;
+    font-size: 20rpx;
+}
+
+.likeInfo>view {
+    display: flex;
+    align-items: center;
+    color: #888888;
+}
+
+.likeInfo>view>image {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    margin-right: 10rpx;
+}
+
+.likeInfo>view>view {
+    max-width: 150rpx;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.likeInfo>icon {
+    font-size: 20rpx;
+    position: relative;
+    top: -13rpx;
+    color: #888888;
+}

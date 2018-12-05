@@ -23,14 +23,17 @@
         <view class="articleTitle">{{articleInfo.fname}}</view>
         <view class="articleContent"><text>{{articleInfo.fcontent}}</text></view>
         <view class="articleLink">
-            <navigator url="" hover-class="none">
-                <icon class="iconfont icon-jinghao">我想吃遍全世界</icon>
+            <navigator url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.id}}" hover-class="none" 
+            wx:for="{{articleInfo.referArticle}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <icon class="iconfont icon-jinghao">{{item.name}}</icon>
             </navigator>
-            <navigator url="" redirect hover-class="className">
-                <icon class="iconfont icon-aite1">我想吃遍全世界</icon>
+            <navigator url="/pages/person/personInfo/personInfo?uid={{item.id}}" hover-class="none"
+            wx:for="{{articleInfo.referPeople}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <icon class="iconfont icon-aite1">{{item.name}}</icon>
             </navigator>
-            <navigator url="" redirect hover-class="className">
-                <icon class="iconfont icon-icon-_baoyou">我想吃遍全世界</icon>
+            <navigator url="/pages/info/commonDataInfo/commonDataInfo?rid={{item.id}}" hover-class="none"
+            wx:for="{{articleInfo.referRecipe}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <icon class="iconfont icon-icon-_baoyou">{{item.name}}</icon>
             </navigator>
         </view>
         <view class="articleTime">

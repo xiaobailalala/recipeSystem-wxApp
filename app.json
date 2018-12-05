@@ -1,13 +1,16 @@
 {
   "pages": [
-    "pages/person/person",
     "pages/home/index",
+    "pages/list/handpickList/handpickList",
+    "pages/infoadd/articleInfoAdd/articleInfoAdd",
+    "pages/infoadd/articleInfoAdd/referObj/referObj",
+    "pages/person/personAtteFans/personAtteFans",
+    "pages/person/person",
     "pages/articleIndex/articleClassify/articleClassify",
     "pages/articleIndex/articleIndex",
     "pages/login/login",
     "pages/attention/attentionIndex",
     "pages/info/articleDataInfo/articleDataInfo",
-    "pages/infoadd/articleInfoAdd/articleInfoAdd",
     "pages/person/personCollect/personCollect",
     "pages/person/personInfo/personInfo",
     "pages/info/commonDataInfo/commonDataInfo",

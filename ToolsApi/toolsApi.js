@@ -63,7 +63,9 @@ var urlsObj = {
   mob_article_listIndex: toolsObj.reqPathUrl + "/mob/article/listIndex",
   mob_article_articleForClassify: toolsObj.reqPathUrl + "/mob/article/articleForClassify",
   mob_commonUser_peopleInfoDetail: toolsObj.reqPathUrl + "/mob/commonUser/peopleInfoDetail",
-  mob_commonUser_updateCommonUserBg: toolsObj.reqPathUrl + "/mob/commonUser/updateCommonUserBg"
+  mob_commonUser_updateCommonUserBg: toolsObj.reqPathUrl + "/mob/commonUser/updateCommonUserBg",
+  mob_recipe_handpickList: toolsObj.reqPathUrl + "/mob/recipe/handpickList",
+  mob_article_handpickList: toolsObj.reqPathUrl + "/mob/article/handpickList"
 }
 module.exports = {
   tools: toolsObj,

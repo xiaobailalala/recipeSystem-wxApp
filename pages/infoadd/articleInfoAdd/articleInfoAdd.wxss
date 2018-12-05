@@ -116,11 +116,9 @@ button::after {
     color: skyblue;
     flex-grow: 1;
     width: 430rpx;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .atpeople>view>icon,
@@ -130,6 +128,12 @@ button::after {
     position: relative;
     top: -7rpx;
     margin-right: 16rpx;
+    max-width: 215rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 .imageContainer-scroll {

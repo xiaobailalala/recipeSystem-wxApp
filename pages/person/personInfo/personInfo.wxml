@@ -24,11 +24,11 @@
     </view>
     <view class="collectContainer">
         <view class="collect_count">
-            <navigator hover-class="none">
+            <navigator url="/pages/person/personAtteFans/personAtteFans?uid={{user.fid}}" hover-class="none">
                 <view>{{atteLen}}</view>
                 <view>关注</view>
             </navigator>
-            <navigator hover-class="none">
+            <navigator url="/pages/person/personAtteFans/personAtteFans?uid={{user.fid}}" hover-class="none">
                 <view>{{fansLen}}</view>
                 <view>粉丝</view>
             </navigator>
@@ -49,12 +49,12 @@
             <view class="content_recipe" hidden="{{!recipeIsShow}}">
                 <view wx:if="{{user.recipes.length==0}}" class="noneTips">要发布点内容才配得上我吃货的名声</view>
                 <view wx:for="{{user.recipes}}" wx:for-index="index" wx:for-item="item" wx:key="index">
-                    <navigator hover-class="none">{{item.fname}}</navigator>
+                    <navigator url="/pages/info/commonDataInfo/commonDataInfo?rid={{item.fid}}" hover-class="none">{{item.fname}}</navigator>
                     <view>
                         <icon class="iconfont icon-chakan"> {{item.fcount}}</icon>
                         <icon class="iconfont icon-favourite"> {{item.fgood}}</icon>
                     </view>
-                    <navigator hover-class="none" url="" hover-class="none">
+                    <navigator hover-class="none" url="/pages/info/commonDataInfo/commonDataInfo?rid={{item.fid}}" hover-class="none">
                         <image src="{{resPath}}{{item.fcover}}" />
                     </navigator>
                 </view>
@@ -64,7 +64,7 @@
                 <view class="likeListMain">
                     <view>
                         <navigator hover-class="none" wx:for="{{user.articles}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}"
-                            url="">
+                            url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.fid}}">
                             <image src="{{resPath}}{{item.fcover}}" lazy-load="true" mode="widthFix" />
                             <view>{{item.fname}}</view>
                             <view class="likeInfo">
@@ -79,7 +79,7 @@
                     </view>
                     <view>
                         <navigator hover-class="none" wx:for="{{user.articles}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}"
-                            url="">
+                            url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.fid}}">
                             <image src="{{resPath}}{{item.fcover}}" lazy-load="true" mode="widthFix" />
                             <view>{{item.fname}}</view>
                             <view class="likeInfo">

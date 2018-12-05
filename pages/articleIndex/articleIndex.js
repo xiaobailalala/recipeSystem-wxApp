@@ -7,28 +7,6 @@ Page({
   data: {
     imgPath: Tools.tools.imgPathUrl,
     resPath: Tools.tools.resPathUrl,
-    image: [
-      {
-        url: Tools.tools.imgPathUrl + "/banner.png",
-        text: "这是第一张banner"
-      },
-      {
-        url: Tools.tools.imgPathUrl + "/banner1.png",
-        text: "草莓奶油纸杯蛋糕"
-      },
-      {
-        url: Tools.tools.imgPathUrl + "/banner2.png",
-        text: "巧克力被子蛋糕"
-      },
-      {
-        url: Tools.tools.imgPathUrl + "/banner3.png",
-        text: "提拉米苏（简易版）"
-      },
-      {
-        url: Tools.tools.imgPathUrl + "/banner4.png",
-        text: "小奶油雪纷纷"
-      }
-    ],
     bannerList: [],
     dataList: []
   },
@@ -77,8 +55,6 @@ Page({
           bannerList: res.data.data.bannerList,
           dataList: res.data.data.dataList
         });
-        console.log(res.data.data.bannerList);
-        console.log(res.data.data.dataList);
       }
     });
   },

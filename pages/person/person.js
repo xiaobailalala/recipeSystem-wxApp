@@ -9,7 +9,9 @@ Page({
     userInfo:null,
     viewflag:0,
     imgPath:Tools.tools.imgPathUrl,
-    resPathUrl:Tools.tools.resPathUrl
+    resPathUrl:Tools.tools.resPathUrl,
+    articlesLen: 0,
+    recipesLen: 0
   },
 
   /**
@@ -58,6 +60,17 @@ Page({
       key: 'commonUser',
       success: res => {
         res.data.faccount = res.data.faccount.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3");
+        wx.request({
+          url: Tools.urls.mob_commonUser_peopleInfoDetail,
+          method: "GET",
+          data: {uid: res.data.fid},
+          success: res => {
+            this.setData({
+              articlesLen: res.data.data.info.articles.length,
+              recipesLen: res.data.data.info.recipes.length
+            });
+          }
+        });
         this.setData({
           userInfo: res.data,
           viewflag: 2

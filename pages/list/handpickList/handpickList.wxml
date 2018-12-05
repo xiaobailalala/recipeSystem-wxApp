@@ -1,0 +1,56 @@
+<image class="bg" src="{{imgPath}}/{{(type == 'note') ? 'noteHandpickBg.jpg' : 'recipeHandpickBg.jpg'}}" />
+<scroll-view class="scrollContainer" scroll-y>
+    <view class="transparency"></view>
+    <view class="mainContainer">
+        <view class="mainHead">
+            <image src="{{imgPath}}/{{(type == 'note') ? 'noteHandpickHead.png' : 'recipeHandpickHead.png'}}" />
+            <view>{{(type == 'note') ? '提到一座城市。只想到那儿的美食。这就是吃货旅行的意义。' : '这盘菜五色俱全，让我忍不住口水直流。再看看其它菜，让我眼花缭乱。'}}</view>
+        </view>
+    </view>
+    <view class="recipeListContainer" wx:if="{{type=='recipe'}}">
+        <navigator class="recipeItem" url="/pages/info/commonDataInfo/commonDataInfo?rid={{item.fid}}" hover-class="none"
+        wx:for="{{dataList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+            <view>{{item.fname}}</view>
+            <view>
+                <view>{{item.commonUser.fusername}}</view>
+                <view class="recipeItemIcon">
+                    <icon class="iconfont icon-chakan"> {{item.fcount}}</icon>
+                    <icon class="iconfont icon-favourite"> {{item.fgood}}</icon>
+                </view>
+            </view>
+            <image mode="center" src="{{resPath}}{{item.fcover}}" />
+        </navigator>
+    </view>
+    <view class="noteListContainer" wx:if="{{type=='note'}}">
+        <view>
+            <navigator wx:for="{{dataList}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}"
+                url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.fid}}" hover-class="none">
+                <image src="{{resPath}}{{item.fcover}}" lazy-load="true" mode="widthFix" />
+                <view>{{item.fname}}</view>
+                <view class="likeInfo">
+                    <view>
+                        <image wx:if="{{item.commonUser.fcover==null}}" src="{{imgPath}}/defaulthead.png"></image>
+                        <image wx:else src="{{resPath}}{{item.commonUser.fcover}}" />
+                        <view>{{item.commonUser.fusername}}</view>
+                    </view>
+                    <icon class="iconfont icon-aixin"> {{item.fgood}}</icon>
+                </view>
+            </navigator>
+        </view>
+        <view>
+            <navigator wx:for="{{dataList}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}"
+                url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.fid}}" hover-class="none">
+                <image src="{{resPath}}{{item.fcover}}" lazy-load="true" mode="widthFix" />
+                <view>{{item.fname}}</view>
+                <view class="likeInfo">
+                    <view>
+                        <image wx:if="{{item.commonUser.fcover==null}}" src="{{imgPath}}/defaulthead.png"></image>
+                        <image wx:else src="{{resPath}}{{item.commonUser.fcover}}" />
+                        <view>{{item.commonUser.fusername}}</view>
+                    </view>
+                    <icon class="iconfont icon-aixin"> {{item.fgood}}</icon>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</scroll-view>

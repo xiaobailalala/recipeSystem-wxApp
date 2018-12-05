@@ -1,0 +1,44 @@
+<scroll-view style="height: 100vh;" scroll-y>
+    <view class="uploadInfo" bindtap="submitTap">
+        <icon class="iconfont icon-shangchuan"></icon>
+    </view>
+    <view class="peopleListItem" wx:if="{{type==1}}" wx:for="{{dataList}}"
+    wx:for-item="item" wx:for-index="index" wx:key="index" bindtap="referPeople"
+    data-id="{{item.fid}}" data-name="{{item.fusername}}" data-index="{{index}}" data-select="{{item.isSelect}}">
+        <view>
+            <view><view class="{{item.isSelect ? 'selectedItem' : ''}}"></view></view>
+            <image wx:if="{{item.fcover==null}}" src="{{imgPath}}/defaulthead.png" />
+            <image wx:else src="{{resPath}}{{item.fcover}}" />
+            {{item.fusername}}
+        </view>
+        <view class="{{item.isFans ? 'fans' : ''}}">{{item.isFans ? '粉丝' : '已关注'}}</view>
+    </view>
+    <view class="recipe_content" wx:if="{{type==2}}" wx:for="{{dataList}}"
+    wx:for-item="item" wx:for-index="index" wx:key="index" bindtap="referArticle"
+    data-id="{{item.article.fid}}" data-name="{{item.article.fname}}" data-index="{{index}}" data-select="{{item.isSelect}}">
+        <view>
+            <view><view class="{{item.isSelect ? 'selectedItem' : ''}}"></view></view>
+            <image src="{{resPath}}{{item.article.fcover}}" />
+        </view>
+        <view>
+            <view class="recipeTitle">{{item.article.fname}}</view>
+            <view class="recipeMaterial">{{item.article.fcontent}}</view>
+            <view class="recipeAuthor">{{item.article.commonUser.fusername}}</view>
+        </view>
+    </view>
+    <view class="recipe_content" wx:if="{{type==3}}" wx:for="{{dataList}}"
+    wx:for-item="item" wx:for-index="index" wx:key="index" bindtap="referRecipe"
+    data-id="{{item.recipe.fid}}" data-name="{{item.recipe.fname}}" data-index="{{index}}" data-select="{{item.isSelect}}">
+        <view>
+            <view><view class="{{item.isSelect ? 'selectedItem' : ''}}"></view></view>
+            <image src="{{resPath}}{{item.recipe.fcover}}" />
+        </view>
+        <view>
+            <view class="recipeTitle">{{item.recipe.fname}}</view>
+            <view class="recipeMaterial">
+                <block wx:for="{{item.recipe.recipeMaterials}}" wx:for-index="ind" wx:key="ind" wx:for-item="ite">{{ite.fname}}</block>
+            </view>
+            <view class="recipeAuthor">{{item.recipe.commonUser.fusername}}</view>
+        </view>
+    </view>
+</scroll-view>

@@ -9,28 +9,6 @@ Page({
     resPath: Tools.tools.resPathUrl,
     contentStyle: "",
     isContentShow: false,
-    image: [
-      {
-        url: Tools.tools.imgPathUrl + "/banner.png",
-        text: "这是第一张banner"
-      },
-      {
-        url: Tools.tools.imgPathUrl + "/banner1.png",
-        text: "草莓奶油纸杯蛋糕"
-      },
-      {
-        url: Tools.tools.imgPathUrl + "/banner2.png",
-        text: "巧克力被子蛋糕"
-      },
-      {
-        url: Tools.tools.imgPathUrl + "/banner3.png",
-        text: "提拉米苏（简易版）"
-      },
-      {
-        url: Tools.tools.imgPathUrl + "/banner4.png",
-        text: "小奶油雪纷纷"
-      }
-    ],
     contentHeadRecipe: "content_head_on",
     contentHeadArticle: "",
     recipeIsShow: true,

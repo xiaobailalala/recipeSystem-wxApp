@@ -1,0 +1,40 @@
+<scroll-view style="height: 100vh;" scroll-y>
+    <view class="headContainer" animation="{{headAnimation}}">
+        <view class="content_head">
+            <view class="{{contentHeadRecipe}}" bindtap="recipeList">关注</view>
+            <view class="{{contentHeadArticle}}" bindtap="articleList">粉丝</view>
+        </view>
+        <view class="search_head">
+            <view>
+                <icon class="iconfont icon-sousuo"></icon>
+                <input bindinput="bindInput" bindfocus="bindFocus" bindblur="bindBlur" placeholder="搜索收藏的食谱 / 笔记"
+                    placeholder-style="color: #e1e1e1;" />
+            </view>
+        </view>
+    </view>
+    <view class="occupiedTag" animation="{{occupiedAnimation}}"></view>
+    <view class="contentContainer">
+        <view class="recipe_content listItem" hidden="{{!recipeIsShow}}">
+            <navigator url="/pages/person/personInfo/personInfo?uid={{item.commonUserPassivity.fid}}" hover-class="none"
+                wx:for="{{atteArr}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <view>
+                    <image wx:if="{{item.commonUserPassivity.fcover==null}}" src="{{imgPath}}/defaulthead.png" />
+                    <image wx:else src="{{resPath}}{{item.commonUserPassivity.fcover}}" />
+                    {{item.commonUserPassivity.fusername}}
+                </view>
+                <view>已关注</view>
+            </navigator>
+        </view>
+        <view class="article_content listItem" hidden="{{!articleIsShow}}">
+            <navigator wx:for="{{fansArr}}" wx:key="index" wx:for-item="item" wx:for-index="index"
+                url="/pages/person/personInfo/personInfo?uid={{item.commonUserInitiative.fid}}" hover-class="none">
+                <view>
+                    <image wx:if="{{item.commonUserInitiative.fcover==null}}" src="{{imgPath}}/defaulthead.png" />
+                    <image wx:else src="{{resPath}}{{item.commonUserInitiative.fcover}}" />
+                    {{item.commonUserInitiative.fusername}}
+                </view>
+                <view>粉丝</view>
+            </navigator>
+        </view>
+    </view>
+</scroll-view>

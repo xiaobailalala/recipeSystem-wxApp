@@ -21,7 +21,11 @@ Page({
     isTopicSelect: false,
     topicArray: ["请选择", "秀早餐", "秀午餐", "秀晚餐"],
     topicIndex: 0,
-    topicSelectContent: "请选择"
+    topicSelectContent: "请选择",
+    uid: 0,
+    referPeopleArr: [],
+    referArticleArr: [],
+    referRecipeArr: []
   },
 
   titleFocus: function () {
@@ -108,74 +112,52 @@ Page({
   },
 
   submitTap: function () {
-    wx.getStorage({
-      key: 'commonUser',
-      success: userRes => {
-        var uid = userRes.data.fid;
-        if (this.data.articleTitle) {
-          if (this.data.articleContent) {
-            if (this.data.selectImgLength) {
-              wx.showLoading({
-                title: "笔记上传中",
-                mask: true,
-                success: res => {
-                  var newArr = [];
-                  var topic = 0;
-                  if (this.data.isTopicSelect){
-                    topic = this.data.topicIndex;
-                  } else {
-                    topic = 0;
-                  }
-                  this.uploadImg(0, this.data.selectImgPath, newArr, {
-                    fName: this.data.articleTitle,
-                    fContent: this.data.articleContent,
-                    fType: "待审核",
-                    fUid: uid,
-                    fRelease: this.getDateTime(),
-                    fTopic: topic
-                  });
-                }
-              });
-            } else {
-              wx.showToast({
-                title: "请至少添加一张封面",
-                icon: "none"
+    if (this.data.articleTitle) {
+      if (this.data.articleContent) {
+        if (this.data.selectImgLength) {
+          wx.showLoading({
+            title: "笔记上传中",
+            mask: true,
+            success: res => {
+              var newArr = [];
+              var topic = 0;
+              if (this.data.isTopicSelect){
+                topic = this.data.topicIndex;
+              } else {
+                topic = 0;
+              }
+
+              this.uploadImg(0, this.data.selectImgPath, newArr, {
+                fName: this.data.articleTitle,
+                fContent: this.data.articleContent,
+                fType: "待审核",
+                fUid: this.data.uid,
+                fRelease: this.getDateTime(),
+                fTopic: topic,
+                peopleArr: this.data.referPeopleArr.map(item => {return item.id}),
+                articleArr: this.data.referArticleArr.map(item => {return item.id}),
+                recipeArr: this.data.referRecipeArr.map(item => {return item.id})
               });
             }
-          } else {
-            wx.showToast({
-              title: "请添加文章的内容",
-              icon: "none"
-            });
-          }
+          });
         } else {
           wx.showToast({
-            title: "请为文章添加标题",
+            title: "请至少添加一张封面",
             icon: "none"
           });
         }
-      },
-      fail: err => {
-        wx.showModal({
-          title: '温馨提示',
-          content: '请先登录后再发布笔记',
-          cancelText: "返回",
-          confirmText: "去登录",
-          confirmColor: "#ffb31a",
-          success: res => {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '/pages/login/login?active=true'
-              });
-            } else if (res.cancel) {
-              wx.navigateBack({
-                delta: 1
-              });
-            }
-          }
+      } else {
+        wx.showToast({
+          title: "请添加文章的内容",
+          icon: "none"
         });
       }
-    });
+    } else {
+      wx.showToast({
+        title: "请为文章添加标题",
+        icon: "none"
+      });
+    }
   },
 
   uploadImg: function(i, imgData, newArr, infoObj){
@@ -255,6 +237,10 @@ Page({
         selectImgLength: arr.length
       });
     }
+    this.setData({
+      // uid: options.uid
+      uid: 5
+    });
   },
 
   /**

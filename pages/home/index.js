@@ -56,12 +56,12 @@ Page({
         color: "#f7a17f",
         content: "热门活动"
       }, {
-        url: "",
+        url: "/pages/list/handpickList/handpickList?type=note",
         iconClass: "icon-yumaobi",
         color: "#2c2b2b",
         content: "精选笔记"
       }, {
-        url: "",
+        url: "/pages/list/handpickList/handpickList?type=recipe",
         iconClass: "icon-zhizuoshipu",
         color: "#7cb3e8",
         content: "精选食谱"
@@ -139,7 +139,7 @@ Page({
   },
 
   addTab: function () {
-    var animation = wx.createAnimation({
+    var animation = wx.createAnimation({ 
       duration: 100,
       timingFunction: 'ease-out'
     });
@@ -226,14 +226,71 @@ Page({
     return obj;
   },
 
-  writeNoteTap: function(){
-    wx.chooseImage({
-      count: 9,
-      sizeType: ['compressed'],
-      success: function(res){
-        var arr = res.tempFilePaths;
+  writeRecipeTap: function(){
+    wx.getStorage({
+      key: "commonUser",
+      success: res => {
         wx.navigateTo({
-          url: "/pages/infoadd/articleInfoAdd/articleInfoAdd?imgPath=" + JSON.stringify(arr)
+          url: "/pages/infoadd/recipeInfoAdd/recipeInfoAdd"
+        });
+      },
+      fail: err =>{
+        wx.showModal({
+          title: '温馨提示',
+          content: '请先登录',
+          cancelText: "返回",
+          confirmText: "去登录",
+          confirmColor: "#ffb31a",
+          success: res => {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/login/login?active=true'
+              });
+            } else if (res.cancel) {
+              wx.navigateBack({
+                delta: 1
+              });
+            }
+          }
+        });
+      }
+    });
+  },
+
+  writeNoteTap: function(){
+    wx.getStorage({
+      key: "commonUser",
+      success: result => {
+        wx.chooseImage({
+          count: 9,
+          sizeType: ['compressed'],
+          success: function(res){
+            var arr = res.tempFilePaths;
+            wx.navigateTo({
+              url: "/pages/infoadd/articleInfoAdd/articleInfoAdd?imgPath=" + JSON.stringify(arr) +
+              "&uid=" + result.data.fid
+            });
+          }
+        });
+      },
+      fail: err =>{
+        wx.showModal({
+          title: '温馨提示',
+          content: '请先登录',
+          cancelText: "返回",
+          confirmText: "去登录",
+          confirmColor: "#ffb31a",
+          success: res => {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/login/login?active=true'
+              });
+            } else if (res.cancel) {
+              wx.navigateBack({
+                delta: 1
+              });
+            }
+          }
         });
       }
     });

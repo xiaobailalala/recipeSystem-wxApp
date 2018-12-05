@@ -19,19 +19,19 @@
 </view>
 <view class="toolsContainer">
     <view>
-        <navigator url="/pages/info/articleDataInfo/articleDataInfo" class="" hover-class="none">
+        <navigator url="/pages/infoadd/articleInfoAdd/referObj/referObj?type=1&uid={{uid}}" hover-class="none">
             <icon class="iconfont icon-aite1"></icon>
         </navigator>
-        <navigator url="" class="" hover-class="none">
+        <navigator url="/pages/infoadd/articleInfoAdd/referObj/referObj?type=2&uid={{uid}}" hover-class="none">
             <icon class="iconfont icon-jinghao"></icon>
         </navigator>
-        <navigator url="" class="" hover-class="none">
+        <navigator url="/pages/infoadd/articleInfoAdd/referObj/referObj?type=3&uid={{uid}}" hover-class="none">
             <icon class="iconfont icon-icon-_baoyou"></icon>
         </navigator>
     </view>
     <view class="enterTopic">
         加入话题 <switch bindchange="topicChange"/>
-        <picker class="" mode="selector" range="{{topicArray}}" bindchange="topicSelectChange" value="{{topicIndex}}"> 
+        <picker mode="selector" range="{{topicArray}}" bindchange="topicSelectChange" value="{{topicIndex}}"> 
             <view class="topicSelect" wx:if="{{isTopicSelect}}">{{topicSelectContent}}</view>
         </picker>
     </view>
@@ -39,29 +39,25 @@
         <view class="atpeople">
             提到的好友：
             <view>
-                <icon class="iconfont icon-aite1">字节君</icon>
-                <icon class="iconfont icon-aite1">字节君</icon>
-                <icon class="iconfont icon-aite1">字节君</icon>
+                <icon wx:for="{{referPeopleArr}}" wx:for-item="item" wx:for-index="index"
+                wx:key="index" class="iconfont icon-aite1">{{item.name}}</icon>
+                {{referPeopleArr.length == 0 ? '尚未选择' : ''}}
             </view>
         </view>
         <view class="atarticle">
             提到的文章：
             <view>
-                <icon class="iconfont icon-jinghao">字节君</icon>
-                <icon class="iconfont icon-jinghao">字节君</icon>
-                <icon class="iconfont icon-jinghao">字节君</icon>
+                <icon wx:for="{{referArticleArr}}" wx:for-item="item" wx:for-index="index"
+                wx:key="index" class="iconfont icon-jinghao">{{item.name}}</icon>
+                {{referArticleArr.length == 0 ? '尚未选择' : ''}}
             </view>
         </view>
         <view class="atrecipe">
             提到的食谱：
             <view>
-                <icon class="iconfont icon-icon-_baoyou">字节君</icon>
-                <icon class="iconfont icon-icon-_baoyou">字节君</icon>
-                <icon class="iconfont icon-icon-_baoyou">字节君</icon>
-                <icon class="iconfont icon-icon-_baoyou">字节君发送</icon>
-                <icon class="iconfont icon-icon-_baoyou">字节君</icon>
-                <icon class="iconfont icon-icon-_baoyou">字节君</icon>
-                <icon class="iconfont icon-icon-_baoyou">字节君发送</icon>
+                <icon wx:for="{{referRecipeArr}}" wx:for-item="item" wx:for-index="index"
+                wx:key="index" class="iconfont icon-icon-_baoyou">{{item.name}}</icon>
+                {{referRecipeArr.length == 0 ? '尚未选择' : ''}}
             </view>
         </view>
     </view>

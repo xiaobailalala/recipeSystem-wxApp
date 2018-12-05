@@ -203,7 +203,7 @@ Page({
     wx.request({
       url: Tools.urls.mob_article_index,
       method: "GET",
-      data: { 
+      data: {
         aid: aid,
         uid: uid
       },
