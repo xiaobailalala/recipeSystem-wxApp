@@ -41,7 +41,7 @@ Page({
         color: "#4fcffc",
         content: "食谱分类"
       }, {
-        url: "",
+        url: "/pages/material/material",
         iconClass: "icon-shucai",
         color: "#9d59e8",
         content: "时令食材"
@@ -66,7 +66,7 @@ Page({
         color: "#7cb3e8",
         content: "精选食谱"
       }, {
-        url: "",
+        url: "/pages/aboutMe/aboutMe",
         iconClass: "icon-guanyuwomen",
         color: "#ffdc44",
         content: "关于我们"

@@ -12,7 +12,7 @@
         </view>
     </view>
     <view class="userInfoContainer">
-        <navigator>
+        <navigator hover-class="none" url="/pages/person/personInfo/personInfo?uid={{articleInfo.commonUser.fid}}">
             <image wx:if="{{articleInfo.commonUser.fcover==null}}" src="{{imgPath}}/defaulthead.png"></image>
             <image wx:else src="{{resPath}}{{articleInfo.commonUser.fcover}}" />
             {{articleInfo.commonUser.fusername}}
@@ -53,13 +53,13 @@
         </view>
         <view class="commentMain">
             <view class="commentMainItem" wx:for="{{articleInfo.articleComments}}" wx:key="index" wx:for-index="index" wx:for-item="item">
-                <navigator url="" hover-class="none">
+                <navigator url="/pages/person/personInfo/personInfo?uid={{item.commonUser.fid}}" hover-class="none">
                     <image src="{{resPath}}{{item.commonUser.fcover}}"/>
                 </navigator>
                 <view>
                     <view class="commentUserInfo">
                         <view>
-                            <navigator url="" hover-class="none">{{item.commonUser.fusername}}</navigator>
+                            <navigator url="/pages/person/personInfo/personInfo?uid={{item.commonUser.fid}}" hover-class="none">{{item.commonUser.fusername}}</navigator>
                             <view>{{item.frelease}}</view>
                         </view>
                         <view><icon class="iconfont icon-aixin"> {{item.fgood}}</icon></view>

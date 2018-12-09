@@ -79,7 +79,7 @@
       </view>
       <view class='introduction'><text decode="true">{{recipeData.fintroduction}}</text></view>
       <view class='userinfo'>
-        <navigator>
+        <navigator hover-class="none" url="/pages/person/personInfo/personInfo?uid={{recipeData.commonUser.fid}}">
           <image src='{{resPathUrl}}{{recipeData.commonUser.fcover}}'></image>
           {{recipeData.commonUser.fusername}}
         </navigator>

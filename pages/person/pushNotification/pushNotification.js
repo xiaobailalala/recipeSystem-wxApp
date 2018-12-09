@@ -1,36 +1,18 @@
-var Tools = require("../../../ToolsApi/toolsApi.js");
+// pages/person/pushNotification/pushNotification.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    imgPath: Tools.tools.imgPathUrl,
-    resPath: Tools.tools.resPathUrl,
-    dataList: [],
-    type: ""
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var type = options.type;
-    this.setData({
-      type: type
-    });
-    wx.request({
-      url: (type == 'recipe') ? Tools.urls.mob_recipe_handpickList : Tools.urls.mob_article_handpickList,
-      method: "GET",
-      success: res => {
-        if (type == 'note') {
-          res.data.data.forEach(item => item.fcover = JSON.parse(item.fcover)[0]);
-        }
-        this.setData({
-          dataList: res.data.data
-        });
-      }
-    });
+
   },
 
   /**

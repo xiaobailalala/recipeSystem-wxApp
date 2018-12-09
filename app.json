@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/material/material",
+    "pages/aboutMe/aboutMe",
     "pages/list/handpickList/handpickList",
     "pages/infoadd/articleInfoAdd/articleInfoAdd",
     "pages/infoadd/articleInfoAdd/referObj/referObj",
@@ -27,7 +29,8 @@
     "pages/reg/reg",
     "pages/repwd/repwd",
     "pages/personeditor/changeImage/changeImage",
-    "pages/comment/recipeComment/commentChangeImg/commentChangeImg"
+    "pages/comment/recipeComment/commentChangeImg/commentChangeImg",
+    "pages/person/pushNotification/pushNotification"
   ],
   "window": {
     "backgroundTextStyle": "light",

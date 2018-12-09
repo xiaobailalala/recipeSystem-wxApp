@@ -1,4 +1,4 @@
-var Tools = require("../../../ToolsApi/toolsApi.js");
+var Tools = require("../../ToolsApi/toolsApi.js");
 Page({
 
   /**
@@ -6,31 +6,42 @@ Page({
    */
   data: {
     imgPath: Tools.tools.imgPathUrl,
-    resPath: Tools.tools.resPathUrl,
-    dataList: [],
-    type: ""
+    bgImgMode: true,
+    bgImgPath: 'aboutMeBg1.jpg',
+    bg1_isHide: false,
+    bg2_isHide: true,
+    bg3_isHide: true
+  },
+
+  bindScroll: function(e) {
+    if (e.detail.scrollTop >= 200) {
+      if (e.detail.scrollTop >= 2000) {
+        this.setData({
+          bg1_isHide: true,
+          bg2_isHide: true,
+          bg3_isHide: false
+        });
+      } else {
+        this.setData({
+          bg1_isHide: true,
+          bg2_isHide: false,
+          bg3_isHide: true
+        });
+      }
+    } else {
+      this.setData({
+        bg1_isHide: false,
+        bg2_isHide: true,
+        bg3_isHide: true
+      });
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var type = options.type;
-    this.setData({
-      type: type
-    });
-    wx.request({
-      url: (type == 'recipe') ? Tools.urls.mob_recipe_handpickList : Tools.urls.mob_article_handpickList,
-      method: "GET",
-      success: res => {
-        if (type == 'note') {
-          res.data.data.forEach(item => item.fcover = JSON.parse(item.fcover)[0]);
-        }
-        this.setData({
-          dataList: res.data.data
-        });
-      }
-    });
+
   },
 
   /**

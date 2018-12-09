@@ -1,0 +1,97 @@
+<image class="bg1" mode="widthFix" hidden="{{bg1_isHide}}" src="{{imgPath}}/aboutMeBg1.jpg" />
+<image class="bg1" mode="scaleToFill" hidden="{{bg2_isHide}}" src="{{imgPath}}/aboutMeBg2.jpg" />
+<view class="bg1" hidden="{{bg3_isHide}}">
+    <image mode="widthFix" src="{{imgPath}}/aboutMeBg3.png" />
+    <image mode="widthFix" src="{{imgPath}}/aboutMeBg5.png" />
+    <image mode="widthFix" src="{{imgPath}}/aboutMeBg4.png" />
+    <image src="{{imgPath}}/aboutMeBg6.jpg" />
+</view>
+<scroll-view style="height: 100vh;" scroll-y bindscroll="bindScroll">
+    <view class="transparency"></view>
+    <view class="mainContainerOne">
+        <view class="mainOneHead">
+            <image src="{{imgPath}}/logo.png" />
+        </view>
+    </view>
+    <view class="mainContainerTwo {{mainTwoFixed?'mainContainerTwoFixed':''}}">
+        <image mode="widthFix" src="{{imgPath}}/logoContext.png" />
+        <image mode="widthFix" src="{{imgPath}}/logo.png" />
+    </view>
+    <view class="mainContainerThree">
+        <view class="threeTitle">
+            平台简介
+            <image mode="widthFix" src="{{imgPath}}/titleBg.png" />
+        </view>
+        <view class="threeContent">
+            <image mode="widthFix" src="{{imgPath}}/bgOneIcon1.png" />
+            <image mode="widthFix" src="{{imgPath}}/bgOneIcon2.png" />
+            <image mode="widthFix" src="{{imgPath}}/mainThreeBg.png" />
+            <view>随着互联网行业的发展，AI技术和互联网社交正在逐步进入人们的生活，也潜移默化地改变着人们的生活形式。针对这一热点，本项目融入智能AI技术，从人们的生活饮食的角度入手，为人们的厨房烹饪构建了一个智能化的厨房助手。外卖产业的兴起使得人们越发的依赖“饭来张口”的饮食习惯，“膳食膳房”平台通过烹饪环境监测以及智能AI语音系统的结合，为人们下厨带来了一种方便、智能的体验。根据用户的烹饪习惯，即时推送厨房小知识以及注意事项，为用户的厨房生活保驾护航。同时平台融入“互联网社交”的理念，为用户提供以美食为主题的网络社交平台，系统会记录用户的行为，针对行为实时进行兴趣话题和精彩内容的智能推送。</view>
+        </view>
+    </view>
+    <view class="mainContainerFour">
+        <view class="fourTitle">
+            产品海报
+            <image mode="widthFix" src="{{imgPath}}/titleBg.png" />
+        </view>
+        <image mode="widthFix" src="{{imgPath}}/poster.jpg" />
+        <view>
+            <view>我的</view>
+            <image mode="widthFix" src="{{imgPath}}/point.png" />
+            <view>团队</view>
+        </view>
+    </view>
+    <view class="mainContainerFive">
+        <view class="fiveTitle">
+            团队介绍
+            <image mode="widthFix" src="{{imgPath}}/titleBg.png" />
+        </view>
+        <view class="fiveContent">
+            <view>
+                <view class="peopleInfo">
+                    <image mode="widthFix" src="{{imgPath}}/peopleTitleBg1.png" />
+                    <view>组长 · 赵培贤</view>
+                    <view>410工作室-资深Java开发工程师</view>
+                </view>
+                <view class="peopleContent">
+                    <image mode="scaleToFill" src="{{imgPath}}/peopleContextLeft.png" />
+                    <view>热爱编程，有良好的逻辑思维和分析能力。对java程序设计和java开发有浓厚的兴趣。在校有较多的项目开发经验。抗压能力强，能够吃苦耐劳，待人真诚，有较强的适应能力和团队协作能力。</view>
+                </view>
+            </view>
+            <view>
+                <view class="peopleInfo peopleInfoRight">
+                    <image mode="widthFix" src="{{imgPath}}/peopleTitleBg2.png" />
+                    <view>组员 · 林连悌</view>
+                    <view>410工作室-资深前端开发工程师</view>
+                </view>
+                <view class="peopleContent">
+                    <image mode="scaleToFill" src="{{imgPath}}/peopleContextRight.png" />
+                    <view>性格积极乐观，待人热情友好，学习能力较强，为人勤奋上进，工作认真负责，有较强的自制力，抗压能力强，在团队合作中，能够很好的发挥自己的优势，献计献策。</view>
+                </view>
+            </view>
+            <view>
+                <view class="peopleInfo">
+                    <image mode="widthFix" src="{{imgPath}}/peopleTitleBg3.png" />
+                    <view>组员 · 杨东雨</view>
+                    <view>410工作室-资深Java开发工程师</view>
+                </view>
+                <view class="peopleContent">
+                    <image mode="scaleToFill" src="{{imgPath}}/peopleContextLeft.png" />
+                    <view>本人性格开朗，交际能力较强，有责任心，有上进心。学习能力较强，肯吃苦耐劳。对代码有很高的兴趣，自律能力强，遇到问题时不怕困难，肯钻研</view>
+                </view>
+            </view>
+            <view>
+                <view class="peopleInfo peopleInfoRight">
+                    <image mode="widthFix" src="{{imgPath}}/peopleTitleBg4.png" />
+                    <view>组员 · 刘飞</view>
+                    <view>410工作室-资深前端开发工程师</view>
+                </view>
+                <view class="peopleContent">
+                    <image mode="scaleToFill" src="{{imgPath}}/peopleContextRight.png" />
+                    <view>性格开朗、有良好的学习能力、积极主动、有责任心、有良好的自我管理能力，考虑问题比较细致，有很好的团结协作能力。</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="mainContainerSix"></view>
+</scroll-view>

@@ -1,4 +1,4 @@
-<image class="bg" src="{{imgPath}}/{{(type == 'note') ? 'noteHandpickBg.jpg' : 'recipeHandpickBg.jpg'}}" />
+<image class="bg" src="{{imgPath}}/{{(type == 'note') ? 'noteHandpickBg.jpg?v=2.0' : 'recipeHandpickBg.jpg?v=2.0'}}" />
 <scroll-view class="scrollContainer" scroll-y>
     <view class="transparency"></view>
     <view class="mainContainer">

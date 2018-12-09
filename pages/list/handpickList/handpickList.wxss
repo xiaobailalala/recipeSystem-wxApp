@@ -20,7 +20,7 @@ button::after {
 
 .bg {
     width: 100%;
-    height: 360rpx;
+    height: 100%;
     position: fixed;
     z-index: -1;
     top: 0;
@@ -71,6 +71,7 @@ button::after {
     padding: 0 40rpx;
     padding-top: 50rpx;
     background-color: #ffffff;
+    min-height: 1000rpx;
 }
 
 .noteListContainer {

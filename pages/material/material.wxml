@@ -1,0 +1,25 @@
+<image hidden="{{isBgHide}}" mode="widthFix" class="bg" src="{{imgPath}}/materialBg.png" />
+<view class="searchContainer">
+    <view class="search_head">
+        <button hidden="{{isBgHide}}" hover-class="none" bindtap="randomBtn">
+            <icon class="iconfont icon-shuaxin1"></icon>
+        </button>
+        <view>
+            <icon class="iconfont icon-sousuo"></icon>
+            <input bindinput="bindInput" bindfocus="bindFocus" bindblur="bindBlur" placeholder="根据关键字搜索食材" value="{{searchContent}}" placeholder-style="color: #e1e1e1;" />
+        </view>
+    </view>
+</view>
+<view wx:if="{{!searchDataIsShow}}" class="materialContainer">
+    <navigator animation="{{dataListShow}}" hover-class="none" wx:for="{{dataList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+        {{item.fname}}
+        <image src="{{resPath}}{{item.fcover}}" />
+    </navigator>
+</view>
+<scroll-view wx:if="{{searchDataIsShow}}" scroll-y style="height: calc(100% - 80rpx);" class="searchListContainer">
+    <navigator wx:for="{{searchList}}" wx:for-index="index" wx:for-item="item" wx:key="index" hover-class="none">
+        <image src="{{resPath}}{{item.fcover}}" />
+        {{item.fname}}
+        <icon class="iconfont icon-xiangyou"></icon>
+    </navigator>
+</scroll-view>

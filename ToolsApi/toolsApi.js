@@ -65,7 +65,9 @@ var urlsObj = {
   mob_commonUser_peopleInfoDetail: toolsObj.reqPathUrl + "/mob/commonUser/peopleInfoDetail",
   mob_commonUser_updateCommonUserBg: toolsObj.reqPathUrl + "/mob/commonUser/updateCommonUserBg",
   mob_recipe_handpickList: toolsObj.reqPathUrl + "/mob/recipe/handpickList",
-  mob_article_handpickList: toolsObj.reqPathUrl + "/mob/article/handpickList"
+  mob_article_handpickList: toolsObj.reqPathUrl + "/mob/article/handpickList",
+  mob_material_randomList: toolsObj.reqPathUrl + "/mob/material/randomList",
+  mob_material_getDataByVagueName: toolsObj.reqPathUrl + "/mob/material/getDataByVagueName"
 }
 module.exports = {
   tools: toolsObj,

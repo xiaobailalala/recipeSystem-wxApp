@@ -9,12 +9,12 @@
   </view>
   <scroll-view class="box_main" scroll-y enable-back-to-top scroll-top="{{scrollTop}}" scroll-with-animation bindscrolltoupper="refresh" bindscrolltolower="loadMore">
     <view class="box_main_item" wx:for="{{commentList}}" wx:for-item="item" wx:key="commentList" wx:for-index="index">
-      <navigator url="?uid={{item.commonUser.fid}}" hover-class="none">
+      <navigator url="/pages/person/personInfo/personInfo?uid={{item.commonUser.fid}}" hover-class="none">
         <image src="{{resPathUrl}}{{item.commonUser.fcover}}"></image>
       </navigator>
       <view class="box_main_item_content">
         <view>
-          <navigator url="?uid={{item.commonUser.fid}}" hover-class="none" class="item_author">
+          <navigator url="/pages/person/personInfo/personInfo?uid={{item.commonUser.fid}}" hover-class="none" class="item_author">
             <icon class="iconfont icon-aite"></icon>{{item.commonUser.fusername}}
             <view wx:if="{{authorid==item.fuid}}" class="isAuthor">作者</view>
           </navigator>
@@ -25,7 +25,7 @@
             <image wx:for="{{item.fcover}}" wx:for-item="imgItem" wx:key="commentImgList" bindtap='previewImage' data-src="{{resPathUrl}}{{imgItem}}" src="{{resPathUrl}}{{imgItem}}" />
           </view>
           <view class="item_reply" wx:if="{{item.freplyid!=-1}}">
-            <navigator url="?uid={{item.foodComment.commonUser.fid}}" hover-class="none" class="item_author">
+            <navigator url="/pages/person/personInfo/personInfo?uid={{item.foodComment.commonUser.fid}}" hover-class="none" class="item_author">
               <icon class="iconfont icon-aite"></icon>{{item.foodComment.commonUser.fusername}}
               <view wx:if="{{authorid==item.foodComment.fuid}}" class="isAuthor">作者</view>
             </navigator>
