@@ -1,5 +1,7 @@
 // pages/person/person.js
 var Tools=require("../../ToolsApi/toolsApi.js");
+var Stomp = require('../../utils/stomp.js').Stomp;
+var stompClient = {};
 Page({
 
   /**
@@ -11,23 +13,38 @@ Page({
     imgPath:Tools.tools.imgPathUrl,
     resPathUrl:Tools.tools.resPathUrl,
     articlesLen: 0,
-    recipesLen: 0
+    recipesLen: 0,
+    tipCount: 0
+  },
+
+  getMessageData: function(uid) {
+    wx.request({
+      url: Tools.urls.mob_sysNotification_showMessageCount,
+      method: "POST",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        uid: uid
+      },
+      success: res => {
+        this.setData({
+          tipCount: res.data.data
+        });
+      }
+    });
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.removeStorage({
-    //   key: 'commonUser',
-    //   success: function(res) {},
-    // })
     wx.getStorage({
-      key: 'commonUser',
-      success: res=> {
-        res.data.faccount = res.data.faccount.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3");
+      key: "commonUser",
+      success: result => {
+        result.data.faccount = result.data.faccount.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3");
         this.setData({
-          userInfo:res.data,
+          userInfo:result.data,
           viewflag: 2
         });
       },
@@ -50,20 +67,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // this.onLoad();
-    
-    // wx.removeStorage({
-    //   key: 'commonUser',
-    //   success: function(res) {},
-    // })
+    var _this = this;
     wx.getStorage({
       key: 'commonUser',
-      success: res => {
-        res.data.faccount = res.data.faccount.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3");
+      success: result => {
+        result.data.faccount = result.data.faccount.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3");
         wx.request({
           url: Tools.urls.mob_commonUser_peopleInfoDetail,
           method: "GET",
-          data: {uid: res.data.fid},
+          data: {uid: result.data.fid},
           success: res => {
             this.setData({
               articlesLen: res.data.data.info.articles.length,
@@ -72,8 +84,40 @@ Page({
           }
         });
         this.setData({
-          userInfo: res.data,
+          userInfo: result.data,
           viewflag: 2
+        });
+        this.getMessageData(result.data.fid);
+        var socketOpen = false;
+        function sendSocketMessage(msg) {
+          if (socketOpen) {
+            wx.sendSocketMessage({
+              data: msg
+            });
+          } else {
+            socketMsgQueue.push(msg)
+          }
+        }
+        var ws = {
+          send: sendSocketMessage
+        }
+        Stomp.setInterval = function () { }
+        Stomp.clearInterval = function () { }
+        wx.connectSocket({
+          url: Tools.tools.socketUrl
+        });
+        wx.onSocketOpen(function (res) {
+          socketOpen = true
+          ws.onopen() 
+        });
+        wx.onSocketMessage(function (res) {
+          ws.onmessage(res)
+        });
+        stompClient = Stomp.over(ws);
+        stompClient.connect({}, function (sessionId) {
+          stompClient.subscribe('/systemMessage/userMsg/' + result.data.fid, function (body, headers) {
+            _this.getMessageData(result.data.fid);
+          });
         });
       },
       fail: err => {
@@ -88,14 +132,18 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    if(this.data.userInfo) {
+      wx.closeSocket();
+    }
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    if(this.data.userInfo) {
+      wx.closeSocket();
+    }
   },
 
   /**

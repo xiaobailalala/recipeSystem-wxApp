@@ -113,7 +113,8 @@
           <view wx:for="{{recipeData.recipeMaterials}}" wx:key="material" wx:for-item="item">
             <view>
               <view wx:if="{{item.fmid==0}}">{{item.fname}}</view>
-              <navigator wx:if="{{item.fmid!=0}}" hover-class='none'>{{item.fname}}</navigator>
+              <navigator wx:if="{{item.fmid!=0}}" hover-class='none'
+              url="/pages/list/materialRecipeList/materialRecipeList?mid={{item.fmid}}">{{item.fname}}</navigator>
             </view>
             <view>{{item.fnumber}}</view>
           </view>

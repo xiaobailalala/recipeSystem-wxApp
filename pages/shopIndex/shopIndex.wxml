@@ -1,0 +1,226 @@
+<scroll-view style="height: 100vh;" scroll-y>
+    <swiper class='imgSwiper' autoplay="true" interval="3000" duration="1000" circular="true">
+        <block wx:for="{{image}}" wx:for-index="index" wx:key="bannerList">
+            <swiper-item>
+                <view class="imgSwiperItem">
+                    <image src="{{item.url}}" class="slide-image" mode="aspectFill" />
+                </view>
+            </swiper-item>
+        </block>
+    </swiper>
+    <view class="classifyContainer">
+        <scroll-view scroll-x class="classifyScroll">
+            <navigator url="" hover-class="none" wx:for="{{classifyList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <view>
+                    <image mode="widthFix" src="{{resPath}}{{item.fcover}}" />
+                    {{item.fname}}
+                </view>
+            </navigator>
+        </scroll-view>
+    </view>
+    <view class="newHotContainer">
+        <view class="contTitle">热门新品</view>
+        <view class="contList">
+            <scroll-view scroll-x class="contScroll">
+                <navigator url="" hover-class="none">
+                    <view>
+                        <image src="{{imgPath}}/banner1.png" />
+                    </view>
+                    <view>啊大大啊大大啊大大啊大大啊大大啊大大啊大大</view>
+                    <view>￥339.00
+                        <icon class="iconfont icon-wangfanbaoyouicon"> 包邮</icon>
+                    </view>
+                </navigator>
+                <navigator url="" hover-class="none">
+                    <view>
+                        <image src="{{imgPath}}/banner1.png" />
+                    </view>
+                    <view>啊大大啊大大啊大大啊大大啊大大啊大大啊大大</view>
+                    <view>￥339.00</view>
+                </navigator>
+                <navigator url="" hover-class="none">
+                    <view>
+                        <image src="{{imgPath}}/banner1.png" />
+                    </view>
+                    <view>啊大大啊大大啊大大啊大大啊大大啊大大啊大大</view>
+                    <view>￥339.00</view>
+                </navigator>
+                <navigator url="" hover-class="none">
+                    <view>
+                        <image src="{{imgPath}}/banner1.png" />
+                    </view>
+                    <view>啊大大啊大大啊大大啊大大啊大大啊大大啊大大</view>
+                    <view>￥339.00</view>
+                </navigator>
+                <navigator url="" hover-class="none">
+                    <view>
+                        <image src="{{imgPath}}/banner1.png" />
+                    </view>
+                    <view>啊大大啊大大啊大大啊大大啊大大啊大大啊大大</view>
+                    <view>￥339.00</view>
+                </navigator>
+                <navigator url="" hover-class="none">
+                    <view>
+                        <image src="{{imgPath}}/banner1.png" />
+                    </view>
+                    <view>啊大大啊大大啊大大啊大大啊大大啊大大啊大大</view>
+                    <view>￥339.00</view>
+                </navigator>
+            </scroll-view>
+        </view>
+    </view>
+    <view class="activityContainer">
+        <view class="contTitle">热门活动</view>
+        <view class="contList">
+            <swiper class='activitySwiper' vertical="true" autoplay="true" interval="2500" duration="1000" circular="true">
+                <block wx:for="{{image}}" wx:for-index="index" wx:key="bannerList">
+                    <swiper-item>
+                        <navigator hover-class="none" class="activitySwiperItem">
+                            <image src="{{item.url}}" class="slide-image" />
+                            <view>
+                                <view>活动啊活动啊！！！活动啊活动啊！！！活动啊活动啊！！！活动啊活动啊！！！</view>
+                                <view>
+                                    <icon class="iconfont icon-dianpu"></icon>店铺小施主
+                                </view>
+                                <view>进店看看 >></view>
+                            </view>
+                        </navigator>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+    </view>
+    <view class="hotContainer">
+        <view class="contTitle">热卖专柜</view>
+        <view class="contList">
+            <scroll-view scroll-x class="contScroll">
+                <navigator url="" hover-class="none">
+                    <view>
+                        <image src="{{imgPath}}/banner1.png" />
+                    </view>
+                    <view>啊大大啊大大啊大大啊大大啊大大啊大大啊大大</view>
+                    <view>￥339.00
+                        <icon class="iconfont icon-wangfanbaoyouicon"> 包邮</icon>
+                    </view>
+                </navigator>
+                <navigator url="" hover-class="none">
+                    <view>
+                        <image src="{{imgPath}}/banner1.png" />
+                    </view>
+                    <view>啊大大啊大大啊大大啊大大啊大大啊大大啊大大</view>
+                    <view>￥339.00</view>
+                </navigator>
+                <navigator url="" hover-class="none">
+                    <view>
+                        <image src="{{imgPath}}/banner1.png" />
+                    </view>
+                    <view>啊大大啊大大啊大大啊大大啊大大啊大大啊大大</view>
+                    <view>￥339.00</view>
+                </navigator>
+                <navigator url="" hover-class="none">
+                    <view>
+                        <image src="{{imgPath}}/banner1.png" />
+                    </view>
+                    <view>啊大大啊大大啊大大啊大大啊大大啊大大啊大大</view>
+                    <view>￥339.00</view>
+                </navigator>
+                <navigator url="" hover-class="none">
+                    <view>
+                        <image src="{{imgPath}}/banner1.png" />
+                    </view>
+                    <view>啊大大啊大大啊大大啊大大啊大大啊大大啊大大</view>
+                    <view>￥339.00</view>
+                </navigator>
+                <navigator url="" hover-class="none">
+                    <view>
+                        <image src="{{imgPath}}/banner1.png" />
+                    </view>
+                    <view>啊大大啊大大啊大大啊大大啊大大啊大大啊大大</view>
+                    <view>￥339.00</view>
+                </navigator>
+            </scroll-view>
+        </view>
+    </view>
+    <view class="allContainer">
+        <view class="contTitle">全部商品</view>
+        <view class="allList">
+            <navigator url="" hover-class="none">
+                <view>
+                    <image src="{{imgPath}}/banner2.png" />
+                    <view>
+                        这个无良商家
+                    </view>
+                </view>
+                <view>这个是商品的标题啦这个是商品的标题啦这个是商品的标题啦</view>
+                <view>￥55.00</view>
+                <view><view>已售289</view>包邮</view>
+            </navigator>
+            <navigator url="" hover-class="none">
+                <view>
+                    <image src="{{imgPath}}/banner2.png" />
+                    <view>
+                        这个无良商家
+                    </view>
+                </view>
+                <view>这个是商品的标题啦</view>
+                <view>￥55.00</view>
+                <view><view>已售289</view>包邮</view>
+            </navigator>
+            <navigator url="" hover-class="none">
+                <view>
+                    <image src="{{imgPath}}/banner2.png" />
+                    <view>
+                        这个无良商家
+                    </view>
+                </view>
+                <view>这个是商品的标题啦</view>
+                <view>￥55.00</view>
+                <view><view>已售289</view>包邮</view>
+            </navigator>
+            <navigator url="" hover-class="none">
+                <view>
+                    <image src="{{imgPath}}/banner2.png" />
+                    <view>
+                        这个无良商家这个无良商家这个无良商家
+                    </view>
+                </view>
+                <view>这个是商品的标题啦</view>
+                <view>￥55.00</view>
+                <view><view>已售289</view>包邮</view>
+            </navigator>
+            <navigator url="" hover-class="none">
+                <view>
+                    <image src="{{imgPath}}/banner2.png" />
+                    <view>
+                        这个无良商家
+                    </view>
+                </view>
+                <view>这个是商品的标题啦</view>
+                <view>￥55.00</view>
+                <view><view>已售289</view>包邮</view>
+            </navigator>
+            <navigator url="" hover-class="none">
+                <view>
+                    <image src="{{imgPath}}/banner2.png" />
+                    <view>
+                        这个无良商家
+                    </view>
+                </view>
+                <view>这个是商品的标题啦</view>
+                <view>￥55.00</view>
+                <view><view>已售289</view>包邮</view>
+            </navigator>
+            <navigator url="" hover-class="none">
+                <view>
+                    <image src="{{imgPath}}/banner2.png" />
+                    <view>
+                        这个无良商家
+                    </view>
+                </view>
+                <view>这个是商品的标题啦</view>
+                <view>￥55.00</view>
+                <view><view>已售289</view>包邮</view>
+            </navigator>
+        </view>
+    </view>
+</scroll-view>

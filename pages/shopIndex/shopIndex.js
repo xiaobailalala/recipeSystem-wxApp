@@ -1,4 +1,4 @@
-var Tools = require("../../ToolsApi/toolsApi.js");
+var Tools=require("../../ToolsApi/toolsApi.js");
 Page({
 
   /**
@@ -7,21 +7,21 @@ Page({
   data: {
     imgPath: Tools.tools.imgPathUrl,
     resPath: Tools.tools.resPathUrl,
-    bannerList: [],
-    dataList: []
-  },
-
-  writeNoteTap: function(){
-    wx.chooseImage({
-      count: 9,
-      sizeType: ['compressed'],
-      success: function(res){
-        var arr = res.tempFilePaths;
-        wx.navigateTo({
-          url: "/pages/infoadd/articleInfoAdd/articleInfoAdd?imgPath=" + JSON.stringify(arr)
-        });
+    image: [
+      {
+        url: Tools.tools.imgPathUrl + "/shopBanner4.jpg"
+      },
+      {
+        url: Tools.tools.imgPathUrl + "/shopBanner2.jpg"
+      },
+      {
+        url: Tools.tools.imgPathUrl + "/shopBanner3.jpg"
+      },
+      {
+        url: Tools.tools.imgPathUrl + "/shopBanner1.jpg"
       }
-    });
+    ],
+    classifyList: []
   },
 
   /**
@@ -42,23 +42,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.showLoading({
-      title: '加载中',
-    });
     wx.request({
-      url: Tools.urls.mob_article_listIndex,
+      url: Tools.urls.mob_marqueClassify_productClassifyList,
       method: "GET",
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
       success: res => {
-        res.data.data.bannerList.forEach(item => item.fcover = JSON.parse(item.fcover)[0]);
-        res.data.data.dataList.forEach(item => item.fcover = JSON.parse(item.fcover)[0]);
         this.setData({
-          bannerList: res.data.data.bannerList,
-          dataList: res.data.data.dataList
+          classifyList: res.data.data
         });
-        wx.hideLoading();
       }
     });
   },

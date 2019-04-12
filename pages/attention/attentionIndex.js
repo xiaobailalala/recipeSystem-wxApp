@@ -131,6 +131,9 @@ Page({
     wx.getStorage({
       key: "commonUser",
       success: res => {
+        wx.showLoading({
+          title: '加载中',
+        });
         wx.request({
           url: Tools.urls.mob_attention_attentionInfo,
           method: "GET",
@@ -161,6 +164,7 @@ Page({
               atteLen: attePeople.length,
               fansLen: fansPeople.length
             });
+            wx.hideLoading();
           }
         });
       },

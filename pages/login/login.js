@@ -95,7 +95,7 @@ Page({
                       if(this.data.isActive){
                         wx.navigateBack({
                           success: ()=> {
-                            if (!this.data.textInfo.recipeUnload) {
+                            // if (!this.data.textInfo.recipeUnload) {
                               var page = getCurrentPages();
                               page = page[page.length - 2];
                               if (page == undefined || page == null) return;
@@ -104,7 +104,7 @@ Page({
                               } else {
                                 page.onLoad();
                               }
-                            }
+                            // }
                           }
                         })
                       }else{

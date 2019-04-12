@@ -1,0 +1,25 @@
+<scroll-view style="height: 100vh;" scroll-y>
+    <view class="titleContainer">
+        <image src="{{resPath}}{{material.fcover}}" />{{material.fname}}
+    </view>
+    <view class="listContainer">
+        <view>- 相关食谱 -</view>
+        <navigator url='/pages/info/commonDataInfo/commonDataInfo?rid={{item.recipe.fid}}' wx:for="{{dataList}}" wx:key="index" wx:for-item="item" hover-class='none' class='datalist'>
+            <image src='{{resPath}}{{item.recipe.fcover}}'></image>
+            <view>
+                <text class='datatitle'>{{item.recipe.fname}}</text>
+                <view class='datatips'>
+                    <view wx:for="{{item.recipe.recipeTips}}" wx:for-item="tips" wx:key="tipTab1">{{tips.tips.fname}}</view>
+                </view>
+                <view class='datainfo'>
+                    <view>{{item.recipe.fauthor}}</view>
+                    <view>{{item.recipe.fgood}}人收藏</view>
+                </view>
+                <view class='datacount'>
+                    <icon class='iconfont icon-yanjing'></icon>
+                    {{item.recipe.fcount}}
+                </view>
+            </view>
+        </navigator>
+    </view>
+</scroll-view>

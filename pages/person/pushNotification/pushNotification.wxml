@@ -1,2 +1,22 @@
-<!--pages/person/pushNotification/pushNotification.wxml-->
-<text>pages/person/pushNotification/pushNotification.wxml</text>
+<view class="uploadInfo" bindtap="toolTap">
+    <icon class="iconfont icon-chilun"></icon>
+</view>
+<scroll-view scroll-top="{{scrollTop}}" class="scrollMain" scroll-y scroll-with-animation="{{scrollWithAnimation}}" enable-back-to-top="true">
+    <view class="msgItem" wx:for="{{dataList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+        <view>{{item.frelease}}</view>
+        <image src="{{imgPath}}/banner1.png" />
+        <view>
+            <view>
+                <text>{{item.fcontent}}</text>
+                <image wx:if="{{item.fcover}}" mode="widthFix" src="{{resPath}}{{item.fcover}}" />
+            </view>
+        </view>
+    </view>
+    <view class="endContainer">
+        <icon class="iconfont icon-END"></icon>
+    </view>
+</scroll-view>
+<action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetChange">
+    <action-sheet-item bindtap="bindClear" style="color: #d9534f;">清空消息</action-sheet-item>
+    <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet>

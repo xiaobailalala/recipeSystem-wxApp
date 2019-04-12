@@ -11,13 +11,15 @@
     </view>
 </view>
 <view wx:if="{{!searchDataIsShow}}" class="materialContainer">
-    <navigator animation="{{dataListShow}}" hover-class="none" wx:for="{{dataList}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+    <navigator animation="{{dataListShow}}" hover-class="none" wx:for="{{dataList}}" wx:for-item="item" wx:for-index="index" wx:key="index"
+    url="/pages/list/materialRecipeList/materialRecipeList?mid={{item.fid}}">
         {{item.fname}}
         <image src="{{resPath}}{{item.fcover}}" />
     </navigator>
 </view>
 <scroll-view wx:if="{{searchDataIsShow}}" scroll-y style="height: calc(100% - 80rpx);" class="searchListContainer">
-    <navigator wx:for="{{searchList}}" wx:for-index="index" wx:for-item="item" wx:key="index" hover-class="none">
+    <navigator wx:for="{{searchList}}" wx:for-index="index" wx:for-item="item" wx:key="index" hover-class="none"
+    url="/pages/list/materialRecipeList/materialRecipeList?mid={{item.fid}}">
         <image src="{{resPath}}{{item.fcover}}" />
         {{item.fname}}
         <icon class="iconfont icon-xiangyou"></icon>

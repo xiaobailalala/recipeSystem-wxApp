@@ -133,14 +133,14 @@ Page({
               tempBottom = temStr.split("-")[0];
               tempTop = temStr.split("-")[1];
               this.initSocket(true);
-              this.setData({
-                isSocketConnect: true
-              });
+              // this.setData({
+              //   isSocketConnect: true
+              // });
             } else {
               this.initSocket(false);
-              this.setData({
-                isSocketConnect: true
-              });
+              // this.setData({
+              //   isSocketConnect: true
+              // });
             }
           }
         });
@@ -168,40 +168,7 @@ Page({
   },
 
   initSocket: function (isFire) {
-    var socketOpen = false;
-    function sendSocketMessage(msg) {
-      if (socketOpen) {
-        wx.sendSocketMessage({
-          data: msg
-        })
-      } else {
-        socketMsgQueue.push(msg)
-      }
-    }
-    var ws = {
-      send: sendSocketMessage
-    }
-    Stomp.setInterval = function () { }
-    Stomp.clearInterval = function () { }
-    wx.connectSocket({
-      url: Tools.tools.socketUrl,
-      success: () => {
-        this.setData({
-          isSocketConnect: true
-        });
-      }
-    });
-    wx.connectSocket({
-      url: Tools.tools.socketUrl
-    });
-    wx.onSocketOpen(function (res) {
-      socketOpen = true
-      ws.onopen()
-    });
-    wx.onSocketMessage(function (res) {
-      ws.onmessage(res)
-    });
-    stompClient = Stomp.over(ws);
+    
     if (isFire) {
       stompClient.connect({}, function (sessionId) {
         stompClient.subscribe('/sensorData/fire', function (body, headers) {
@@ -549,11 +516,42 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (this.data.isSocketConnect) {
-      this.onLoad({
-        rid: this.data.recipeData.fid
-      });
+    var socketOpen = false;
+    function sendSocketMessage(msg) {
+      if (socketOpen) {
+        wx.sendSocketMessage({
+          data: msg
+        })
+      } else {
+        socketMsgQueue.push(msg)
+      }
     }
+    var ws = {
+      send: sendSocketMessage
+    }
+    Stomp.setInterval = function () { }
+    Stomp.clearInterval = function () { }
+    wx.connectSocket({
+      url: Tools.tools.socketUrl,
+      // success: () => {
+      //   this.setData({
+      //     isSocketConnect: true
+      //   });
+      // }
+    });
+    wx.onSocketOpen(function (res) {
+      socketOpen = true
+      // ws.onopen()
+    });
+    wx.onSocketMessage(function (res) {
+      // ws.onmessage(res)
+    });
+    stompClient = Stomp.over(ws);
+    // if (this.data.isSocketConnect) {
+    //   this.onLoad({
+    //     rid: this.data.recipeData.fid
+    //   });
+    // }
   },
 
   /**

@@ -19,7 +19,7 @@
         <view class="likeListMain">
             <view>
                 <navigator hover-class="none" wx:for="{{articleList}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==0}}"
-                    class="" url="" hover-class="none">
+                    url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.fid}}" hover-class="none">
                     <image src="{{resPath}}{{item.fcover}}" lazy-load="true" mode="widthFix" />
                     <view>{{item.fname}}</view>
                     <view class="likeInfo">
@@ -34,7 +34,7 @@
             </view>
             <view>
                 <navigator hover-class="none" wx:for="{{articleList}}" wx:key="cascade" wx:for-item="item" wx:for-index="index" wx:if="{{index%2==1}}"
-                    class="" url="" hover-class="none">
+                    url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.fid}}" hover-class="none">
                     <image src="{{resPath}}{{item.fcover}}" lazy-load="true" mode="widthFix" />
                     <view>{{item.fname}}</view>
                     <view class="likeInfo">

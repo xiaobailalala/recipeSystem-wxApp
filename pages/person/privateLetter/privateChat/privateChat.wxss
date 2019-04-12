@@ -1,0 +1,272 @@
+page {
+    height: 100%;
+    background-color: #ffffff;
+    position: relative;
+}
+
+.clear {
+    clear: both;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+button::after {
+    border: unset;
+}
+
+.userInfoContainer {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20rpx 40rpx;
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #eeeeee;
+    box-shadow: 0 10rpx 15rpx #eeeeee;
+    background-color: #ffffff;
+}
+
+.userInfoContainer>navigator:nth-of-type(1) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 28rpx;
+}
+
+.userInfoContainer>navigator:nth-of-type(1)>image {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+}
+
+.userInfoContainer>navigator:nth-of-type(2) {
+    color: #888888;
+    font-size: 24rpx;
+}
+
+.inputContainer {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25rpx 15rpx;
+    box-sizing: border-box;
+    border-top: 1rpx solid #eeeeee;
+    box-shadow: 0 -10rpx 15rpx #eeeeee;
+    background-color: #ffffff;
+}
+
+.iconLeft,
+.iconRight {
+    width: 13%;
+    height: 80rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconLeft>icon,
+.iconRight>icon {
+    font-size: 60rpx;
+}
+
+.iconContent {
+    width: 70%;
+    height: 80rpx;
+    border-radius: 10rpx;
+    overflow: hidden;
+}
+
+.iconContent>view {
+    background-color: #eeeeee;
+    height: 100%;
+    text-align: center;
+    line-height: 80rpx;
+}
+
+.iconContent>input {
+    background-color: #eeeeee;
+    height: 100%;
+    padding: 0 20rpx;
+}
+
+.recordContainer {
+    position: absolute;
+    width: 250rpx;
+    left: 50%;
+    margin-left: -125rpx;
+    height: 250rpx;
+    top: 50%;
+    margin-top: -125rpx;
+    background-color: #000000;
+    opacity: 0.6;
+    border-radius: 30rpx;
+    z-index: 100;
+    text-align: center;
+    padding: 20rpx 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.recordContainer>icon {
+    font-size: 130rpx;
+    color: #ffffff;
+    margin-bottom: 20rpx;
+}
+
+.recordContainer>view {
+    font-size: 26rpx;
+    color: #ffffff;
+}
+
+icon.cancleIcon {
+    color: #fb1d16;
+}
+
+.occupiDedTop {
+    height: 122rpx;
+}
+
+.occupiedBottom {
+    height: 150rpx;
+}
+
+.chatList {
+    padding: 30rpx 40rpx;
+    position: relative;
+}
+
+.leftChat>navigator {
+    position: absolute;
+    left: 40rpx;
+    top: 78rpx;
+    z-index: 10;
+}
+
+.rightChat>navigator {
+    position: absolute;
+    right: 40rpx;
+    top: 78rpx;
+    z-index: 10;
+}
+
+.leftChat .chatIcon {
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-right: 15rpx solid #eeeeee;
+    border-top: 12rpx solid transparent;
+    border-bottom: 12rpx solid transparent;
+    z-index: 10;
+    left: 101rpx;
+    top: 33rpx;
+}
+
+.rightChat .chatIcon {
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 15rpx solid #eeeeee;
+    border-top: 12rpx solid transparent;
+    border-bottom: 12rpx solid transparent;
+    z-index: 10;
+    right: 101rpx;
+    top: 33rpx;
+}
+
+.rightChat .chatRecord>view:nth-of-type(2) {
+    float: right;
+}
+
+.chatList>navigator>image {
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 50%;
+}
+
+.chatContext,
+.chatRecord,
+.chatImg {
+    padding: 0 115rpx;
+    min-height: 90rpx;
+    padding-top: 10rpx;
+    position: relative;
+}
+
+.chatContext>view:nth-of-type(2) {
+    background-color: #eeeeee;
+    color: #666666;
+    font-size: 30rpx;
+    padding: 15rpx;
+    border-radius: 10rpx;
+}
+
+.chatRecord>view:nth-of-type(2) {
+    background-color: #eeeeee;
+    border-radius: 10rpx;
+    height: 70rpx;
+    width: 200rpx;
+}
+
+.chatImg>view:nth-of-type(2) {
+    background-color: #eeeeee;
+    border-radius: 10rpx;
+    padding: 15rpx;
+}
+
+.chatRecord icon {
+    font-size: 32rpx;
+    font-weight: bold;
+    position: relative;
+}
+
+.leftChat .chatRecord icon {
+    left: 20rpx;
+}
+
+.rightChat .chatRecord icon {
+    float: right;
+    right: 20rpx;
+}
+
+.chatRecord>view:nth-of-type(2)>view {
+    color: #888888;
+    font-size: 30rpx;
+    display: inline-block;
+    position: relative;
+    left: 40rpx;
+}
+
+.rightChat .chatRecord>view:nth-of-type(2)>view {
+    left: unset;
+    float: right;
+    right: 40rpx;
+    top: 18rpx;
+}
+
+.chatImg image {
+    width: 100%;
+}
+
+.chatList>text{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 28rpx;
+    color: #b4b4b4;
+    margin-bottom: 15rpx;
+}

@@ -41,17 +41,28 @@
     <navigator class='toolsGo' url="/pages/person/personCollect/personCollect?uid={{userInfo.fid}}">
       <view>
         <text>我的收藏</text>
-        <view>
+        <view class="toolsItem">
           个人收藏都在这里
           <text class='icon-gengduo iconfont iconRight'></text>
         </view>
       </view>
     </navigator>
-    <navigator class='toolsGo'>
+    <navigator url="/pages/person/pushNotification/pushNotification" class='toolsGo'>
       <view>
         <text>推送信息</text>
-        <view>
+        <view wx:if="{{tipCount}}" class="toolsTip">{{tipCount}}</view>
+        <view class="toolsItem">
           您的生活小贴士
+          <text class='icon-gengduo iconfont iconRight'></text>
+        </view>
+      </view>
+    </navigator>
+    <navigator url="/pages/person/privateLetter/privateLetter" class='toolsGo'>
+      <view>
+        <text>私信管理</text>
+        <view wx:if="{{tipCount}}" class="toolsTip">{{tipCount}}</view>
+        <view class="toolsItem">
+          这里有小伙伴们的关心哦
           <text class='icon-gengduo iconfont iconRight'></text>
         </view>
       </view>
@@ -59,7 +70,7 @@
     <navigator class='toolsGo'>
       <view>
         <text>最近浏览菜谱</text>
-        <view>
+        <view class="toolsItem">
           瞅瞅我的足迹
           <text class='icon-gengduo iconfont iconRight'></text>
         </view>
@@ -68,7 +79,7 @@
     <navigator class='toolsGo'>
       <view>
         <text>草稿箱</text>
-        <view>
+        <view class="toolsItem">
           这里的东西还没发布哦
           <text class='icon-gengduo iconfont iconRight'></text>
         </view>
@@ -77,7 +88,7 @@
     <button class='toolsGo' open-type='share'>
       <view>
         <text>分享膳房膳食给朋友</text>
-        <view>
+        <view class="toolsItem">
           Share Me
           <text class='icon-gengduo iconfont iconRight'></text>
         </view>

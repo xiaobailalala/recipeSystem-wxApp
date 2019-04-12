@@ -1,1 +1,98 @@
-/* pages/person/pushNotification/pushNotification.wxss */
+page {
+    height: 100%;
+    background-color: #ffffff;
+    position: relative;
+}
+
+.clear {
+    clear: both;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+button::after {
+    border: unset;
+}
+
+.msgItem {
+    padding: 0 40rpx;
+    position: relative;
+    padding-top: 30rpx;
+    margin-bottom: 10rpx;
+}
+
+.msgItem>image {
+    position: absolute;
+    border-radius: 50%;
+    width: 88rpx;
+    height: 88rpx;
+    left: 40rpx;
+    top: 90rpx;
+}
+
+.msgItem>view:nth-of-type(1) {
+    font-size: 24rpx;
+    color: #b8b8b8;
+    text-align: center;
+    padding: 26rpx 0;
+    position: relative;
+}
+
+.msgItem>view:nth-of-type(2) {
+    padding-left: 110rpx;
+}
+
+.msgItem>view:nth-of-type(2)>view:nth-of-type(1) {
+    background-color: #f6f6f6;
+    font-size: 28rpx;
+    line-height: 1.9;
+    padding: 26rpx 23rpx;
+    border-radius: 15rpx;
+}
+
+.msgItem>view:nth-of-type(2)>view:nth-of-type(1)>image {
+    width: 100%;
+    padding-top: 20rpx;
+}
+
+.scrollMain {
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.endContainer{
+    margin-top: 50rpx;
+    text-align: center;
+}
+
+.endContainer>icon {
+    color: #dcdcdc;
+    font-size: 40rpx;
+    padding-bottom: 150rpx;
+}
+
+.uploadInfo {
+    position: fixed;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 10rpx;
+    top: 10rpx;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 20rpx #888888;
+    z-index: 1000;
+}
+
+.uploadInfo>icon {
+    color: #888888;
+    position: relative;
+    top: -6rpx;
+    font-size: 40rpx;
+}

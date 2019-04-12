@@ -1,0 +1,11 @@
+<scroll-view style="height: 100vh;" scroll-y>
+    <view class="peopleListItem" wx:for="{{dataList}}" data-id="{{item.fid}}"
+    wx:for-item="item" wx:for-index="index" wx:key="index" bindtap="enterChat">
+        <view>
+            <image wx:if="{{item.fcover==null}}" src="{{imgPath}}/defaulthead.png" />
+            <image wx:else src="{{resPath}}{{item.fcover}}" />
+            {{item.fusername}}
+        </view>
+        <icon class="iconfont icon-gengduo"></icon>
+    </view>
+</scroll-view>

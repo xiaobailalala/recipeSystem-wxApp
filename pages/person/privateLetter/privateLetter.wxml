@@ -1,0 +1,34 @@
+<scroll-view style="height: 100vh;" scroll-y>
+    <view class="replyContainer">
+        <navigator url="/pages/person/privateLetter/chatPeople/chatPeople?type=atte" hover-class="none">
+            <view><icon class="iconfont icon-wodehaoyou"></icon></view>粉丝
+        </navigator>
+        <navigator url="/pages/person/privateLetter/chatPeople/chatPeople?type=fans" hover-class="none">
+            <view><icon class="iconfont icon-guanzhuderen2"></icon></view>关注
+        </navigator>
+        <navigator url="" hover-class="none">
+            <view><icon class="iconfont icon-aite1"></icon></view>提到我
+        </navigator>
+        <navigator url="" hover-class="none">
+            <view><icon class="iconfont icon-pinglun"></icon></view>评论
+        </navigator>
+    </view>
+    <view class="messageContainer">
+        <view bindtap="enterChat" hover-class="none" bindlongpress="bindLongPress">
+            <image src="{{imgPath}}/banner.png" />
+            <view>
+                <view>
+                    <view>膳食小助手</view>
+                    <view>这是一条测试消息这是一条测试消息这是一条测试消息</view>
+                </view>
+                <view>
+                    <view>2018-12-16</view>
+                    <view>
+                        <view>16:40</view>
+                        <view>6</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</scroll-view>

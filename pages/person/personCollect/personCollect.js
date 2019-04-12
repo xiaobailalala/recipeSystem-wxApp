@@ -111,6 +111,9 @@ Page({
    */
   onLoad: function (options) {
     var uid = options.uid;
+    wx.showLoading({
+      title: '加载中',
+    });
     wx.request({
       url: Tools.urls.mob_commonUser_collectionInfo,
       data: {
@@ -127,6 +130,7 @@ Page({
           articleList: res.data.data.article,
           articleListAll: res.data.data.article
         });
+        wx.hideLoading();
       }
     });
   },

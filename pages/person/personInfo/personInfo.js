@@ -135,6 +135,9 @@ Page({
         });
       }
     });
+    wx.showLoading({
+      title: '加载中',
+    });
     wx.request({
       url: Tools.urls.mob_commonUser_peopleInfoDetail,
       method: "GET",
@@ -147,6 +150,7 @@ Page({
           fansLen: res.data.data.fansInfo.length,
           uid: uid
         });
+        wx.hideLoading();
       }
     });
   },

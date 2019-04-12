@@ -1,17 +1,18 @@
 var toolsObj = {
   // reqPathUrl: "http://192.168.1.110:8080",
   reqPathUrl: "http://192.168.1.110:8080",
-  // reqPathUrl: "http://172.20.10.2:8080",
+  // reqPathUrl: "http://172.20.10.3:8080",
   // imgPathUrl:"http://192.168.1.119:8080/recipeUpload/resource/img",
   // imgPathUrl: "http://172.21.91.21:8080/recipeUpload/resource/img",
   imgPathUrl: "http://192.168.1.110:8090/recipeUpload/resource/img",
-  // imgPathUrl: "http://172.20.10.2:8090/recipeUpload/resource/img",
-  resPathUrl: "http://192.168.1.108/",
+  // imgPathUrl: "http://172.20.10.3:8090/recipeUpload/resource/img",
+  // resPathUrl: "http://192.168.1.108/",
+  resPathUrl: "http://47.107.179.70/",
   // resPathUrl: "http://172.20.10.2/",
   // resPathUrl: "http://172.21.91.21/",
   // resPathUrl: "http://172.20.10.10/",
   socketUrl: "ws://192.168.1.110:8080/endpoint-websocket-wxClient",
-  // socketUrl: "ws://172.20.10.2:8080/endpoint-websocket-wxClient",
+  // socketUrl: "ws://172.20.10.3:8080/endpoint-websocket-wxClient",
   toast: function(content, icon, mask, duration, fn) {
     wx.showToast({
       title: content,
@@ -63,11 +64,19 @@ var urlsObj = {
   mob_article_listIndex: toolsObj.reqPathUrl + "/mob/article/listIndex",
   mob_article_articleForClassify: toolsObj.reqPathUrl + "/mob/article/articleForClassify",
   mob_commonUser_peopleInfoDetail: toolsObj.reqPathUrl + "/mob/commonUser/peopleInfoDetail",
+  mob_commonUser_peopleInfoBrief: toolsObj.reqPathUrl + "/mob/commonUser/peopleInfoBrief",
   mob_commonUser_updateCommonUserBg: toolsObj.reqPathUrl + "/mob/commonUser/updateCommonUserBg",
   mob_recipe_handpickList: toolsObj.reqPathUrl + "/mob/recipe/handpickList",
   mob_article_handpickList: toolsObj.reqPathUrl + "/mob/article/handpickList",
   mob_material_randomList: toolsObj.reqPathUrl + "/mob/material/randomList",
-  mob_material_getDataByVagueName: toolsObj.reqPathUrl + "/mob/material/getDataByVagueName"
+  mob_material_getDataByVagueName: toolsObj.reqPathUrl + "/mob/material/getDataByVagueName",
+  mob_sysNotification_showMessage: toolsObj.reqPathUrl + "/mob/sysNotification/showMessage",
+  mob_sysNotification_showMessageCount: toolsObj.reqPathUrl + "/mob/sysNotification/showMessageCount",
+  mob_sysNotification_deleteMessage: toolsObj.reqPathUrl + "/mob/sysNotification/deleteMessage",
+  mob_marqueClassify_productClassifyList: toolsObj.reqPathUrl + "/mob/marqueClassify/productClassifyList",
+  mob_recipe_getDataByMid: toolsObj.reqPathUrl + "/mob/recipe/getDataByMid",
+  mob_commonChat_chatSaveMessage: toolsObj.reqPathUrl + "/mob/commonChat/chatSaveMessage",
+  mob_commonChat_showMessage: toolsObj.reqPathUrl + "/mob/commonChat/showMessage"
 }
 module.exports = {
   tools: toolsObj,

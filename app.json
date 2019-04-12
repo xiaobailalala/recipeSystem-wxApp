@@ -1,16 +1,23 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/login/login",
+    "pages/person/privateLetter/privateChat/privateChat",
+    "pages/person/privateLetter/privateLetter",
+    "pages/person/privateLetter/chatPeople/chatPeople",
+    "pages/reg/reg",
     "pages/material/material",
+    "pages/list/materialRecipeList/materialRecipeList",
+    "pages/shopIndex/shopIndex",
+    "pages/person/person",
+    "pages/person/pushNotification/pushNotification",
     "pages/aboutMe/aboutMe",
     "pages/list/handpickList/handpickList",
     "pages/infoadd/articleInfoAdd/articleInfoAdd",
     "pages/infoadd/articleInfoAdd/referObj/referObj",
     "pages/person/personAtteFans/personAtteFans",
-    "pages/person/person",
     "pages/articleIndex/articleClassify/articleClassify",
     "pages/articleIndex/articleIndex",
-    "pages/login/login",
     "pages/attention/attentionIndex",
     "pages/info/articleDataInfo/articleDataInfo",
     "pages/person/personCollect/personCollect",
@@ -26,11 +33,9 @@
     "pages/menu/menu",
     "pages/logs/logs",
     "pages/personeditor/personeditor",
-    "pages/reg/reg",
     "pages/repwd/repwd",
     "pages/personeditor/changeImage/changeImage",
-    "pages/comment/recipeComment/commentChangeImg/commentChangeImg",
-    "pages/person/pushNotification/pushNotification"
+    "pages/comment/recipeComment/commentChangeImg/commentChangeImg"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -55,7 +60,7 @@
         "text": "笔记"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/shopIndex/shopIndex",
         "iconPath": "icon/unstore.png",
         "selectedIconPath": "icon/instore.png",
         "text": "周边"

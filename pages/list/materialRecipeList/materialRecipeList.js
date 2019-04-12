@@ -7,46 +7,25 @@ Page({
   data: {
     imgPath: Tools.tools.imgPathUrl,
     resPath: Tools.tools.resPathUrl,
-    peopleLen: 0,
-    peopleList: [],
-    articleList: [],
-    classify: 1
-  },
-
-  writeNoteTap: function(){
-    wx.chooseImage({
-      count: 9,
-      sizeType: ['compressed'],
-      success: function(res){
-        var arr = res.tempFilePaths;
-        wx.navigateTo({
-          url: "/pages/infoadd/articleInfoAdd/articleInfoAdd?imgPath=" + JSON.stringify(arr)
-        });
-      }
-    });
+    material: {},
+    dataList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({
-      title: '加载中',
-    });
-    var classify = options.classify;
     wx.request({
-      url: Tools.urls.mob_article_articleForClassify,
+      url: Tools.urls.mob_recipe_getDataByMid,
       method: "GET",
-      data: {classify: classify},
+      data: {
+        mid: options.mid
+      },
       success: res => {
-        res.data.data.articleList.forEach(item => item.fcover = JSON.parse(item.fcover)[0]);
         this.setData({
-          peopleLen: res.data.data.peopleList.length,
-          peopleList: res.data.data.peopleList,
-          articleList: res.data.data.articleList,
-          classify: classify
+          material: res.data.data.material,
+          dataList: res.data.data.dataList
         });
-        wx.hideLoading();
       }
     });
   },
