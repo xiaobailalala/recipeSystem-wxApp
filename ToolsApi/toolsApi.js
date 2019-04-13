@@ -1,19 +1,9 @@
 var toolsObj = {
-  // reqPathUrl: "http://192.168.1.110:8080",
-  reqPathUrl: "http://192.168.1.110:8080",
-  // reqPathUrl: "http://172.20.10.3:8080",
-  // imgPathUrl:"http://192.168.1.119:8080/recipeUpload/resource/img",
-  // imgPathUrl: "http://172.21.91.21:8080/recipeUpload/resource/img",
-  imgPathUrl: "http://192.168.1.110:8090/recipeUpload/resource/img",
-  // imgPathUrl: "http://172.20.10.3:8090/recipeUpload/resource/img",
-  // resPathUrl: "http://192.168.1.108/",
+  reqPathUrl: "http://192.168.2.226:8080",
+  imgPathUrl: "http://47.107.179.70:8090/recipeUpload/resource/img",
   resPathUrl: "http://47.107.179.70/",
-  // resPathUrl: "http://172.20.10.2/",
-  // resPathUrl: "http://172.21.91.21/",
-  // resPathUrl: "http://172.20.10.10/",
-  socketUrl: "ws://192.168.1.110:8080/endpoint-websocket-wxClient",
-  // socketUrl: "ws://172.20.10.3:8080/endpoint-websocket-wxClient",
-  toast: function(content, icon, mask, duration, fn) {
+  socketUrl: "ws://192.168.2.226:8080/endpoint-websocket-wxClient",
+  toast: function (content, icon, mask, duration, fn) {
     wx.showToast({
       title: content,
       icon: icon,
@@ -78,7 +68,49 @@ var urlsObj = {
   mob_commonChat_chatSaveMessage: toolsObj.reqPathUrl + "/mob/commonChat/chatSaveMessage",
   mob_commonChat_showMessage: toolsObj.reqPathUrl + "/mob/commonChat/showMessage"
 }
+
+const websocket = new Promise(function(resolve, reject){
+  let socketOpen = false
+  let socketMsgQueue = []
+  // 发送数据
+  function sendSocketMessage(msg) {
+    if (socketOpen) {
+      wx.sendSocketMessage({ // 通过 WebSocket连接发送数据
+        data: msg
+      })
+    } else {
+      socketMsgQueue.push(msg)
+    }
+  }
+  let ws = {
+    send: sendSocketMessage
+  }
+  wx.connectSocket({
+    url: toolsObj.socketUrl
+  })
+  wx.onSocketOpen((res) => {
+    socketOpen = true
+    ws.onopen()
+  })
+  wx.onSocketMessage(res => {
+    ws.onmessage(res)
+  })
+  let Stomp = require('../utils/stomp.js').Stomp
+  Stomp.setInterval = (interval, f) => {
+    return setInterval(interval, f)
+  }
+  Stomp.clearInterval = (id) => {
+    return clearInterval(id)
+  }
+  var stompClient = Stomp.over(ws)
+  stompClient.connect({}, sessionId => {
+    resolve(stompClient)
+  })
+})
+
+
 module.exports = {
   tools: toolsObj,
-  urls: urlsObj
+  urls: urlsObj,
+  websocket: websocket
 }

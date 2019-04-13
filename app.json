@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/info/commonDataInfo/works/works",
+    "pages/infoadd/articleInfoAdd/articleInfoAdd",
     "pages/login/login",
     "pages/person/privateLetter/privateChat/privateChat",
     "pages/person/privateLetter/privateLetter",
@@ -13,7 +15,6 @@
     "pages/person/pushNotification/pushNotification",
     "pages/aboutMe/aboutMe",
     "pages/list/handpickList/handpickList",
-    "pages/infoadd/articleInfoAdd/articleInfoAdd",
     "pages/infoadd/articleInfoAdd/referObj/referObj",
     "pages/person/personAtteFans/personAtteFans",
     "pages/articleIndex/articleClassify/articleClassify",

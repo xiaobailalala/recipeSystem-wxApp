@@ -43,12 +43,12 @@
     </view>
     <navigator hover-class='none' url="/pages/comment/recipeComment/recipeComment?rid={{recipeData.fid}}&authorid={{recipeData.fuid}}&type=recipe">
       <icon class='iconfont icon-pinglun'></icon>
-      1
+      {{recipeData.commentCount}}
     </navigator>
-    <navigator hover-class='none'>
+    <view hover-class='none' class="upload-works" bindtap="uploadWorks">
       <icon class='iconfont icon-zhaoxiangji'></icon>
       传作品
-    </navigator>
+    </view>
   </view>
   <scroll-view scroll-y>
     <image class='cover' src='{{resPathUrl}}{{recipeData.fcover}}' bindtap='previewImage' data-src="{{resPathUrl}}{{recipeData.fcover}}"></image>

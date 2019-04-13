@@ -163,9 +163,9 @@ Page({
         // });
       }
       var textInfo = options;
-        this.setData({
-          textInfo: textInfo
-        });
+      this.setData({
+        textInfo: textInfo
+      });
       this.setData({
         isActive: true
       });

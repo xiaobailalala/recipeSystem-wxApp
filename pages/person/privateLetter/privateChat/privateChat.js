@@ -1,6 +1,4 @@
 var Tools = require("../../../../ToolsApi/toolsApi.js");
-var Stomp = require('../../../../utils/stomp.js').Stomp;
-var stompClient = {};
 Page({
 
   /**
@@ -236,31 +234,7 @@ Page({
         });
         this.getMessageData(result.data.fid, this.data.oid);
         var _this = this;
-        var socketOpen = false;
-        function sendSocketMessage(msg) {
-          if (socketOpen) {
-            wx.sendSocketMessage({
-              data: msg
-            })
-          } else {
-            socketMsgQueue.push(msg)
-          }
-        }
-        var ws = {
-          send: sendSocketMessage
-        }
-        Stomp.setInterval = function () { }
-        Stomp.clearInterval = function () { }
-        wx.connectSocket({
-          url: Tools.tools.socketUrl
-        });
-        wx.onSocketOpen(function (res) {
-          socketOpen = true
-        });
-        wx.onSocketMessage(function (res) {
-        });
-        stompClient = Stomp.over(ws);
-        stompClient.connect({}, function (sessionId) {
+        Tools.websocket.then(stompClient => {
           stompClient.subscribe('/chat/userMsg/' + result.data.fid, function (body, headers) {
             _this.getMessageData(result.data.fid, _this.data.oid);
           });

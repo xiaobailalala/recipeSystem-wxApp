@@ -100,33 +100,7 @@ Page({
           userInfo: result.data
         });
         this.getMessageData(result.data.fid);
-        var socketOpen = false;
-        function sendSocketMessage(msg) {
-          if (socketOpen) {
-            wx.sendSocketMessage({
-              data: msg
-            });
-          } else {
-            socketMsgQueue.push(msg)
-          }
-        }
-        var ws = {
-          send: sendSocketMessage
-        }
-        Stomp.setInterval = function () { }
-        Stomp.clearInterval = function () { }
-        wx.connectSocket({
-          url: Tools.tools.socketUrl
-        });
-        wx.onSocketOpen(function (res) {
-          socketOpen = true
-          ws.onopen()
-        });
-        wx.onSocketMessage(function (res) {
-          ws.onmessage(res)
-        });
-        stompClient = Stomp.over(ws);
-        stompClient.connect({}, function (sessionId) {
+        Tools.websocket.then(stompClient => {
           stompClient.subscribe('/systemMessage/userMsg/' + result.data.fid, function (body, headers) {
             _this.getMessageData(result.data.fid);
           });
@@ -139,14 +113,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    wx.closeSocket();
+    // wx.closeSocket();
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    wx.closeSocket();
+    // wx.closeSocket();
   },
 
   /**

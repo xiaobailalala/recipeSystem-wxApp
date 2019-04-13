@@ -1,0 +1,121 @@
+page {
+    height: 100%;
+    background-color: #ffffff;
+    position: relative;
+}
+
+.clear {
+    clear: both;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+button::after {
+    border: unset;
+}
+
+.uploadInfo {
+    position: fixed;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 10rpx;
+    top: 10rpx;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 20rpx #888888;
+    z-index: 1000;
+}
+
+.uploadInfo>icon {
+    color: #888888;
+    position: relative;
+    top: -8rpx;
+}
+
+.inputContainer,
+.imageContainer {
+    padding: 0 35rpx;
+}
+
+.pageTitle {
+    padding-top: 20rpx;
+    font-weight: bold;
+    color: #000000;
+    font-size: 50rpx;
+}
+
+.contentInput {
+    position: relative;
+}
+
+.contentInput>view {
+    position: absolute;
+    right: 0;
+    color: #cccccc;
+    bottom: 8rpx;
+}
+
+.contentInput>textarea {
+    padding: 30rpx 0;
+    width: 100%;
+    height: 300rpx;
+    font-size: 32rpx;
+    border-bottom: 1rpx solid #f0efed;
+    padding-bottom: 46rpx;
+}
+
+.imageContainer-scroll {
+    white-space: nowrap;
+}
+
+.imageContainer view {
+    margin-right: 32rpx;
+    position: relative;
+    width: 180rpx;
+    height: 180rpx;
+    margin-top: 24rpx;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.imageContainer view>icon {
+    position: absolute;
+    color: rgb(202, 202, 202);
+    right: -22rpx;
+    top: -32rpx;
+    margin: 0;
+    padding: 0;
+    line-height: unset;
+    font-size: 40rpx;
+}
+
+.imageContainer view>image {
+    width: 100%;
+    height: 100%;
+    border-radius: 10rpx;
+    margin: 0;
+}
+
+.imageContainer .selectImage>icon {
+    position: relative;
+    top: -6rpx;
+    left: 0;
+    font-size: 50rpx;
+}
+
+.imageContainer .selectImage {
+    border: 3rpx dotted rgb(161, 161, 161);
+    display: inline-block;
+    line-height: 180rpx;
+    text-align: center;
+    vertical-align: top;
+    border-radius: 10rpx;
+    margin-right: 0;
+}

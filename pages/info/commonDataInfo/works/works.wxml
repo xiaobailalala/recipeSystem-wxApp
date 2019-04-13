@@ -1,0 +1,24 @@
+<view class="uploadInfo" bindtap="submitTap">
+    <icon class="iconfont icon-shangchuan"></icon>
+</view>
+<view class="inputContainer">
+    <view class="pageTitle">
+        作品心得
+    </view>
+    <view class="contentInput">
+        <textarea maxlength="1000" bindfocus="contentFocus" bindblur="contentBlur" bindinput="contentInput" placeholder="说点什么~"
+            placeholder-style="color: #cccccc;"></textarea>
+        <view wx:if="{{contentMask.isShow}}">{{contentMask.length}}</view>
+    </view>
+</view>
+<view class="imageContainer">
+    <scroll-view class="imageContainer-scroll" scroll-x>
+        <view wx:for="{{selectImgPath}}" wx:key="this" wx:for-item="item" wx:for-index="index">
+            <icon class="iconfont icon-delete" data-index="{{index}}" bindtap="deleteImg" />
+            <image src="{{item}}" />
+        </view>
+        <view class="selectImage" wx:if="{{selectImgLength!=9}}" bindtap="selectImg">
+            <icon class="iconfont icon-iconjia" />
+        </view>
+    </scroll-view>
+</view>

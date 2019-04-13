@@ -33,7 +33,7 @@ button::after {
     padding-right: 30rpx;
 }
 
-.toolsNav>navigator {
+.toolsNav>navigator, .upload-works {
     height: 100%;
     line-height: 100rpx;
     font-size: 30rpx;
