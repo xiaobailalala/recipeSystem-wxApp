@@ -1,8 +1,9 @@
+var serverUrl = "192.168.0.104:8080";
 var toolsObj = {
-  reqPathUrl: "http://192.168.2.226:8080",
+  reqPathUrl: "http://" + serverUrl,
   imgPathUrl: "http://47.107.179.70:8090/recipeUpload/resource/img",
   resPathUrl: "http://47.107.179.70/",
-  socketUrl: "ws://192.168.2.226:8080/endpoint-websocket-wxClient",
+  socketUrl: "ws://" + serverUrl + "/endpoint-websocket-wxClient",
   toast: function (content, icon, mask, duration, fn) {
     wx.showToast({
       title: content,

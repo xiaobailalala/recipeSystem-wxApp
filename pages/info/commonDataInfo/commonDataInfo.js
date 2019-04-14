@@ -1,23 +1,35 @@
 // pages/info/commonDataInfo/commonDataInfo.js
 var Tools = require("../../../ToolsApi/toolsApi.js");
 var Stomp = require('../../../utils/stomp.js').Stomp;
-var stompClient = {};
-var fireSensorData = 0;
-var smogSensorData = 0;
-var infraredSensorData = 0;
-var distanceSensorData = 0;
-var fireTimer = null;
-var smogTimer = null;
-var tempTop, tempBottom;
-var fireVoice, smogVoice, readyVoice, distanceVoice, cookTipMark;
 var innerAudioContext;
-var isFirstVoice = true, endType = 0, processVoice, requestVoice, voiceNextTimeout, voiceNextInterval, voiceNext, cookIndex = 0;
+var endType = 0, voiceNext;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    stompClient: {},
+    fireSensorData: 0,
+    smogSensorData: 0,
+    infraredSensorData: 0,
+    distanceSensorData: 0,
+    fireTimer: null,
+    smogTimer: null,
+    tempTop: 0, 
+    tempBottom: 0,
+    fireVoice: null, 
+    smogVoice: null, 
+    readyVoice: null, 
+    distanceVoice: null, 
+    cookTipMark: null,
+    isFirstVoice: true, 
+    processVoice: null, 
+    requestVoice: null, 
+    voiceNextTimeout: null, 
+    voiceNextInterval: null, 
+    cookIndex: 0,
+
     imgPath: Tools.tools.imgPathUrl,
     resPathUrl: Tools.tools.resPathUrl,
     recipeData: null,
@@ -88,6 +100,7 @@ Page({
   },
 
   getInitData: function (rid, uid, type) {
+    const _this = this;
     wx.request({
       url: Tools.urls.mob_recipe_updateRecipeCount,
       method: "GET",
@@ -123,8 +136,10 @@ Page({
             });
             var temStr = this.data.recipeData.ffire;
             if (temStr != 0) {
-              tempBottom = temStr.split("-")[0];
-              tempTop = temStr.split("-")[1];
+              _this.setData({
+                tempBottom: temStr.split("-")[0],
+                tempTop: temStr.split("-")[1]
+              });
               this.initSocket(true);
               // this.setData({
               //   isSocketConnect: true
@@ -153,35 +168,53 @@ Page({
         cookTipMark: "COOK_TIP"
       },
       success: res => {
-        readyVoice = res.data.data[0];
-        fireVoice = res.data.data[1];
-        smogVoice = res.data.data[2];
-        distanceVoice = res.data.data[3];
-        cookTipMark = res.data.data[4];
+        _this.setData({
+          fireVoice: res.data.data[1],
+          smogVoice: res.data.data[2],
+          readyVoice: res.data.data[0],
+          distanceVoice: res.data.data[3],
+          cookTipMark: res.data.data[4]
+        });
+        
+        
+        
+        
+        
       }
     });
   },
 
   initSocket: function (isFire) {
+    const _this = this;
     if (isFire) {
       Tools.websocket.then(stompClient => {
         stompClient.subscribe('/sensorData/fire', function (body, headers) {
-          fireSensorData = JSON.parse(body.body).tmp;
+          _this.setData({
+            fireSensorData: JSON.parse(body.body).tmp
+          });
         });
         stompClient.subscribe('/sensorData/smog', function (body, headers) {
-          smogSensorData = JSON.parse(body.body).pm;
+          _this.setData({
+            smogSensorData: JSON.parse(body.body).pm
+          });
         });
         stompClient.subscribe("/sensorData/infrared", function (body, headers) {
-          infraredSensorData = JSON.parse(body.body).body;
+          _this.setData({
+            infraredSensorData: JSON.parse(body.body).body
+          });
         });
         stompClient.subscribe("/sensorData/distance", function (body, headers) {
-          distanceSensorData = JSON.parse(body.body).distance;
+          _this.setData({
+            distanceSensorData: JSON.parse(body.body).distance
+          });
         });
       });
     } else {
       Tools.websocket.then(stompClient => {
         stompClient.subscribe('/sensorData/smog', function (body, headers) {
-          fireSensorData = JSON.parse(body.body).tmp;
+          _this.setData({
+            fireSensorData: JSON.parse(body.body).tmp
+          });
         });
       });
     }
@@ -251,32 +284,33 @@ Page({
     return {
       start() {
         this.stopVoice();
-        if (isFirstVoice) {
+        if (_this.data.isFirstVoice) {
           endType = -1;
-          innerAudioContext.src = _this.data.resPathUrl + readyVoice;
+          innerAudioContext.src = _this.data.resPathUrl + _this.data.readyVoice;
           innerAudioContext.play();
           readyTimeout = setTimeout(() => {
-            this.cookInterval(cookIndex);
+            this.cookInterval(_this.data.cookIndex);
           }, 10000);
         } else {
-          this.cookInterval(cookIndex);
+          this.cookInterval(_this.data.cookIndex);
         }
       },
       stop() {
         endType = 0;
         innerAudioContext.stop();
         clearTimeout(readyTimeout);
-        clearInterval(voiceNextInterval);
-        clearTimeout(voiceNextTimeout);
+        clearInterval(_this.data.voiceNextInterval);
+        clearTimeout(_this.data.voiceNextTimeout);
       },
       cookInterval(index) {
         this.stopVoice();
         this.request(process[index].fid).then(res => {
-          console.log(res);
-          processVoice = res.data.data.fvoice;
-          requestVoice = res.data.data.freqVoice;
+          _this.setData({
+            processVoice: res.data.data.fvoice,
+            requestVoice: res.data.data.freqVoice
+          });
           endType = 1;
-          innerAudioContext.src = _this.data.resPathUrl + cookTipMark;
+          innerAudioContext.src = _this.data.resPathUrl + _this.data.cookTipMark;
           innerAudioContext.play();
           voiceNext = Number(res.data.data.frequest) * 1000;
         });
@@ -341,7 +375,7 @@ Page({
           FireBtnStyle: "toolsOn"
         });
         Tools.websocket.then(stompClient => {
-          stompClient.send("/sensorMonitor/fireListenStart", {}, JSON.stringify({ "uid": this.data.userInfo.fid, "top": tempTop }));
+          stompClient.send("/sensorMonitor/fireListenStart", {}, JSON.stringify({ "uid": this.data.userInfo.fid, "top": _this.data.tempTop }));
           stompClient.send("/sensorMonitor/infraredListenStart", {}, JSON.stringify({ "uid": this.data.userInfo.fid, "top": 50 }));
           stompClient.send("/sensorMonitor/distanceListenStart", {}, JSON.stringify({ "uid": this.data.userInfo.fid, "top": 50 }));
         });
@@ -390,27 +424,28 @@ Page({
   },
 
   fireMonitor: function (isOpen) {
+    const _this = this;
     if (isOpen) {
-      fireTimer = setInterval(() => {
-        if (fireSensorData > tempTop || (infraredSensorData == 1 && distanceSensorData < 0.5)) {
+      const tempFireTimer = setInterval(() => {
+        if (_this.data.fireSensorData > _this.data.tempTop || (_this.data.infraredSensorData == 1 && _this.data.distanceSensorData < 0.5)) {
           this.setData({
             FireStyle: "safeWarn",
             mainBtnStyle: "mainBtnWarn"
           });
-          if (fireSensorData > tempTop) {
+          if (_this.data.fireSensorData > _this.data.tempTop) {
             if (endType == 0) {
               endType = 5;
-              innerAudioContext.src = this.data.resPathUrl + fireVoice;
+              innerAudioContext.src = this.data.resPathUrl + _this.data.fireVoice;
               innerAudioContext.play();
               Tools.websocket.then(stompClient => {
                 stompClient.send("/sensorMonitor/warning", {}, this.data.userInfo.fid);
               });
             }
           }
-          if (infraredSensorData == 1 && distanceSensorData < 0.5) {
+          if (_this.data.infraredSensorData == 1 && _this.data.distanceSensorData < 0.5) {
             if (endType == 0) {
               endType = 5;
-              innerAudioContext.src = this.data.resPathUrl + distanceVoice;
+              innerAudioContext.src = this.data.resPathUrl + _this.data.distanceVoice;
               innerAudioContext.play();
               Tools.websocket.then(stompClient => {
                 stompClient.send("/sensorMonitor/warning", {}, this.data.userInfo.fid);
@@ -424,22 +459,26 @@ Page({
           });
         }
       }, 1500);
+      _this.setData({
+        fireTimer: tempFireTimer
+      });
     } else {
-      clearInterval(fireTimer);
+      clearInterval(_this.data.fireTimer);
     }
   },
 
   smogMonitor: function (isOpen) {
+    const _this = this;
     if (isOpen) {
-      smogTimer = setInterval(() => {
-        if (smogSensorData > 90) {
+      const tempSmogTimer = setInterval(() => {
+        if (_this.data.smogSensorData > 90) {
           this.setData({
             SmogStyle: "safeWarn",
             mainBtnStyle: "mainBtnWarn"
           });
           if (endType == 0) {
             endType = 5;
-            innerAudioContext.src = this.data.resPathUrl + smogVoice;
+            innerAudioContext.src = this.data.resPathUrl + _this.data.smogVoice;
             innerAudioContext.play();
             Tools.websocket.then(stompClient => {
               stompClient.send("/sensorMonitor/warning", {}, this.data.userInfo.fid);
@@ -452,8 +491,11 @@ Page({
           });
         }
       }, 1500);
+      _this.setData({
+        smogTimer: tempSmogTimer
+      });
     } else {
-      clearInterval(smogTimer);
+      clearInterval(_this.data.smogTimer);
     }
   },
 
@@ -630,32 +672,43 @@ Page({
       switch(endType) {
         case 1:
           endType = 2;
-          innerAudioContext.src = _this.data.resPathUrl + processVoice;
+          innerAudioContext.src = _this.data.resPathUrl + _this.data.processVoice;
           innerAudioContext.play();
           break;
         case 2:
           endType = 3;
-          innerAudioContext.src = _this.data.resPathUrl + requestVoice;
+          innerAudioContext.src = _this.data.resPathUrl + _this.data.requestVoice;
           innerAudioContext.play();
           break;
         case 3:
           endType = 0;
-          voiceNextTimeout = setTimeout(() => {
-            voiceNextInterval = setInterval(() => {
+          const tempVoiceNextTimeout = setTimeout(() => {
+            const tempVoiceNextInterval = setInterval(() => {
               voiceNext-=100;
             },100);
-            clearInterval(voiceNextInterval);
-            cookIndex++;
-            console.log(cookIndex);
-            _this.data.cookOperation.cookInterval(cookIndex)
+            _this.setData({
+              voiceNextInterval: tempVoiceNextInterval
+            });
+            clearInterval(_this.data.voiceNextInterval);
+            let tempCookIndex = _this.data.cookIndex;
+            tempCookIndex++;
+            _this.setData({
+              cookIndex: tempCookIndex
+            });
+            _this.data.cookOperation.cookInterval(_this.data.cookIndex)
           },voiceNext);
-          console.log("process 1 finish");
+          _this.setData({
+            voiceNextTimeout: tempVoiceNextTimeout
+          });
           break;
         case 5:
           endType = 0;
           break;
         case -1:
-          isFirstVoice = !isFirstVoice;
+          const isFirst = _this.data.isFirstVoice;
+          _this.setData({
+            isFirstVoice: !isFirst
+          });
           break;
       }
     });
