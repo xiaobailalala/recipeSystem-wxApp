@@ -9,6 +9,7 @@ Page({
     selectImgPath: [],
     selectImgLength: 0,
     uid: 0,
+    rid: 0,
     contentMask: {
       length: 1000,
       isShow: false
@@ -95,6 +96,7 @@ Page({
             fContent: this.data.articleContent,
             fType: "待审核",
             fUid: this.data.uid,
+            fRid: this.data.rid,
             fRelease: this.getDateTime()
           });
         }
@@ -154,8 +156,9 @@ Page({
       });
     }
     this.setData({
-      // uid: options.uid
-      uid: 5
+      uid: options.uid,
+      rid: options.rid
+      // uid: 5
     });
   },
 

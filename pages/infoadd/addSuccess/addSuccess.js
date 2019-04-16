@@ -17,14 +17,22 @@ Page({
   },
 
   write: function () {
-    if (this.data.target == "recipe") {
-      wx.navigateTo({
-        url: "/pages/infoadd/recipeInfoAdd/recipeInfoAdd"
-      });
-    } else {
-      wx.navigateTo({
-        url: "/pages/infoadd/articleInfoAdd/articleInfoAdd"
-      });
+    switch(this.data.target) {
+      case "recipe": 
+        wx.navigateTo({
+          url: "/pages/infoadd/recipeInfoAdd/recipeInfoAdd"
+        });
+        break;
+      case "article":
+        wx.navigateTo({
+          url: "/pages/infoadd/articleInfoAdd/articleInfoAdd"
+        });
+        break;
+      case "works":
+        wx.navigateTo({
+          url: "/pages/info/commonDataInfo/works/works"
+        });
+        break;
     }
   },
 

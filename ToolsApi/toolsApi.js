@@ -1,4 +1,4 @@
-var serverUrl = "192.168.0.104:8080";
+var serverUrl = "47.107.179.70:8080";
 var toolsObj = {
   reqPathUrl: "http://" + serverUrl,
   imgPathUrl: "http://47.107.179.70:8090/recipeUpload/resource/img",
@@ -67,7 +67,10 @@ var urlsObj = {
   mob_marqueClassify_productClassifyList: toolsObj.reqPathUrl + "/mob/marqueClassify/productClassifyList",
   mob_recipe_getDataByMid: toolsObj.reqPathUrl + "/mob/recipe/getDataByMid",
   mob_commonChat_chatSaveMessage: toolsObj.reqPathUrl + "/mob/commonChat/chatSaveMessage",
-  mob_commonChat_showMessage: toolsObj.reqPathUrl + "/mob/commonChat/showMessage"
+  mob_commonChat_showMessage: toolsObj.reqPathUrl + "/mob/commonChat/showMessage",
+  mob_product_saveInfo: toolsObj.reqPathUrl + "/mob/product/saveInfo",
+  mob_product_index: toolsObj.reqPathUrl + "/mob/product/index",
+  mob_common_randomWorks: toolsObj.reqPathUrl + "/mob/common/randomWorks"
 }
 
 const websocket = new Promise(function(resolve, reject){

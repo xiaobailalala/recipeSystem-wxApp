@@ -372,6 +372,10 @@ button::after {
     border-bottom: 2rpx solid #d6d6d6;
 }
 
+.material {
+  position: relative;
+}
+
 .material>view:nth-of-type(1) {
     padding: 30rpx 0;
     padding-bottom: 50rpx;
@@ -438,4 +442,194 @@ button::after {
     border-bottom: 2rpx solid #d6d6d6;
     font-size: 28rpx;
     color: #999999;
+}
+
+.worksList {
+    border-bottom: 2rpx solid #d6d6d6;
+    margin-bottom: 60rpx;
+    padding-bottom: 10rpx;
+}
+
+.works>view:nth-of-type(1)>view {
+  display: inline-block;
+  color: #9B9B9B;
+  font-size: 26rpx;
+  font-weight: normal;
+  margin-left: 10rpx;
+}
+
+.works>navigator {
+  position: absolute;
+  top: 32rpx;
+  color: #3175C9;
+  right: 0;
+}
+
+.worksContainer {
+    white-space: nowrap;
+}
+
+.workses {
+    display: inline-block;
+    width: 270rpx;
+    margin-right: 24rpx;
+    vertical-align: top;
+    height: 570rpx;
+    box-sizing: border-box;
+    border: 1rpx solid #E5E3DF;
+    border-radius: 6rpx;
+    overflow: hidden;
+}
+
+.workses>image {
+    width: 100%;
+    height: 290rpx;
+}
+
+.works-userinfo {
+    padding: 20rpx 15rpx;
+    position: relative;
+}
+
+.works-userinfo>image {
+    width: 55rpx;
+    height: 55rpx;
+    border-radius: 50%;
+}
+
+.works-userinfo>view {
+    color: #9595B1;
+    position: absolute;
+    padding-left: 70rpx;
+    top: 20rpx;
+}
+
+.works-userinfo>view>view:nth-of-type(1) {
+    font-size: 26rpx;
+}
+
+.works-userinfo>view>view:nth-of-type(2) {
+    font-size: 20rpx;
+    margin-top: 5rpx;
+}
+
+.works-content {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 15rpx;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    font-size: 25rpx;
+    color: #666666;
+    height: 65rpx;
+}
+
+.works-count {
+    height: 80rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999999;
+    font-weight: 100;
+}
+
+.works-count>icon {
+    font-size: 28rpx;
+}
+
+.worksList>button {
+    font-size: 28rpx;
+    color: #ffffff;
+    background-color: #FFB31A;
+    height: 74rpx;
+    width: 660rpx;
+    line-height: 74rpx;
+    border-radius: 37rpx;
+    margin-top: 50rpx;
+    margin-bottom: 50rpx;
+}
+
+.worksList>button>icon {
+    font-weight: bolder;
+    font-size: 32rpx;
+    position: relative;
+    top: 3rpx;
+    margin-right: 5rpx;
+}
+
+.more-recipe>view:nth-of-type(1) {
+    padding: 30rpx 0;
+    padding-top: 0;
+    padding-bottom: 50rpx;
+    font-size: 40rpx;
+    color: #000000;
+    font-weight: bold;
+}
+
+.moreList {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-bottom: 150rpx;
+}
+
+.more-item {
+    width: 48%;
+    border-radius: 20rpx;
+    overflow: hidden;
+    height: 330rpx;
+    margin-bottom: 30rpx;
+    box-shadow: 0 0 15rpx #eeeeee;
+}
+
+.more-item>image {
+    height: 200rpx;
+}
+
+.more-title {
+    padding: 0 10rpx;
+    padding-top: 12rpx;
+    margin-bottom: 12rpx;
+    font-size: 28rpx;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+}
+
+.more-userinfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10rpx;
+}
+
+.more-userinfo>view {
+    position: relative;
+    color: #666666;
+    font-size: 22rpx;
+}
+
+.more-userinfo>view>image {
+    width: 36rpx;
+    height: 36rpx;
+    border-radius: 50%;
+    margin-right: 6rpx;
+    vertical-align: top;
+    position: relative;
+    top: -3rpx;
+}
+
+.more-userinfo>icon {
+    font-size: 26rpx;
+    color: #666666;
+    position: relative;
+    top: -12rpx;
 }

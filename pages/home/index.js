@@ -82,7 +82,8 @@ Page({
     resPath: Tools.tools.resPathUrl,
     refreshTipAnimation: {},
     recipeRandom: [],
-    articleList: []
+    articleList: [],
+    workList: []
   },
 
   refreshRecipeList: function () {
@@ -117,6 +118,19 @@ Page({
   },
 
   refreshGroupList: function () {
+    wx.request({
+      url: Tools.urls.mob_common_randomWorks,
+      method: "GET",
+      success: res => {
+        var newArr = res.data.data;
+        newArr.forEach(item => {
+          item.fcover = JSON.parse(item.fcover);
+        });
+        this.setData({
+          workList: newArr
+        });
+      }
+    });
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: 'ease-out'
@@ -304,6 +318,10 @@ Page({
       url: Tools.urls.mob_common_index,
       method: "GET",
       success: res=> {
+        var works = res.data.data.worksList;
+        works.forEach(item => {
+          item.fcover = JSON.parse(item.fcover);
+        });
         var articles = res.data.data.articleList;
         articles.forEach(element => {
           var coverArr = JSON.parse(element.fcover)
@@ -311,7 +329,8 @@ Page({
         });
         this.setData({
           recipeRandom: res.data.data.randomRecipe,
-          articleList: articles
+          articleList: articles,
+          workList: works
         });
       }
     });

@@ -1,0 +1,48 @@
+<scroll-view scroll-y style="height: 100vh;">
+    <view class="coverListContainer">
+        <swiper bindchange="swiperChange">
+            <block wx:for="{{articleInfo.fcover}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <swiper-item class="">
+                    <image src="{{resPath}}{{item}}" />
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="coverIndexTag">
+            {{imageIndex}} / {{coverLength}}
+        </view>
+    </view>
+    <view class="userInfoContainer">
+        <navigator hover-class="none" url="/pages/person/personInfo/personInfo?uid={{articleInfo.commonUser.fid}}">
+            <image wx:if="{{articleInfo.commonUser.fcover==null}}" src="{{imgPath}}/defaulthead.png"></image>
+            <image wx:else src="{{resPath}}{{articleInfo.commonUser.fcover}}" />
+            {{articleInfo.commonUser.fusername}}
+        </navigator>
+        <button class="{{(userInfo==null||!isAttention)?'attention':'attentionOn'}}"
+            wx:if="{{userInfo.fid!=articleInfo.commonUser.fid}}" data-oid="{{articleInfo.commonUser.fid}}"
+            hover-class='none' bindtap='attentionTab'>{{(userInfo==null||!isAttention)?'关注':'已关注'}}</button>
+    </view>
+    <view class="articleContainer">
+        <navigator hover-class="none" url="/pages/info/commonDataInfo/commonDataInfo?rid={{articleInfo.recipe.fid}}" class="articleTitle"><icon class="iconfont icon-icon-_baoyou"> {{articleInfo.recipe.fname}}</icon></navigator>
+        <view class="articleContent"><text>{{articleInfo.fcontent}}</text></view>
+        <view class="articleLink">
+            <navigator url="/pages/info/articleDataInfo/articleDataInfo?aid={{item.id}}" hover-class="none"
+                wx:for="{{articleInfo.referArticle}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <icon class="iconfont icon-jinghao">{{item.name}}</icon>
+            </navigator>
+            <navigator url="/pages/person/personInfo/personInfo?uid={{item.id}}" hover-class="none"
+                wx:for="{{articleInfo.referPeople}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <icon class="iconfont icon-aite1">{{item.name}}</icon>
+            </navigator>
+            <navigator url="/pages/info/commonDataInfo/commonDataInfo?rid={{item.id}}" hover-class="none"
+                wx:for="{{articleInfo.referRecipe}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+                <icon class="iconfont icon-icon-_baoyou">{{item.name}}</icon>
+            </navigator>
+        </view>
+        <view class="articleTime">
+            <view>{{articleInfo.frelease}}</view>
+            <view>
+                <view>{{articleInfo.fcount}}次浏览</view>
+            </view>
+        </view>
+    </view>
+</scroll-view>

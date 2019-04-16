@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/info/commonDataInfo/workInfo/workInfo",
+    "pages/info/commonDataInfo/commonDataInfo",
     "pages/info/commonDataInfo/works/works",
     "pages/infoadd/articleInfoAdd/articleInfoAdd",
     "pages/login/login",
@@ -23,7 +25,6 @@
     "pages/info/articleDataInfo/articleDataInfo",
     "pages/person/personCollect/personCollect",
     "pages/person/personInfo/personInfo",
-    "pages/info/commonDataInfo/commonDataInfo",
     "pages/infoadd/recipeInfoAdd/recipeInfoAdd",
     "pages/infoadd/addSuccess/addSuccess",
     "pages/infoadd/recipeInfoAdd/recipeIntroduction/recipeIntroduction",

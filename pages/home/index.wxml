@@ -74,63 +74,27 @@
       </view>
       <view class="groupListContainer">
         <view class="sectionTip">
-          精选组合
+          精选作品
         </view>
-        <navigator class="groupItem" url="" hover-class="none">
-          <view class="groupOutView">
-            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
-            <view>共11道菜</view>
+        <navigator class="groupItem" wx:for="{{workList}}" wx:key="workList" wx:for-item="item" wx:for-index="index" url="/pages/info/commonDataInfo/workInfo/workInfo?wid={{item.fid}}" hover-class="none">
+          <swiper class='groupSwiper' autoplay="true" interval="{{1800 + (index+1) * 150}}" duration="1000" circular="true">
+            <block wx:for="{{item.fcover}}" wx:for-index="in" wx:for-item="it" wx:key="groupList">
+              <swiper-item>
+                <image src="{{resPath}}{{it}}" class="slide-image" mode="aspectFill" />
+              </swiper-item>
+            </block>
+          </swiper>
+          <view>
+            <view class="groupTitle">
+              <text>作品来自于</text><icon class="iconfont icon-iconfontzhizuobiaozhun47"></icon>
+              {{item.recipe.fname}}
+            </view>
+            <view class="groupContent">{{item.fcontent}}</view>
+            <view class="groupUserinfo">
+              <image src="{{resPath}}{{item.commonUser.fcover}}"/>
+              <view>{{item.commonUser.fusername}}</view>
+            </view>
           </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="groupItem" url="" hover-class="none">
-          <view class="groupOutView">
-            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
-            <view>共11道菜</view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="groupItem" url="" hover-class="none">
-          <view class="groupOutView">
-            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
-            <view>共11道菜</view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="groupItem" url="" hover-class="none">
-          <view class="groupOutView">
-            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
-            <view>共11道菜</view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="groupItem" url="" hover-class="none">
-          <view class="groupOutView">
-            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
-            <view>共11道菜</view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="groupItem" url="" hover-class="none">
-          <view class="groupOutView">
-            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
-            <view>共11道菜</view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="groupItem" url="" hover-class="none">
-          <view class="groupOutView">
-            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
-            <view>共11道菜</view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
-        </navigator>
-        <navigator class="groupItem" url="" hover-class="none">
-          <view class="groupOutView">
-            <view>问问自己，多久没吃过一顿丰盛的早餐了？</view>
-            <view>共11道菜</view>
-          </view>
-          <image src="{{imgPath}}/banner.png" />
         </navigator>
         <view class="refreshList" bindtap="refreshGroupList">
           上次看到这里 点击刷新

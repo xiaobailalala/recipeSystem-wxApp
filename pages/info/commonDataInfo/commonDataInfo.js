@@ -10,10 +10,10 @@ Page({
    */
   data: {
     stompClient: {},
-    fireSensorData: 0,
-    smogSensorData: 0,
-    infraredSensorData: 0,
-    distanceSensorData: 0,
+    fireSensorData: -1,
+    smogSensorData: -1,
+    infraredSensorData: -1,
+    distanceSensorData: -1,
     fireTimer: null,
     smogTimer: null,
     tempTop: 0, 
@@ -23,6 +23,7 @@ Page({
     readyVoice: null, 
     distanceVoice: null, 
     cookTipMark: null,
+    openSensorMark: null,
     isFirstVoice: true, 
     processVoice: null, 
     requestVoice: null, 
@@ -33,6 +34,9 @@ Page({
     imgPath: Tools.tools.imgPathUrl,
     resPathUrl: Tools.tools.resPathUrl,
     recipeData: null,
+    moreData: null,
+    worksData: null,
+    worksLen: 0,
     processLength: 0,
     voiceData: "",
     audioEle: false,
@@ -82,6 +86,7 @@ Page({
    */
   onLoad: function (options) {
     var opt = options.rid;
+    // var opt = 5;
     wx.getStorage({
       key: 'commonUser',
       success: res => {
@@ -123,12 +128,20 @@ Page({
             fType: type
           },
           success: res => {
+            const newArr = res.data.data.works;
+            if (newArr.length != 0 && newArr != null) {
+              newArr.forEach(item => {
+                item.fcover = JSON.parse(item.fcover)[0];
+              });
+            }
             this.setData({
               isAttention: res.data.data.isAttention ? true : false,
               recipeData: res.data.data.item,
-              processLength: res.data.data.item.processes.length
+              processLength: res.data.data.item.processes.length,
+              moreData: res.data.data.more,
+              worksData: newArr,
+              worksLen: newArr.length
             });
-            console.log(this.data.recipeData);
             const isCollect = res.data.data.isCollect ? "#ffdc44" : "#999999";
             this.setData({
               isCollect: isCollect,
@@ -141,14 +154,8 @@ Page({
                 tempTop: temStr.split("-")[1]
               });
               this.initSocket(true);
-              // this.setData({
-              //   isSocketConnect: true
-              // });
             } else {
               this.initSocket(false);
-              // this.setData({
-              //   isSocketConnect: true
-              // });
             }
           }
         });
@@ -165,7 +172,8 @@ Page({
         fireMark: "FIRE_SENSOR_ALARM",
         smogMark: "SMOG_SENSOR_ALARM",
         distanceMark: "FIRE_DISTANCE",
-        cookTipMark: "COOK_TIP"
+        cookTipMark: "COOK_TIP",
+        openSensorMark: "OPEN_SENSOR"
       },
       success: res => {
         _this.setData({
@@ -173,13 +181,9 @@ Page({
           smogVoice: res.data.data[2],
           readyVoice: res.data.data[0],
           distanceVoice: res.data.data[3],
-          cookTipMark: res.data.data[4]
+          cookTipMark: res.data.data[4],
+          openSensorMark: res.data.data[5]
         });
-        
-        
-        
-        
-        
       }
     });
   },
@@ -189,31 +193,36 @@ Page({
     if (isFire) {
       Tools.websocket.then(stompClient => {
         stompClient.subscribe('/sensorData/fire', function (body, headers) {
+          const tempData = JSON.parse(body.body).tmp === undefined ? -1 : JSON.parse(body.body).tmp;
           _this.setData({
-            fireSensorData: JSON.parse(body.body).tmp
+            fireSensorData: tempData
           });
         });
         stompClient.subscribe('/sensorData/smog', function (body, headers) {
+          const tempData = JSON.parse(body.body).pm === undefined ? -1 : JSON.parse(body.body).pm;
           _this.setData({
-            smogSensorData: JSON.parse(body.body).pm
+            smogSensorData: tempData
           });
         });
         stompClient.subscribe("/sensorData/infrared", function (body, headers) {
+          const tempData = JSON.parse(body.body).body === undefined ? -1 : JSON.parse(body.body).body;
           _this.setData({
-            infraredSensorData: JSON.parse(body.body).body
+            infraredSensorData: tempData
           });
         });
         stompClient.subscribe("/sensorData/distance", function (body, headers) {
+          const tempData = JSON.parse(body.body).distance === undefined ? -1 : JSON.parse(body.body).distance
           _this.setData({
-            distanceSensorData: JSON.parse(body.body).distance
+            distanceSensorData: tempData
           });
         });
       });
     } else {
       Tools.websocket.then(stompClient => {
         stompClient.subscribe('/sensorData/smog', function (body, headers) {
+          const tempData = JSON.parse(body.body).tmp === undefined ? -1 : JSON.parse(body.body).tmp;
           _this.setData({
-            fireSensorData: JSON.parse(body.body).tmp
+            fireSensorData: tempData
           });
         });
       });
@@ -250,14 +259,6 @@ Page({
   },
 
   testVoice: function () {
-    // this.audioCtx.play();
-    // console.log(this.data.recipeData.processes[0].fvoice);
-    // this.setData({
-    //   audioEle: true,
-    //   voiceData: this.data.recipeData.processes[0].fvoice
-    // });
-    // this.audioCtx = wx.createAudioContext('aiAudio');
-    // this.audioCtx.play();
     wx.navigateTo({
       url: '/pages/login/login?active=true&recipeUnload=true&rid=' + this.data.recipeData.fid
     });
@@ -340,6 +341,7 @@ Page({
   },
 
   fire: function () {
+    const _this = this;
     if (this.data.userInfo == null) {
       wx.showModal({
         title: '温馨提示',
@@ -384,6 +386,7 @@ Page({
   },
 
   smog: function () {
+    const _this = this;
     if (this.data.userInfo == null) {
       wx.showModal({
         title: '温馨提示',
@@ -427,36 +430,42 @@ Page({
     const _this = this;
     if (isOpen) {
       const tempFireTimer = setInterval(() => {
-        if (_this.data.fireSensorData > _this.data.tempTop || (_this.data.infraredSensorData == 1 && _this.data.distanceSensorData < 0.5)) {
-          this.setData({
-            FireStyle: "safeWarn",
-            mainBtnStyle: "mainBtnWarn"
-          });
-          if (_this.data.fireSensorData > _this.data.tempTop) {
-            if (endType == 0) {
-              endType = 5;
-              innerAudioContext.src = this.data.resPathUrl + _this.data.fireVoice;
-              innerAudioContext.play();
-              Tools.websocket.then(stompClient => {
-                stompClient.send("/sensorMonitor/warning", {}, this.data.userInfo.fid);
-              });
-            }
-          }
-          if (_this.data.infraredSensorData == 1 && _this.data.distanceSensorData < 0.5) {
-            if (endType == 0) {
-              endType = 5;
-              innerAudioContext.src = this.data.resPathUrl + _this.data.distanceVoice;
-              innerAudioContext.play();
-              Tools.websocket.then(stompClient => {
-                stompClient.send("/sensorMonitor/warning", {}, this.data.userInfo.fid);
-              });
-            }
-          }
+        if (_this.data.fireSensorData == -1) {
+          endType = 5;
+          innerAudioContext.src = this.data.resPathUrl + _this.data.openSensorMark;
+          innerAudioContext.play();
         } else {
-          this.setData({
-            FireStyle: "safeOn",
-            mainBtnStyle: "mainBtnOn"
-          });
+          if (_this.data.fireSensorData > _this.data.tempTop || (_this.data.infraredSensorData == 1 && _this.data.distanceSensorData < 0.5)) {
+            this.setData({
+              FireStyle: "safeWarn",
+              mainBtnStyle: "mainBtnWarn"
+            });
+            if (_this.data.fireSensorData > _this.data.tempTop) {
+              if (endType == 0) {
+                endType = 5;
+                innerAudioContext.src = this.data.resPathUrl + _this.data.fireVoice;
+                innerAudioContext.play();
+                Tools.websocket.then(stompClient => {
+                  stompClient.send("/sensorMonitor/warning", {}, this.data.userInfo.fid);
+                });
+              }
+            }
+            if (_this.data.infraredSensorData == 1 && _this.data.distanceSensorData < 0.5) {
+              if (endType == 0) {
+                endType = 5;
+                innerAudioContext.src = this.data.resPathUrl + _this.data.distanceVoice;
+                innerAudioContext.play();
+                Tools.websocket.then(stompClient => {
+                  stompClient.send("/sensorMonitor/warning", {}, this.data.userInfo.fid);
+                });
+              }
+            }
+          } else {
+            this.setData({
+              FireStyle: "safeOn",
+              mainBtnStyle: "mainBtnOn"
+            });
+          }
         }
       }, 1500);
       _this.setData({
@@ -471,24 +480,30 @@ Page({
     const _this = this;
     if (isOpen) {
       const tempSmogTimer = setInterval(() => {
-        if (_this.data.smogSensorData > 90) {
-          this.setData({
-            SmogStyle: "safeWarn",
-            mainBtnStyle: "mainBtnWarn"
-          });
-          if (endType == 0) {
-            endType = 5;
-            innerAudioContext.src = this.data.resPathUrl + _this.data.smogVoice;
-            innerAudioContext.play();
-            Tools.websocket.then(stompClient => {
-              stompClient.send("/sensorMonitor/warning", {}, this.data.userInfo.fid);
+        if (_this.data.smogSensorData == -1) {
+          endType = 5;
+          innerAudioContext.src = this.data.resPathUrl + _this.data.openSensorMark;
+          innerAudioContext.play();
+        } else {
+          if (_this.data.smogSensorData > 90) {
+            this.setData({
+              SmogStyle: "safeWarn",
+              mainBtnStyle: "mainBtnWarn"
+            });
+            if (endType == 0) {
+              endType = 5;
+              innerAudioContext.src = this.data.resPathUrl + _this.data.smogVoice;
+              innerAudioContext.play();
+              Tools.websocket.then(stompClient => {
+                stompClient.send("/sensorMonitor/warning", {}, this.data.userInfo.fid);
+              });
+            }
+          } else {
+            this.setData({
+              SmogStyle: "safeOn",
+              mainBtnStyle: "mainBtnOn"
             });
           }
-        } else {
-          this.setData({
-            SmogStyle: "safeOn",
-            mainBtnStyle: "mainBtnOn"
-          });
         }
       }, 1500);
       _this.setData({
@@ -622,11 +637,12 @@ Page({
         wx.chooseImage({
           count: 9,
           sizeType: ['compressed'],
-          success: function(res){
+          success: (res) => {
             var arr = res.tempFilePaths;
             wx.navigateTo({
               url: "/pages/info/commonDataInfo/works/works?imgPath=" + JSON.stringify(arr) +
-              "&uid=" + result.data.fid
+              "&uid=" + result.data.fid +
+              "&rid=" + this.data.recipeData.fid
             });
           }
         });

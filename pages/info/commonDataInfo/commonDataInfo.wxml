@@ -34,14 +34,16 @@
       <button hover-class='none' class='icon_menu_item {{XSBtnStyle}}' bindtap='cook' animation="{{animationcollect}}">
         <image src='{{imgPath}}/cook.png'></image>
       </button>
-      <button hover-class='none' class='icon_menu_item {{FireBtnStyle}}' bindtap='fire' animation="{{animationTranspond}}">
+      <button hover-class='none' class='icon_menu_item {{FireBtnStyle}}' bindtap='fire'
+        animation="{{animationTranspond}}">
         <image src='{{imgPath}}/fire.png'></image>
       </button>
       <button hover-class='none' class='icon_menu_item {{SmogBtnStyle}}' bindtap='smog' animation="{{animationInput}}">
         <image src='{{imgPath}}/smog.png'></image>
       </button>
     </view>
-    <navigator hover-class='none' url="/pages/comment/recipeComment/recipeComment?rid={{recipeData.fid}}&authorid={{recipeData.fuid}}&type=recipe">
+    <navigator hover-class='none'
+      url="/pages/comment/recipeComment/recipeComment?rid={{recipeData.fid}}&authorid={{recipeData.fuid}}&type=recipe">
       <icon class='iconfont icon-pinglun'></icon>
       {{recipeData.commentCount}}
     </navigator>
@@ -51,7 +53,8 @@
     </view>
   </view>
   <scroll-view scroll-y>
-    <image class='cover' src='{{resPathUrl}}{{recipeData.fcover}}' bindtap='previewImage' data-src="{{resPathUrl}}{{recipeData.fcover}}"></image>
+    <image class='cover' src='{{resPathUrl}}{{recipeData.fcover}}' bindtap='previewImage'
+      data-src="{{resPathUrl}}{{recipeData.fcover}}"></image>
     <view class='main'>
       <view class='title'>{{recipeData.fname}}</view>
       <view class='tools'>
@@ -130,6 +133,53 @@
       </view>
       <view class='release'>
         发布于 {{recipeData.frelease}}
+      </view>
+      <view class='material works'>
+        <view>作品
+          <view>{{worksLen}}人做过</view>
+        </view>
+        <view class='worksList'>
+          <scroll-view scroll-x class="worksContainer">
+            <view class="" wx:if="{{worksLen == 0}}">暂无作品</view>
+            <navigator url="/pages/info/commonDataInfo/workInfo/workInfo?wid={{item.fid}}" hover-class="none" class="workses" wx:for="{{worksData}}" 
+            wx:for-item="item" wx:key="worksData">
+              <image src="{{resPathUrl}}{{item.fcover}}" />
+              <view class='works-userinfo'>
+                <image src="{{resPathUrl}}{{item.commonUser.fcover}}" />
+                <view>
+                  <view>{{item.commonUser.fusername}}</view>
+                  <view>{{item.frelease}}</view>
+                </view>
+              </view>
+              <view class='works-content'>
+                解放军噢加加加加急费劲啊就卡福利卡浪费kafka啊卡咖啡卡卡卡发啊 啊康复理疗卡浪费卡里啊啊
+              </view>
+              <view class="works-count">
+                <icon class="iconfont icon-chakan"> {{item.fcount}}</icon>
+              </view>
+            </navigator>
+          </scroll-view>
+          <button hover-class='none' bindtap="uploadWorks">
+            <icon class="iconfont icon-zhaoxiangji1"></icon>
+            上传作品
+          </button>
+        </view>
+      </view>
+      <view class="more-recipe">
+        <view>更多食谱推荐</view>
+        <view class="moreList">
+          <navigator class="more-item" url="/pages/info/commonDataInfo/commonDataInfo?rid={{item.fid}}" hover-class="none" wx:for="{{moreData}}" wx:for-item="item" wx:key="moreData">
+            <image src="{{resPathUrl}}{{item.fcover}}" />
+            <view class="more-title">{{item.fname}}</view>
+            <view class="more-userinfo">
+              <view>
+                <image src="{{resPathUrl}}{{item.commonUser.fcover}}" />
+                {{item.commonUser.fusername}}
+              </view>
+              <icon class="iconfont icon-favourite"> {{item.fgood}}</icon>
+            </view>
+          </navigator>
+        </view>
       </view>
     </view>
   </scroll-view>

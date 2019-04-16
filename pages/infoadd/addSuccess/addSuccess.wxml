@@ -11,6 +11,6 @@
     </view>
     <view class="successBtn">
         <button bindtap="home" hover-class="none">返回首页</button>
-        <button bindtap="write" hover-class="none">再写一篇</button>
+        <button wx:if="{{target != 'works'}}" bindtap="write" hover-class="none">再写一篇</button>
     </view>
 </view>

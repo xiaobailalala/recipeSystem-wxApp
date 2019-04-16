@@ -319,45 +319,85 @@ button::after {
 }
 
 .groupItem {
-    margin-bottom: 80rpx;
-    overflow: hidden;
-    border-radius: 10rpx;
+    margin-bottom: 50rpx;
     width: 100%;
     position: relative;
-    height: 420rpx;
-    color: #ffffff;
+    height: 230rpx;
 }
 
-.groupItem>image {
-    width: 100%;
-    height: 100%;
-}
-
-.groupOutView {
-    background-color: rgba(0, 0, 0, 0.2);
+.groupItem>view {
     position: absolute;
-    left: 0;
     top: 0;
+    left: 0;
+    padding-left: 320rpx;
+    height: 100%;
+}
+
+.groupSwiper {
+    height: 100%;
+    width: 300rpx;
+    border-radius: 10rpx;
+    overflow: hidden;
+}
+
+.groupSwiper image {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10rpx;
 }
 
-.groupOutView>view:nth-of-type(1) {
-    padding: 0 40rpx;
-    font-size: 34rpx;
+.groupTitle{
     font-weight: bold;
-    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    height: 94rpx;
+    position: relative;
+    top: -12rpx;
+    font-size: 30rpx;
 }
 
-.groupOutView>view:nth-of-type(2) {
-    font-size: 28rpx;
-    margin-top: 16rpx;
+.groupTitle>text,.groupTitle>icon {
+    color: #4FCFFC;
+    font-size: 24rpx;
+    font-weight: normal;
 }
+
+.groupTitle>icon {
+    font-size: 36rpx;
+    margin-right: 10rpx;
+}
+
+.groupContent {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    font-size: 24rpx;
+    color: #999999;
+    height: 64rpx;
+}
+
+.groupUserinfo {
+    padding-top: 20rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #666666;
+
+}
+
+.groupUserinfo>image {
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+}
+
 
 .likeListMain {
     display: flex;
