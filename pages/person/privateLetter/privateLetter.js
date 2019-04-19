@@ -6,7 +6,11 @@ Page({
    */
   data: {
     imgPath: Tools.tools.imgPathUrl,
-    resPath: Tools.tools.resPathUrl
+    resPath: Tools.tools.resPathUrl,
+    uid: null,
+    userInfo: {},
+    height: 0,
+    linkmanList: []
   },
 
   bindLongPress: function() {
@@ -33,7 +37,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var height = wx.getSystemInfoSync().windowHeight;
+    this.setData({
+      height: height
+    });
   },
 
   /**
@@ -47,7 +54,41 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
+    wx.getStorage({
+      key: "commonUser",
+      success: result => {
+        this.setData({
+          uid: result.data.fid,
+          userInfo: result.data
+        });
+        wx.request({
+          url: Tools.urls.mob_linkman_linkmanList,
+          method: "POST",
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            fUid: this.data.uid
+          },
+          success: res => {
+            this.setData({
+              linkmanList: res.data.data
+            });
+            console.log(this.data.linkmanList);
+            wx.hideLoading()
+          }
+        });
+        Tools.websocket.then(stompClient => {
+          stompClient.subscribe('/chat/userMsg/' + result.data.fid, function (body, headers) {
+            
+          });
+        });
+      }
+    });
   },
 
   /**

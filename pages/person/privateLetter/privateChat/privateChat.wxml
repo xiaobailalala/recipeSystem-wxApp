@@ -6,8 +6,8 @@
     </navigator>
     <navigator url="/pages/person/personInfo/personInfo?uid={{otherInfo.fid}}" hover-class="none">查看主页 >></navigator>
 </view>
-<scroll-view style="height: 100vh;" scroll-y="{{!recordStart}}"
-    scroll-top="{{scrollTop}}" scroll-with-animation="{{scrollWithAnimation}}">
+<scroll-view style="height: {{height - 75}}px;" scroll-y="{{!recordStart}}"
+    scroll-with-animation="{{scrollWithAnimation}}" scroll-into-view="{{scrollIntoView}}">
     <view class="occupiDedTop"></view>
     <view wx:for="{{messageList}}" wx:for-item="item" wx:for-index="index" wx:key="index"
     class="{{uid == item.fuid ? 'rightChat' : 'leftChat'}} chatList">
@@ -16,93 +16,44 @@
             <image wx:if="{{(uid == item.fuid && userInfo.fcover == null) || (uid != item.fuid && otherInfo.fcover == null)}}" src="{{imgPath}}/defaulthead.png" />
             <image wx:if="{{(uid == item.fuid && userInfo.fcover != null) || (uid != item.fuid && otherInfo.fcover != null)}}" src="{{resPath}}{{uid == item.fuid ? userInfo.fcover : otherInfo.fcover}}" />
         </navigator>
-        <view wx:if="{{item.ftype==1}}" class="chatContext">
+        <view wx:if="{{item.ftype==0}}" class="chatContext">
             <view class="chatIcon"></view>
             <view><text>{{item.fcontent}}</text></view>
         </view>
-        <view wx:if="{{item.ftype==2}}" class="chatRecord">
+        <view wx:if="{{item.ftype==1}}" class="chatRecord">
             <view class="chatIcon"></view>
-            <view>
+            <view data-src="{{item.furl}}" bindtap='playVoice'>
                 <icon class="iconfont icon-goutongye_yuyin_you_00"></icon>
-                <view>5s</view>
+                <view>{{item.flong}}s</view>
             </view>
         </view>
-        <view wx:if="{{item.ftype==3}}" class="chatImg">
+        <view wx:if="{{item.ftype==2}}" class="chatImg">
             <view class="chatIcon"></view>
             <view>
-                <image mode="widthFix" src="{{imgPath}}/banner.png" />
+                <image data-src="{{item.furl}}" bindtap='previewImage' mode="widthFix" src="{{resPath}}{{item.furl}}" />
             </view>
         </view>
-    </view>
-    <!--<view class="rightChat chatList">
-        <text>2018-12-12 12:12</text>
-        <navigator url="" hover-class="none"><image src="{{imgPath}}/banner.png" /></navigator>        
-        <view class="chatContext">
-            <view class="chatIcon"></view>
-            <view><text>聊天测试文本内容聊天测试文本内容聊天测试文本内容聊天测试文本内容</text></view>
-        </view>
-    </view>
-    <view class="leftChat chatList">
-        <text>2018-12-12 12:12</text>
-        <navigator url="" hover-class="none"><image src="{{imgPath}}/banner.png" /></navigator>
-        <view class="chatRecord">
-            <view class="chatIcon"></view>
-            <view>
-                <icon class="iconfont icon-goutongye_yuyin_you_00"></icon>
-                <view>5s</view>
-            </view>
-        </view>
-    </view>
-    <view class="rightChat chatList">
-        <text>2018-12-12 12:12</text>
-        <navigator url="" hover-class="none"><image src="{{imgPath}}/banner.png" /></navigator>        
-        <view class="chatRecord">
-            <view class="chatIcon"></view>
-            <view>
-                <icon class="iconfont icon-goutongye_yuyin_zuo_00"></icon>
-                <view>5s</view>
-            </view>
-        </view>
-    </view>
-    <view class="leftChat chatList">
-        <text>2018-12-12 12:12</text>
-        <navigator url="" hover-class="none"><image src="{{imgPath}}/banner.png" /></navigator>
-        <view class="chatImg">
-            <view class="chatIcon"></view>
-            <view>
-                <image mode="widthFix" src="{{imgPath}}/banner.png" />
-            </view>
-        </view>
-    </view>
-    <view class="rightChat chatList">
-        <text>2018-12-12 12:12</text>
-        <navigator url="" hover-class="none"><image src="{{imgPath}}/banner.png" /></navigator>        
-        <view class="chatImg">
-            <view class="chatIcon"></view>
-            <view>
-                <image mode="widthFix" src="{{imgPath}}/banner.png" />
-            </view>
-        </view>
-    </view>-->
-    <view class="occupiedBottom"></view>
-    <view class="inputContainer">
-        <view class="iconLeft" bindtap="changeInput">
-            <icon class="iconfont {{isInputText?'icon-yuyin':'icon-jianpan'}}"></icon>
-        </view>
-        <view class="iconContent">
-            <view wx:if="{{!isInputText}}" bindtouchmove="moveToCancle"
-            bindtouchstart="startRecording" bindtouchend="stopRecording">按住说话</view>
-            <input type="text" wx:if="{{isInputText}}" bindinput="bindInput" confirm-hold="true"
-             placeholder="发送消息..." cursor-spacing="15" auto-focus="{{isInputText}}"
-             bindconfirm="bindConfirm" value="{{chatContext}}"/>
-        </view>
-        <view class="iconRight" bindtap="selectImg">
-            <icon class="iconfont icon-tupian1"></icon>
-        </view>
+        <view id='scrollPosition-{{item.fid}}'></view>
     </view>
 </scroll-view>
+<view class="inputContainer">
+    <view class="iconLeft" bindtap="changeInput">
+        <icon class="iconfont {{isInputText?'icon-yuyin':'icon-jianpan'}}"></icon>
+    </view>
+    <view class="iconContent">
+        <view wx:if="{{!isInputText}}" bindtouchmove="moveToCancle"
+        bindtouchstart="startRecording" bindtouchend="stopRecording">按住说话</view>
+        <input type="text" wx:if="{{isInputText}}" bindinput="bindInput" confirm-hold="true"
+          placeholder="发送消息..." cursor-spacing="15" auto-focus="{{isInputText}}"
+          bindconfirm="bindConfirm" value="{{chatContext}}"/>
+    </view>
+    <view class="iconRight" bindtap="selectImg">
+        <icon class="iconfont icon-tupian1"></icon>
+    </view>
+</view>
 <view class="recordContainer" hidden="{{!recordStart}}">
     <icon class="iconfont {{cancleRecord?'icon-fanhui cancleIcon':'icon-yuyin1'}}"></icon>
-    <view wx:if="{{!cancleRecord}}">手指上划，取消发送</view>
-    <view wx:if="{{cancleRecord}}">松开手指，取消发送</view>
+    <!-- <view wx:if="{{!cancleRecord}}">手指上划，取消发送</view> -->
+    <!-- <view wx:if="{{!cancleRecord}}">松开手指，取消发送</view> -->
+    <view wx:if="{{isPlaying}}">录制中...</view>
 </view>

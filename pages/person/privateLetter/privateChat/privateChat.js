@@ -1,23 +1,23 @@
 var Tools = require("../../../../ToolsApi/toolsApi.js");
+var innerAudioContext;
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     imgPath: Tools.tools.imgPathUrl,
     resPath: Tools.tools.resPathUrl,
     isInputText: true,
     recordStart: false,
     cancleRecord: false,
+    isPlaying: false,
     uid: 0,
     userInfo: {},
     oid: 0,
     otherInfo: {},
     chatContext: "",
     scrollWithAnimation: false,
-    scrollTop: 0,
-    messageList: []
+    messageList: [],
+    height: 0,
+    scrollIntoView: "",
+    currentVoiceSrc: ""
   },
 
   changeInput: function () {
@@ -33,7 +33,8 @@ Page({
     });
     recorderManager.onStart(() => {
       this.setData({
-        recordStart: true
+        recordStart: true,
+        isPlaying: true
       });
     });
   },
@@ -41,43 +42,45 @@ Page({
   stopRecording: function () {
     var that = this;
     this.setData({
-      recordStart: false
+      recordStart: false,
+      isPlaying: false
     });
     const recorderManager = wx.getRecorderManager();
     recorderManager.stop();
     recorderManager.onStop((res) => {
-      if (!this.data.cancleRecord) {
+      // if (!this.data.cancleRecord) {
         if (res.duration < 1000) {
           wx.showToast({
             title: '说话时间太短!',
             icon: 'none'
           });
-          that.setData({
-            startRecording: false
-          })
           return;
         } else {
-          this.submitMessage(res, 2);
+          this.submitMessage(res, 1);
         }
-      }
-      that.setData({
-        cancleRecord: false
-      })
+        that.setData({
+          // startRecording: false
+          isPlaying: false
+        })
+      // }
+      // that.setData({
+      //   cancleRecord: false
+      // })
     })
   },
 
   moveToCancle: function (event) {
-    let cancleY = this.data.pageHeight;
-    let currentY = event.touches[0].pageY;
-    if (currentY < (cancleY - 65)) {
-      this.setData({
-        cancleRecord: true
-      });
-    } else {
-      this.setData({
-        cancleRecord: false
-      });
-    } 
+    // let cancleY = this.data.pageHeight;
+    // let currentY = event.touches[0].pageY;
+    // if (currentY < (cancleY - 75)) {
+    //   this.setData({
+    //     cancleRecord: true
+    //   });
+    // } else {
+    //   this.setData({
+    //     cancleRecord: false
+    //   });
+    // } 
   },
 
   bindInput: function(e) {
@@ -88,7 +91,7 @@ Page({
 
   bindConfirm: function() {
     if (this.data.chatContext) {
-      this.submitMessage(this.data.chatContext, 1);
+      this.submitMessage(this.data.chatContext, 0);
     } else {
       wx.showToast({
         title: '发送的内容不能为空',
@@ -98,12 +101,16 @@ Page({
   },
 
   /**
-   * tyle:1 文本信息
-   * type:2 语音信息
-   * type:3 图片信息
+   * tyle:0 文本信息
+   * type:1 语音信息
+   * type:2 图片信息
    */
   submitMessage: function(submitContent, type) {
-    if (type == 1) {
+    wx.showLoading({
+      title: '发送中',
+      mask: true
+    });
+    if (type == 0) {
       wx.request({
         url: Tools.urls.mob_commonChat_chatSaveMessage,
         method: "POST",
@@ -116,20 +123,20 @@ Page({
           fUid: this.data.uid,
           fOid: this.data.oid,
           fState: 0,
-          fType: 1
+          fType: type
         },
         success: res => {
-          console.log("----> " + this.data.uid + " " + this.data.oid);
-          this.getMessageData(this.data.uid, this.data.oid);
+          this.refreshMessageData(res.data.data);
           this.setData({
             chatContext: ""
           });
+          wx.hideLoading()
         }
       });
     } else {
       wx.uploadFile({
         url: Tools.urls.mob_commonChat_chatSaveMessage,
-        filePath: type == 2 ? submitContent.tempFilePath : submitContent,
+        filePath: type == 1 ? submitContent.tempFilePath : submitContent,
         name: "file",
         formData: {
           fRelease: this.getDateTime(),
@@ -137,10 +144,11 @@ Page({
           fOid: this.data.oid,
           fState: 0,
           fType: type,
-          fLong: type == 2 ? Math.floor(Number(submitContent.duration)/1000) : 0
+          fLong: type == 1 ? Math.floor(Number(submitContent.duration)/1000) : 0
         },
         success: res => {
-          this.getMessageData(this.data.uid, this.data.oid);
+          this.refreshMessageData(JSON.parse(res.data).data);
+          wx.hideLoading()
         }
       });
     }
@@ -152,8 +160,18 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: res => {
-        this.submitMessage(res.tempFilePaths[0], 3);
+        this.submitMessage(res.tempFilePaths[0], 2);
       }
+    });
+  },
+
+  refreshMessageData: function (obj) {
+    const _this = this;
+    let newMessageList = _this.data.messageList;
+    newMessageList.push(obj);
+    _this.setData({
+      scrollIntoView: "scrollPosition-" + obj.fid,
+      messageList: newMessageList
     });
   },
 
@@ -169,14 +187,14 @@ Page({
         oid: oid
       },
       success: res => {
+        const list = res.data.data;
         this.setData({
-          scrollTop: res.data.data.length * 1500,
+          scrollIntoView: list.length !== 0 ? "scrollPosition-" + list[list.length - 1].fid : "",
           messageList: res.data.data
         });
         this.setData({
           scrollWithAnimation: true
         });
-        console.log(res.data.data);
       }
     });
   },
@@ -191,10 +209,37 @@ Page({
     return year + "-" + month + "-" + day + " " + hours + ":" + minutes;
   },
 
+  playVoice: function (e) {
+    const current = e.currentTarget.dataset.src;
+    if (this.data.currentVoiceSrc == current) {
+      this.setData({
+        currentVoiceSrc: ""
+      });
+      innerAudioContext.stop();
+    } else {
+      this.setData({
+        currentVoiceSrc: current
+      });
+      innerAudioContext.src = this.data.resPath + current;
+      innerAudioContext.play();
+    }
+  },
+
+  previewImage: function (e) {
+    const current = e.currentTarget.dataset.src;
+    wx.previewImage({
+      urls: [this.data.resPath + current]
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var height = wx.getSystemInfoSync().windowHeight;
+    this.setData({
+      height: height
+    });
     var uid = 2;
     wx.request({
       url: Tools.urls.mob_commonUser_peopleInfoBrief,
@@ -224,19 +269,26 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    const _this = this;
+    innerAudioContext = wx.createInnerAudioContext();
+    innerAudioContext.onEnded(function () {
+      _this.setData({
+        currentVoiceSrc: ""
+      });
+    });
     wx.getStorage({
       key: "commonUser",
       success: result => {
-        console.log(result.data.fid);
         this.setData({
           uid: result.data.fid,
           userInfo: result.data
         });
         this.getMessageData(result.data.fid, this.data.oid);
-        var _this = this;
+        const _this = this;
         Tools.websocket.then(stompClient => {
           stompClient.subscribe('/chat/userMsg/' + result.data.fid, function (body, headers) {
-            _this.getMessageData(result.data.fid, _this.data.oid);
+            _this.refreshMessageData(JSON.parse(body.body));
+            stompClient.send("/chatSwitch/user/changeChatState", {}, JSON.stringify({ "fUid": _this.data.uid, "fOid": _this.data.oid }));
           });
         });
       }

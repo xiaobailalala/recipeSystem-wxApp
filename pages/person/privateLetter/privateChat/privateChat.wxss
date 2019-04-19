@@ -61,7 +61,9 @@ button::after {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 25rpx 15rpx;
+    padding: 0 15rpx;
+    padding-bottom: 30rpx;
+    height: 150rpx;
     box-sizing: border-box;
     border-top: 1rpx solid #eeeeee;
     box-shadow: 0 -10rpx 15rpx #eeeeee;
@@ -213,6 +215,11 @@ icon.cancleIcon {
     font-size: 30rpx;
     padding: 15rpx;
     border-radius: 10rpx;
+}
+
+.chatContext>view:nth-of-type(2)>text{
+    word-break: break-all;
+    white-space: normal;
 }
 
 .chatRecord>view:nth-of-type(2) {

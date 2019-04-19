@@ -1,13 +1,13 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/person/privateLetter/privateLetter",
+    "pages/person/privateLetter/privateChat/privateChat",
     "pages/info/commonDataInfo/workInfo/workInfo",
     "pages/info/commonDataInfo/commonDataInfo",
     "pages/info/commonDataInfo/works/works",
     "pages/infoadd/articleInfoAdd/articleInfoAdd",
     "pages/login/login",
-    "pages/person/privateLetter/privateChat/privateChat",
-    "pages/person/privateLetter/privateLetter",
     "pages/person/privateLetter/chatPeople/chatPeople",
     "pages/reg/reg",
     "pages/material/material",

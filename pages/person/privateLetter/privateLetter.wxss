@@ -22,7 +22,8 @@ button::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 40rpx 70rpx;
+    padding: 0 70rpx;
+    height: 214rpx;
     border-bottom: 1rpx solid #eeeeee;
 }
 
@@ -126,7 +127,7 @@ button::after {
 .messageContainer>view>view>view:nth-of-type(2)>view:nth-of-type(2) {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 .messageContainer>view>view>view:nth-of-type(2)>view:nth-of-type(2)>view:nth-of-type(2) {
@@ -139,4 +140,5 @@ button::after {
     border-radius: 50%;
     color: #ffffff;
     font-size: 20rpx;
+    margin-left: 30rpx;
 }

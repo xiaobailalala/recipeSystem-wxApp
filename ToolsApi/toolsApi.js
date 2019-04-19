@@ -1,4 +1,4 @@
-var serverUrl = "47.107.179.70:8080";
+var serverUrl = "192.168.2.226:8080";
 var toolsObj = {
   reqPathUrl: "http://" + serverUrl,
   imgPathUrl: "http://47.107.179.70:8090/recipeUpload/resource/img",
@@ -70,7 +70,8 @@ var urlsObj = {
   mob_commonChat_showMessage: toolsObj.reqPathUrl + "/mob/commonChat/showMessage",
   mob_product_saveInfo: toolsObj.reqPathUrl + "/mob/product/saveInfo",
   mob_product_index: toolsObj.reqPathUrl + "/mob/product/index",
-  mob_common_randomWorks: toolsObj.reqPathUrl + "/mob/common/randomWorks"
+  mob_common_randomWorks: toolsObj.reqPathUrl + "/mob/common/randomWorks",
+  mob_linkman_linkmanList: toolsObj.reqPathUrl + "/mob/linkman/linkmanList"
 }
 
 const websocket = new Promise(function(resolve, reject){
